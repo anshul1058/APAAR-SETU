@@ -19,6 +19,9 @@ dist/
 htmlcov/
 .coverage
 
+# Runtime
+server.log
+
 # OS / editor
 .DS_Store
 Thumbs.db
