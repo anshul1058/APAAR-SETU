@@ -1,0 +1,506 @@
+apaar_id,passport_no,full_name,dob,gender,student_code,college,location,mht_cet_code,program_level,branch,academic_year,approved_intake,approved_supernumerary,quota_type,category,nationality,admission_date
+600315383816,,Saanvi Sane,2008-10-17,F,RMD_001,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-02
+906199705115,,Siya Srinivasan,2003-01-07,F,RMD_002,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-16
+544527434359,,Maya Pillay,2002-02-27,F,RMD_003,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-21
+317588682461,,Agastya Uppal,2009-08-16,M,RMD_004,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-07-09
+010609977390,,Abhiram Jayaraman,2005-12-09,M,RMD_005,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-02
+695935288288,,Anika Chana,2007-05-21,F,RMD_006,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-23
+210006418670,,Dakshesh Samra,2002-04-25,M,RMD_007,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-14
+665315937923,,Faraj Sampath,2008-02-13,M,RMD_008,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-06
+,G8793970,Janya Prakash,2002-07-07,F,RMD_009,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,SC,INDIAN,2026-08-27
+113452511308,,Alka Rattan,2002-08-22,F,RMD_010,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-10
+,A8949333,Aarini Chaudhry,2006-04-26,F,RMD_011,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,SC,INDIAN,2026-08-20
+626629524024,,Vrinda Barad,2002-04-18,F,RMD_012,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-19
+483079569659,,Leela Rau,2005-11-16,F,RMD_013,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-21
+842037838970,,Champak Lall,2005-04-14,M,RMD_014,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-17
+090477324078,,Saksham Venkataraman,2008-01-14,M,RMD_015,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-13
+610678357218,,Gopal Sankar,2004-11-06,M,RMD_016,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,ST,INDIAN,2026-09-02
+,B3064461,Aarna Pandey,2003-12-29,F,RMD_017,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,ST,INDIAN,2026-07-10
+674744693731,,Unnati Sarma,2007-01-14,F,RMD_018,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-21
+835683357329,,Yahvi Ratti,2005-07-10,F,RMD_019,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-20
+579392412373,,Indrajit Lala,2005-01-02,M,RMD_020,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-17
+282479894564,,Advay Sodhi,2009-03-09,M,RMD_021,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-27
+662134038108,,Saksham Kaul,2002-01-24,M,RMD_022,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,ST,INDIAN,2026-07-10
+156795073927,,Bimala Om,2008-12-20,F,RMD_023,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-14
+302658389303,,Tarak Maharaj,2005-08-27,M,RMD_024,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-09-18
+977845152916,,Gauri Shanker,2003-09-17,F,RMD_025,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-08-28
+189841419347,,Aadi Sagar,2002-06-05,M,RMD_026,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-14
+201344861944,,Isaac Thakur,2009-10-15,M,RMD_027,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-22
+912856843212,,Vyanjana Hans,2008-12-01,F,RMD_028,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-25
+379858681407,,Manan Ram,2002-02-21,M,RMD_029,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-12
+666772772114,,Ati Devan,2005-11-25,F,RMD_030,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-15
+810976253760,,Maanas Edwin,2002-04-11,M,RMD_031,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-01
+897945432030,,Oeshi Mahajan,2005-06-18,F,RMD_032,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-07-20
+182463046845,,Tanvi Mahajan,2007-10-29,F,RMD_033,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-06
+594438022738,,Libni Bawa,2007-09-20,F,RMD_034,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-21
+,A7141186,Jacob Mani,2009-10-14,M,RMD_035,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,ST,INDIAN,2026-08-04
+566425175654,,Garima Choudhury,2004-02-12,F,RMD_036,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-08
+545888373597,,Sai Hayre,2002-12-22,F,RMD_037,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-16
+,C4273567,Guneet Atwal,2008-05-11,M,RMD_038,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,oci,ST,OCI,2026-09-25
+041373228423,,Rachita Bhandari,2003-02-18,F,RMD_039,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-08-24
+709867546304,,Chaitaly Brahmbhatt,2006-02-11,F,RMD_040,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-26
+373936121921,,Vihaan Bobal,2008-04-13,M,RMD_041,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-25
+,X2982538,Triveni Bath,2003-12-28,F,RMD_042,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,oci,OBC,OCI,2026-07-27
+428499023867,,Gabriel Mangal,2003-05-19,M,RMD_043,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-18
+342559945834,,Nathan Luthra,2003-05-14,M,RMD_044,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-06
+634671397048,,Sarthak Bora,2003-04-10,M,RMD_045,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-28
+329729624279,,Sneha Bali,2008-11-27,F,RMD_046,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-04
+543382492208,,Qabil Mangat,2008-12-26,M,RMD_047,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-09-01
+164345256194,,Bachittar Kuruvilla,2005-09-26,M,RMD_048,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-20
+988283826552,,Yutika Viswanathan,2006-07-25,F,RMD_049,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-02
+753881721068,,Manbir Bhagat,2008-01-29,M,RMD_050,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-24
+369841543989,,Liam Gade,2009-07-27,M,RMD_051,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-24
+102072843528,,Lekha Chakraborty,2004-07-18,F,RMD_052,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-20
+278701142033,,Farhan Mand,2005-08-24,M,RMD_053,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-08
+237525312095,,Manya Vaidya,2003-05-08,F,RMD_054,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-02
+,H8159497,Hredhaan Barad,2003-07-29,M,RMD_055,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,SC,INDIAN,2026-09-13
+046904632716,,Anay Raj,2008-03-15,M,RMD_056,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-08
+350154965504,,Nirja Soni,2008-02-07,F,RMD_057,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-08-02
+,K8083787,Zashil Banerjee,2005-02-12,M,RMD_058,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,oci,ST,OCI,2026-08-09
+249028471577,,Aarav Kadakia,2009-02-07,M,RMD_059,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-19
+063326439601,,Naksh Chada,2009-08-12,M,RMD_060,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-18
+,P8800406,Ayush Lal,2008-03-11,M,RMD_061,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,GENERAL,INDIAN,2026-07-08
+479082373839,,Harshil Yogi,2008-06-08,M,RMD_062,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-21
+595233707130,,Meghana Sridhar,2007-03-07,F,RMD_063,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-18
+931833239807,,Anirudh Nayar,2008-10-25,M,RMD_064,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-19
+068421482647,,Aahana Dutt,2005-12-24,F,RMD_065,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-11
+363754151416,,Chakradhar Chandran,2006-07-17,M,RMD_066,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-25
+759411584059,,Indira Dass,2003-07-24,F,RMD_067,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-22
+171028599153,,Sai Savant,2002-01-16,M,RMD_068,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-01
+226119470336,,Ekaja Nori,2004-02-18,F,RMD_069,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-05
+824589112353,,Agastya Raj,2005-06-10,M,RMD_070,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-06
+948760154509,,Rohan Sood,2007-02-14,M,RMD_071,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-02
+461817574068,,Vaishnavi Rege,2008-08-16,F,RMD_072,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-08-09
+874927193935,,Rachana Palla,2002-07-29,F,RMD_073,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-08
+010333189356,,Timothy Uppal,2008-08-27,M,RMD_074,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-03
+594986927425,,Kevin Maharaj,2002-04-03,M,RMD_075,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-09
+988482504923,,Udarsh Ravel,2009-06-03,M,RMD_076,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,GENERAL,INDIAN,2026-07-07
+509048330213,,Farhan Chawla,2009-07-18,M,RMD_077,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,SC,INDIAN,2026-08-13
+935215883751,,Omaja Raj,2009-10-06,F,RMD_078,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-09
+148141086578,,Bhavani Dora,2007-10-29,F,RMD_079,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-22
+810240681250,,Raagini Rattan,2002-08-29,F,RMD_080,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-10
+,L6347837,Kalpit Raj,2007-01-02,M,RMD_081,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,fn,ST,FOREIGN,2026-08-01
+777953940588,,Nakul Kata,2002-08-16,M,RMD_082,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-13
+061212806224,,Avni Master,2007-05-21,F,RMD_083,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-28
+969012611698,,Ekantika Behl,2008-12-22,F,RMD_084,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-05
+282294838218,,Sarthak Khalsa,2008-12-24,M,RMD_085,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-18
+300610547378,,Vinaya Warrior,2009-01-03,F,RMD_086,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-17
+532010277143,,Banjeet Yadav,2009-04-01,M,RMD_087,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-21
+625120168851,,Shivani Jha,2003-04-20,F,RMD_088,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-26
+148262515418,,Zansi Puri,2005-08-21,F,RMD_089,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-10
+982320064372,,Dipta Dalal,2008-02-16,F,RMD_090,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-19
+901229704264,,Harish Contractor,2002-05-06,M,RMD_091,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-13
+105774892526,,Ekantika Kant,2002-06-20,F,RMD_092,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-20
+,N8105931,Yochana Nanda,2007-10-11,F,RMD_093,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,fn,ST,FOREIGN,2026-08-05
+506053595309,,Veda Doshi,2003-08-13,F,RMD_094,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-18
+610850355402,,Tripti Oza,2007-01-20,F,RMD_095,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-07
+377346428270,,Shravya Hayer,2005-09-24,F,RMD_096,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-08-07
+887369785411,,Ekalinga Chowdhury,2009-03-18,M,RMD_097,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-09-03
+199045560885,,Ira Sanghvi,2003-04-21,F,RMD_098,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-09
+918300237139,,Advay Goda,2008-07-19,M,RMD_099,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-08
+138887811508,,Darsh Aggarwal,2009-06-08,M,RMD_100,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-13
+863828202442,,Madhav Rana,2005-07-18,M,RMD_101,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-27
+133279473605,,Faris Barman,2004-01-11,M,RMD_102,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-08
+545646323182,,Siddharth Sheth,2009-02-05,M,RMD_103,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-25
+643035551278,,Qasim Roy,2002-03-02,M,RMD_104,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-12
+084267757940,,Jai Goda,2009-01-02,M,RMD_105,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-07-17
+505095941274,,Suhani Dewan,2002-01-05,F,RMD_106,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-07
+079610348486,,Aarnav Chand,2008-05-23,M,RMD_107,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-27
+525937477473,,Ucchal Ramachandran,2009-01-16,F,RMD_108,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-23
+620792811611,,Chanchal Wable,2008-05-06,F,RMD_109,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-09
+217774307580,,David Biswas,2007-09-15,M,RMD_110,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-27
+211018779509,,Christopher Mitra,2005-04-21,M,RMD_111,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,SC,INDIAN,2026-08-11
+825033644347,,Ekani Ratta,2007-12-29,F,RMD_112,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-07-22
+640022723910,,Nihal Devi,2006-06-11,M,RMD_113,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-02
+734860149773,,Wakeeta Kant,2008-03-25,F,RMD_114,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-02
+634678098421,,Atharv Kibe,2001-11-16,M,RMD_115,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-18
+437246187376,,Vyanjana Dada,2003-09-25,F,RMD_116,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-12
+769221635182,,Lila Bhasin,2009-01-01,F,RMD_117,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-16
+019022034655,,Gabriel Uppal,2008-12-28,M,RMD_118,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-13
+296529625618,,Om Ravel,2007-08-08,M,RMD_119,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-07
+,L0356297,Darsh Basu,2008-05-02,M,RMD_120,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,oci,SC,OCI,2026-08-07
+008526261713,,Rohan Contractor,2004-11-22,M,RMD_121,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-19
+421110959509,,Yagnesh Natt,2002-12-28,M,RMD_122,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-28
+,A4921393,Noah Bala,2002-08-09,M,RMD_123,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,GENERAL,INDIAN,2026-09-22
+742720979828,,Upma Tank,2009-03-31,F,RMD_124,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-08-20
+800679179178,,Karan Minhas,2003-04-29,M,RMD_125,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-07-02
+792161738982,,Arunima Madan,2004-07-23,F,RMD_126,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-22
+636327445144,,Yachana Pathak,2009-02-08,F,RMD_127,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-22
+829220807199,,Laban Batta,2008-08-09,M,RMD_128,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-24
+192342007673,,Siddharth Ganesh,2003-09-12,M,RMD_129,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-04
+715371334968,,Chaman Kala,2003-08-26,F,RMD_130,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-15
+542650886423,,Xalak Misra,2008-09-14,F,RMD_131,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-08
+184019782385,,Vasudha Comar,2003-11-27,F,RMD_132,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-02
+887760586839,,Ishani Sawhney,2002-05-27,F,RMD_133,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-15
+423129998447,,Tanveer Sahota,2006-04-17,M,RMD_134,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-04
+182254589631,,Hemal Behl,2005-03-01,F,RMD_135,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-08-26
+789931637418,,Wyatt Sachdeva,2005-02-14,M,RMD_136,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-09-27
+147782415850,,Om Nazareth,2009-10-12,M,RMD_137,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-07-27
+,X1974147,Leena Naik,2002-04-05,F,RMD_138,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,oci,OBC,OCI,2026-08-25
+656926475290,,Chandani Suresh,2003-02-06,F,RMD_139,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-09-28
+839572120387,,Chanchal Cherian,2005-04-14,F,RMD_140,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-21
+214406716609,,Chasmum Goel,2005-08-12,F,RMD_141,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-22
+008026474376,,Laksh Wagle,2003-01-03,M,RMD_142,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-13
+127018893940,,Yashawini Rajan,2009-05-27,F,RMD_143,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-04
+478136738274,,Vedant Thakur,2007-06-21,M,RMD_144,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,SC,INDIAN,2026-09-18
+,N6172503,Triya Ravel,2009-04-04,F,RMD_145,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,fn,OBC,FOREIGN,2026-08-23
+093560520732,,Lila Kashyap,2006-07-30,F,RMD_146,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-26
+586435852327,,Maya Menon,2006-12-14,F,RMD_147,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-08-14
+085171857134,,Harinakshi Jain,2004-07-25,F,RMD_148,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-09-11
+354610705905,,Jagdish Kibe,2002-03-19,M,RMD_149,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,EWS,INDIAN,2026-08-16
+948977254885,,Nidhi Sastry,2006-01-20,F,RMD_150,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-07-14
+,Y4285760,Laksh Solanki,2004-05-09,M,RMD_151,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,nri,SC,INDIAN,2026-09-23
+808064456512,,Yasti Chawla,2007-06-17,F,RMD_152,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-09-10
+299787735763,,Azad Jani,2008-07-28,M,RMD_153,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,GENERAL,INDIAN,2026-07-24
+731160014590,,Yachana Mand,2004-12-05,F,RMD_154,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,SC,INDIAN,2026-07-26
+009069610016,,Guneet Kamdar,2002-05-24,M,RMD_155,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,SC,INDIAN,2026-08-02
+468782685720,,Krisha Mannan,2002-10-20,F,RMD_156,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,OBC,INDIAN,2026-07-02
+252182092733,,Vamakshi Loke,2009-02-15,F,RMD_157,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,supernumerary,ST,INDIAN,2026-08-25
+156143391673,,Vivaan Choudhury,2009-05-15,M,RMD_158,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Mechanical Engineering,2026-27,150,8,regular,ST,INDIAN,2026-09-16
+374275444104,,Rudra Sangha,2005-04-16,M,RMD_159,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-17
+,H2960590,Upma Khanna,2004-05-02,F,RMD_160,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,nri,EWS,INDIAN,2026-09-22
+505100679483,,Tristan Kannan,2008-02-29,M,RMD_161,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-07-15
+405636097503,,Libni Nigam,2004-08-18,F,RMD_162,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-19
+097622192723,,Max Ahuja,2009-05-25,M,RMD_163,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,supernumerary,ST,INDIAN,2026-09-27
+,Y2503192,Leela Gara,2007-01-25,F,RMD_164,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,nri,SC,INDIAN,2026-07-26
+472945602564,,Kiaan Sunder,2005-08-04,M,RMD_165,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-23
+902141568341,,Radhika Palla,2009-07-06,F,RMD_166,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-21
+340629397549,,Chakradhar Thakkar,2006-12-07,M,RMD_167,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-24
+809737048325,,Yash Jha,2007-08-14,M,RMD_168,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-27
+952673839952,,Warda Wali,2009-10-07,F,RMD_169,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-16
+975081050545,,Upma Goyal,2004-11-30,F,RMD_170,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-09-11
+647290971924,,Omkaar Grewal,2005-07-29,M,RMD_171,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-09-23
+969260616681,,Wazir Bumb,2003-01-22,M,RMD_172,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-23
+206184836588,,Balvan Kibe,2004-08-30,M,RMD_173,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-23
+382261278803,,Sneha Tandon,2003-04-19,F,RMD_174,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-18
+196802256687,,Neel Oak,2005-08-26,M,RMD_175,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-13
+245300001025,,Darsh Dey,2007-08-10,M,RMD_176,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-10
+123926504108,,Jonathan Parmer,2008-05-09,M,RMD_177,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-02
+676692608184,,Eta Seshadri,2003-05-24,F,RMD_178,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-26
+537222136423,,Ekaja Varma,2008-09-28,F,RMD_179,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-04
+530499788937,,Ryan Chandran,2008-09-15,M,RMD_180,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-22
+042882934028,,Ekta Prakash,2006-03-18,F,RMD_181,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-12
+477674423926,,Victor Randhawa,2006-03-08,M,RMD_182,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-15
+381675595521,,Sai Khare,2005-11-01,F,RMD_183,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-19
+445230426159,,Ladli Om,2007-03-15,F,RMD_184,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,supernumerary,ST,INDIAN,2026-07-15
+007166893942,,Manbir Kannan,2004-03-11,M,RMD_185,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-11
+102778754550,,Laban Patel,2005-02-28,M,RMD_186,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-06
+731862129165,,Jonathan Date,2004-07-18,M,RMD_187,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-19
+317058486475,,Udarsh Bhandari,2004-05-01,M,RMD_188,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,supernumerary,EWS,INDIAN,2026-07-23
+271989521764,,Prisha Kaur,2003-08-30,F,RMD_189,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-18
+076899216025,,Luke Bhalla,2009-01-01,M,RMD_190,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-24
+102117998197,,Nidra Johal,2006-06-26,F,RMD_191,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-05
+957175781552,,Chakradev Tailor,2005-01-12,M,RMD_192,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-05
+,P5234672,Fitan Keer,2005-03-26,M,RMD_193,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,nri,OBC,INDIAN,2026-07-13
+211897696699,,Udarsh Raghavan,2006-01-28,M,RMD_194,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-03
+884410855256,,Mugdha Thakur,2002-05-02,F,RMD_195,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-14
+118007313573,,Yashasvi Rai,2004-11-05,F,RMD_196,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-11
+175575955438,,Shivani Palan,2008-01-23,F,RMD_197,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-13
+025815800771,,Avi Palla,2005-07-11,M,RMD_198,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-07-21
+670833101362,,Dhruv Rama,2008-03-14,M,RMD_199,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-20
+133718824409,,Ekapad Dass,2004-09-25,M,RMD_200,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-09-04
+958917136622,,Yatin Suresh,2007-07-27,M,RMD_201,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-07-22
+357679766325,,Aradhana Rastogi,2009-01-31,F,RMD_202,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-08
+704395821937,,Henry Nadkarni,2007-05-27,M,RMD_203,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-09-20
+125092965407,,Tanish Subramanian,2005-08-31,M,RMD_204,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-28
+436262901126,,Hamsini Pathak,2008-03-05,F,RMD_205,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-02
+261927066580,,Aadhya Lal,2008-11-22,F,RMD_206,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,supernumerary,ST,INDIAN,2026-08-15
+985274253001,,Yatin Mane,2003-06-04,M,RMD_207,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-10
+973228232828,,Anita Kalla,2008-08-24,F,RMD_208,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-08
+,Z2999094,Girik Gaba,2009-07-27,M,RMD_209,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,nri,SC,INDIAN,2026-07-21
+388255165754,,Sathvik Grover,2007-02-14,M,RMD_210,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-09-28
+099861332708,,Ojasvi Palla,2008-02-26,F,RMD_211,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-08
+254234767422,,Avni Manne,2003-11-16,F,RMD_212,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-06
+087079303201,,Aachal Palan,2006-11-13,F,RMD_213,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-15
+174210912758,,Lipika Sandal,2005-03-24,F,RMD_214,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-18
+696574600444,,Mason Doctor,2003-11-29,M,RMD_215,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-09-02
+586485011293,,Ekapad Ravi,2003-04-15,M,RMD_216,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-06
+635723528227,,Veda Sangha,2004-02-07,F,RMD_217,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-25
+419838975061,,Faqid Savant,2003-08-15,M,RMD_218,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-09-18
+439534144334,,Januja Din,2004-01-14,F,RMD_219,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-11
+168358178604,,Jatin Magar,2007-08-29,M,RMD_220,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-04
+331053589868,,Ekiya Mittal,2008-02-06,F,RMD_221,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-07-15
+895753809637,,Nilima Sama,2003-12-27,F,RMD_222,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-12
+804923706221,,Utkarsh Shere,2007-12-15,M,RMD_223,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-06
+976431609998,,Shivani Gaba,2002-04-10,F,RMD_224,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-07-18
+545861041909,,Chaaya Mody,2008-06-19,F,RMD_225,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-26
+694430294138,,Ayaan Dara,2004-03-16,M,RMD_226,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-07-05
+,J5765873,Ekaraj Keer,2002-09-14,M,RMD_227,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,oci,EWS,OCI,2026-09-27
+373192018845,,Yagnesh Kuruvilla,2009-10-03,M,RMD_228,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-09-14
+696929272255,,Tanay Sule,2003-04-22,M,RMD_229,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-18
+796738770569,,Vaishnavi Badami,2004-03-30,F,RMD_230,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-07-28
+609666243008,,Radhika Rao,2009-06-16,F,RMD_231,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-14
+126601383917,,Maanas Bumb,2007-02-14,M,RMD_232,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-21
+364660444119,,Qarin Nair,2009-08-16,M,RMD_233,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-12
+463134871921,,Madhav Bhandari,2004-08-31,M,RMD_234,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-07-16
+,X7494985,Varenya Gala,2006-10-14,F,RMD_235,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,oci,SC,OCI,2026-07-28
+178924433511,,Lila Seth,2005-01-17,F,RMD_236,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-17
+865958063367,,Shaurya Naidu,2009-07-13,M,RMD_237,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-07
+658751876540,,Gaurang Suresh,2005-01-02,M,RMD_238,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-26
+556697777716,,Yatin Khare,2004-02-17,M,RMD_239,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-26
+017115307653,,Suhani Swamy,2002-05-26,F,RMD_240,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-09-01
+810588358841,,Hiral Jha,2006-04-22,F,RMD_241,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-09-16
+584834498973,,Oliver Mistry,2005-02-26,M,RMD_242,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-07
+169071377946,,Osha Thakur,2008-02-03,F,RMD_243,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-13
+827416214806,,Theodore Korpal,2004-06-05,M,RMD_244,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-11
+210346978860,,Hiral Sachdev,2002-09-25,F,RMD_245,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-08
+550610584204,,Rachit Sahota,2006-04-22,M,RMD_246,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-28
+656421629476,,Osha Tiwari,2004-02-05,F,RMD_247,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-02
+,V1590151,Urmi Tak,2009-05-02,F,RMD_248,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,nri,GENERAL,INDIAN,2026-07-09
+180744522137,,Dominic Aurora,2006-04-07,M,RMD_249,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-07-19
+495267495795,,Krish Bora,2002-06-05,M,RMD_250,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,supernumerary,ST,INDIAN,2026-07-20
+861979390876,,Vihaan Bora,2004-02-18,M,RMD_251,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-08-02
+,W4212260,Sarthak Chaudhary,2007-08-27,M,RMD_252,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,fn,OBC,FOREIGN,2026-08-25
+205389268575,,Anusha Hari,2004-04-07,F,RMD_253,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-09-25
+626388902285,,Pranit Khalsa,2002-03-03,M,RMD_254,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-07-13
+492774740152,,Krishna Zachariah,2001-10-31,F,RMD_255,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-08-25
+069041709405,,Ojasvi Bhavsar,2006-05-19,F,RMD_256,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-24
+420333689709,,Lajita Dass,2008-12-13,F,RMD_257,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-07-11
+837840633821,,Anamika Bera,2003-01-02,F,RMD_258,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-09-20
+501548028561,,Kashish Luthra,2005-07-30,F,RMD_259,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-17
+974116311731,,Zaitra Ramaswamy,2005-06-29,F,RMD_260,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,EWS,INDIAN,2026-07-09
+213734404167,,Vamakshi Mohan,2005-01-27,F,RMD_261,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-10
+511794357316,,Radha Sehgal,2007-10-14,F,RMD_262,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,supernumerary,GENERAL,INDIAN,2026-08-02
+012406996054,,Patrick Misra,2007-11-01,M,RMD_263,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-09-24
+919556289796,,Watika Handa,2003-08-14,F,RMD_264,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-23
+685895741959,,Netra Maharaj,2002-04-18,F,RMD_265,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-17
+592102883453,,Hemal Bobal,2009-07-11,F,RMD_266,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-09-19
+564292346496,,Eta Jhaveri,2004-12-02,F,RMD_267,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-25
+897361179029,,Mekhala Sawhney,2005-08-15,F,RMD_268,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-07-14
+283472726122,,Kashvi Vaidya,2006-02-16,F,RMD_269,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-09-10
+460751910717,,Yutika Mann,2006-10-18,F,RMD_270,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-07-21
+509841328406,,Caleb Shah,2003-01-21,M,RMD_271,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-08-14
+203275961707,,Lajita Rau,2004-12-23,F,RMD_272,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-05
+408540927142,,Baghyawati Narula,2003-10-12,F,RMD_273,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-07-23
+325705743923,,Ayaan Andra,2007-06-06,M,RMD_274,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-17
+178934221482,,Ronith Misra,2007-05-19,M,RMD_275,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-02
+051756515278,,Lakshmi Warrior,2006-10-16,F,RMD_276,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-17
+294383997311,,Lucky Kadakia,2005-04-14,M,RMD_277,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-23
+894492614301,,Balendra Sabharwal,2007-11-22,M,RMD_278,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-09-03
+280425471079,,Aachal Brahmbhatt,2002-09-03,F,RMD_279,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-07-28
+617329803589,,Anthony Dugar,2006-09-18,M,RMD_280,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,OBC,INDIAN,2026-07-08
+633665533615,,Yashasvi Nagy,2004-11-29,F,RMD_281,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,GENERAL,INDIAN,2026-09-27
+776301211808,,Eshana Nadkarni,2002-04-05,F,RMD_282,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-14
+149973475193,,Rishi Mohanty,2007-11-28,M,RMD_283,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,SC,INDIAN,2026-08-23
+700930667571,,Sanaya Sarna,2005-04-16,F,RMD_284,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Computer Engineering,2026-27,120,6,regular,ST,INDIAN,2026-08-12
+020102984722,,Kevin Bhalla,2007-06-26,M,RMD_285,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-04
+324277927695,,Fiyaz Naidu,2008-10-14,M,RMD_286,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-08-19
+607551705206,,Chaitanya Kibe,2007-12-20,M,RMD_287,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-07-10
+616871655711,,Vincent Raghavan,2004-12-06,M,RMD_288,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-22
+,R4877165,Vidhi Shanker,2005-02-25,F,RMD_289,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,GENERAL,INDIAN,2026-08-09
+306555911113,,Harita Mahal,2006-04-22,F,RMD_290,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-09-13
+075381259725,,Xiti More,2003-03-18,F,RMD_291,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-07
+469093665078,,Falan Narang,2003-10-14,M,RMD_292,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-01
+616313160170,,Anita Vasa,2003-07-24,F,RMD_293,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-08-24
+780589560490,,Ekavir Purohit,2005-09-17,M,RMD_294,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-08-09
+239377822513,,Eshana Maharaj,2009-01-30,F,RMD_295,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-08-04
+498400235115,,Anya Bhagat,2006-12-19,F,RMD_296,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-27
+,P8220960,Aadhya Upadhyay,2004-12-10,F,RMD_297,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,fn,SC,FOREIGN,2026-08-18
+642858496237,,Garima Swaminathan,2005-11-07,F,RMD_298,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-09-24
+736383239310,,Wakeeta Date,2005-07-16,F,RMD_299,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-09-07
+809332277634,,Gayathri Ben,2004-12-23,F,RMD_300,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-08-02
+326640443563,,Siddharth Sridhar,2009-04-28,M,RMD_301,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-08-09
+873220322278,,Charvi Madan,2007-10-21,F,RMD_302,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-07-22
+913407951898,,Pooja Mallick,2005-07-25,F,RMD_303,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-09-17
+711752963809,,Dalbir Goda,2005-07-10,M,RMD_304,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-17
+763848589410,,Chaitaly Mannan,2003-07-23,F,RMD_305,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-07-01
+742289265950,,Lajita Bassi,2002-05-03,F,RMD_306,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-12
+418713008819,,Adya Reddy,2006-07-09,F,RMD_307,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-07-06
+223294579936,,Aarnav Deep,2007-01-17,M,RMD_308,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-26
+032508863755,,Pranav Ramachandran,2002-01-24,M,RMD_309,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-08-23
+896302579667,,Wriddhish Samra,2006-03-18,M,RMD_310,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-14
+362687556369,,Ayaan Kanda,2004-12-11,M,RMD_311,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-26
+253197500574,,Aashi Behl,2009-02-13,F,RMD_312,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-08-08
+828392404927,,Geetika Pillai,2003-01-24,F,RMD_313,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-09-07
+270559708265,,Lohit Sharma,2009-08-07,M,RMD_314,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-25
+909577516065,,Vanya Sahota,2009-09-14,F,RMD_315,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-09-16
+678709432879,,Ryan Lad,2009-03-01,M,RMD_316,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-07-26
+902339567484,,Gaurangi Goswami,2005-09-10,F,RMD_317,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-07-03
+199541738512,,Varenya Mistry,2003-09-26,F,RMD_318,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-07-22
+735502245571,,Jonathan Som,2009-09-13,M,RMD_319,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-07-19
+135182079365,,Pallavi Balay,2005-04-24,F,RMD_320,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-07-05
+,R9586364,Darpan Bains,2004-04-05,M,RMD_321,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,SC,INDIAN,2026-08-15
+087629987625,,Pooja Dube,2004-01-18,F,RMD_322,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-09-07
+943679889008,,Dev Arya,2002-10-29,M,RMD_323,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-09-10
+916594690650,,Unni Naik,2005-02-21,F,RMD_324,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-09-03
+124234591926,,Aashi Setty,2004-11-16,F,RMD_325,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-08
+,F8868236,Vanya Srinivas,2008-10-28,F,RMD_326,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,ST,INDIAN,2026-09-24
+087117844626,,Ayaan Gupta,2006-08-24,M,RMD_327,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-09-21
+320118521914,,Abhiram Bose,2002-08-19,M,RMD_328,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-08-21
+449431401449,,Lucky Apte,2006-07-05,M,RMD_329,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-08-16
+396375952834,,Pratyush Modi,2003-10-31,M,RMD_330,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-23
+436698180319,,Chaman Mukherjee,2006-04-12,F,RMD_331,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-09-28
+000868969442,,Omkaar Karan,2002-02-16,M,RMD_332,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-07-18
+013834138433,,Tanveer Goel,2005-05-20,M,RMD_333,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-08
+,T9358483,Jason Sura,2005-12-19,M,RMD_334,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,OBC,INDIAN,2026-08-01
+981058435893,,Gautam Basak,2005-04-04,M,RMD_335,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-16
+759106810140,,Ubika Choudhury,2009-09-24,F,RMD_336,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,supernumerary,ST,INDIAN,2026-09-25
+988951664468,,Ria Biswas,2006-03-17,F,RMD_337,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-28
+,M2390200,Urmi Varghese,2009-06-26,F,RMD_338,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,OBC,INDIAN,2026-08-07
+387346302145,,Panini Bandi,2006-03-25,F,RMD_339,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-09-05
+328726997757,,Ranbir Bajaj,2007-05-09,M,RMD_340,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-07-12
+,U8000939,Yashica Choudhury,2003-03-04,F,RMD_341,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,oci,ST,OCI,2026-07-15
+218537715134,,Chakradhar Thaker,2006-03-03,M,RMD_342,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-08-15
+385077357852,,Parth Chander,2006-01-30,M,RMD_343,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-07-06
+502579720315,,Jyoti Dugar,2007-05-31,F,RMD_344,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-12
+180864340080,,Samarth Banerjee,2007-06-14,M,RMD_345,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-07-10
+516657520040,,Quincy Sandhu,2007-12-20,M,RMD_346,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,SC,INDIAN,2026-08-02
+372731710185,,Kala Chaudhary,2007-06-27,F,RMD_347,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-07-17
+090189072630,,Udyati Goswami,2004-01-13,F,RMD_348,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-23
+,W8207184,Harshil Sura,2005-04-10,M,RMD_349,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,oci,EWS,OCI,2026-09-28
+616009227633,,Utkarsh Butala,2009-03-12,M,RMD_350,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-25
+,M7753109,Siddharth Seth,2002-02-21,M,RMD_351,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,SC,INDIAN,2026-09-21
+199099188525,,Ishanvi Srinivasan,2006-10-01,F,RMD_352,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-08
+112109955531,,Dalbir Rattan,2008-05-01,M,RMD_353,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-10
+161543840530,,Dipta Wali,2003-03-31,F,RMD_354,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-07-13
+154110892764,,Ojas Om,2004-12-22,M,RMD_355,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-09-19
+685684684294,,Gautam Mani,2004-08-02,M,RMD_356,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-08
+785863131249,,Zansi Hora,2005-05-05,F,RMD_357,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-07-11
+212299344327,,Libni Salvi,2007-10-17,F,RMD_358,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-07-28
+990981700108,,Chameli Bhatt,2007-06-15,F,RMD_359,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-09-10
+967300228913,,Ekta Amble,2005-07-31,F,RMD_360,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-09-15
+781139674810,,Daniel Parsa,2003-09-22,M,RMD_361,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-09-25
+299414772787,,Lohit Misra,2008-07-04,M,RMD_362,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-07
+044916663407,,Jacob Sinha,2009-01-26,M,RMD_363,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,supernumerary,ST,INDIAN,2026-09-03
+218922569288,,Zaitra Kant,2003-03-27,F,RMD_364,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-20
+812189309323,,Shivani Verma,2009-04-16,F,RMD_365,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,supernumerary,SC,INDIAN,2026-09-11
+541049449555,,Gaurang Ratta,2004-02-11,M,RMD_366,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-09-03
+396189674292,,Vamakshi Luthra,2006-05-06,F,RMD_367,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-24
+769804609251,,Sathvik Saha,2004-03-17,M,RMD_368,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-21
+876788858348,,Krish Nayak,2009-05-20,M,RMD_369,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-07-20
+658918971786,,Brijesh Kothari,2008-01-24,M,RMD_370,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-07-16
+803478301304,,Hamsini Agrawal,2004-04-24,F,RMD_371,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-08-05
+237707683369,,Upma Singhal,2002-04-16,F,RMD_372,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-09-26
+021527476250,,Theodore Pathak,2007-11-05,M,RMD_373,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,ST,INDIAN,2026-08-10
+,X8278963,Nitara Borah,2005-05-28,F,RMD_374,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,oci,ST,OCI,2026-09-03
+901650943843,,Ubika Shankar,2003-04-10,F,RMD_375,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,supernumerary,ST,INDIAN,2026-09-21
+336638425416,,Agastya Hayre,2006-01-29,M,RMD_376,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,OBC,INDIAN,2026-07-01
+463725257589,,Bhavani Bhasin,2007-10-17,F,RMD_377,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,EWS,INDIAN,2026-09-21
+978799948443,,Harrison Ahuja,2003-01-08,M,RMD_378,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,regular,GENERAL,INDIAN,2026-07-04
+,L2984763,Damyanti Raghavan,2008-12-08,F,RMD_379,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Civil Engineering,2026-27,90,5,nri,EWS,INDIAN,2026-08-22
+466316793790,,Tarak Soni,2008-12-13,M,RMD_380,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,EWS,INDIAN,2026-07-13
+381207600307,,Isaiah Sengupta,2003-02-09,M,RMD_381,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-07-11
+917600981469,,Waida Srinivasan,2009-08-07,F,RMD_382,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-09-11
+841009237649,,Wahab Sathe,2006-11-09,M,RMD_383,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-09-25
+,B9480173,Widisha Bhatnagar,2005-01-26,F,RMD_384,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,nri,ST,INDIAN,2026-08-04
+566099460858,,Tarak Krishna,2005-11-12,M,RMD_385,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-09-17
+571035319210,,Ethan Behl,2009-05-15,M,RMD_386,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-09-09
+730813509072,,Ekapad Badal,2008-06-29,M,RMD_387,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-09-23
+245092982866,,Nimrat Naik,2005-03-17,F,RMD_388,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-08-06
+587934704036,,Krish Keer,2005-03-31,M,RMD_389,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-08-28
+924334600602,,Indrajit Warrior,2006-11-30,M,RMD_390,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-09-23
+043074636021,,William Dhar,2005-04-22,M,RMD_391,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-08-12
+322635692421,,Dalaja Din,2005-06-29,F,RMD_392,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,supernumerary,OBC,INDIAN,2026-09-10
+249320194443,,Janaki Bhavsar,2006-03-09,F,RMD_393,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-07-12
+047729903144,,Elijah Bath,2003-01-28,M,RMD_394,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-07-19
+382337241387,,Chakradhar Srinivas,2008-01-11,M,RMD_395,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-11
+934091720586,,Vrinda Bhattacharyya,2003-02-23,F,RMD_396,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-07
+036961800129,,Ira Babu,2003-07-13,F,RMD_397,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-07-11
+519147134110,,Ansh Gade,2002-07-06,M,RMD_398,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-08-12
+656582600062,,Forum Pingle,2003-03-26,F,RMD_399,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-09-16
+112497237715,,Yachana Gulati,2003-03-09,F,RMD_400,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-07-09
+717137230260,,Ansh Mittal,2008-06-25,M,RMD_401,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,supernumerary,OBC,INDIAN,2026-08-26
+,N8926023,Arunima Warrior,2002-01-11,F,RMD_402,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,oci,ST,OCI,2026-08-02
+396348350620,,Jacob Varkey,2006-01-08,M,RMD_403,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-07-10
+609487831762,,Ayush Dey,2004-09-01,M,RMD_404,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,supernumerary,EWS,INDIAN,2026-08-20
+209077174258,,Saumya Sankaran,2002-08-20,F,RMD_405,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-07-16
+076141576073,,Lucky Bath,2007-03-13,M,RMD_406,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-09-22
+521651349896,,Shivansh Shan,2009-04-30,M,RMD_407,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-01
+550999803573,,Chanakya Nanda,2004-02-23,M,RMD_408,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-09-19
+377363227232,,Qadim Shukla,2007-12-22,M,RMD_409,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-27
+511445582233,,Darsh Parsa,2004-07-25,M,RMD_410,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-08-23
+289934740210,,Warjas Palla,2004-07-23,M,RMD_411,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,EWS,INDIAN,2026-08-27
+801337579497,,Frado Vaidya,2006-06-02,M,RMD_412,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-08-05
+,C7708517,Anamika Narang,2005-12-06,F,RMD_413,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,nri,GENERAL,INDIAN,2026-07-10
+,K6178248,Divya Keer,2004-06-30,F,RMD_414,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,oci,ST,OCI,2026-08-17
+293006340497,,Bahadurjit Kari,2007-01-28,M,RMD_415,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-02
+557022561903,,Agastya Saxena,2004-05-29,M,RMD_416,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-08-25
+233810096319,,Balhaar Sha,2008-08-24,M,RMD_417,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-09-12
+631447258573,,Aradhana Sant,2005-03-25,F,RMD_418,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-08-11
+591401347638,,Charita Uppal,2006-12-13,F,RMD_419,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-09-24
+368177491158,,Damini Ramachandran,2002-08-31,F,RMD_420,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-07-11
+085477032871,,Nikita Narula,2005-08-21,F,RMD_421,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-18
+,C0929242,Ekansh Padmanabhan,2004-02-06,M,RMD_422,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,oci,ST,OCI,2026-07-17
+870465056611,,Qushi Prakash,2008-12-27,F,RMD_423,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-20
+906475771900,,Ekta Dyal,2009-10-02,F,RMD_424,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-08-09
+004696127083,,Ranveer Lall,2003-07-28,M,RMD_425,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-09-22
+145084991618,,Gauri Sachdeva,2009-06-02,F,RMD_426,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-13
+760730206659,,Agastya Ramesh,2006-07-17,M,RMD_427,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-09-23
+827977047676,,Hemangini Kothari,2008-02-20,F,RMD_428,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,EWS,INDIAN,2026-07-22
+382823870960,,Ria Tank,2005-11-10,F,RMD_429,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-07-25
+764738795213,,Orinder Goswami,2005-01-31,M,RMD_430,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-07-28
+795769349472,,Harish Wable,2007-10-10,M,RMD_431,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-08-23
+073059939067,,Vinaya Bhandari,2004-07-29,F,RMD_432,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-07-19
+,B9782266,Upasna Kamdar,2006-09-20,F,RMD_433,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,oci,SC,OCI,2026-07-21
+453636489136,,Zilmil Maharaj,2006-02-03,F,RMD_434,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,SC,INDIAN,2026-08-13
+441773999867,,Guneet Tailor,2002-05-27,M,RMD_435,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-07-21
+026991053776,,Lekha Baral,2003-10-14,F,RMD_436,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-08-05
+270631253765,,Banjeet Venkatesh,2001-11-07,M,RMD_437,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-07-12
+507874721952,,Devansh Sood,2007-08-06,M,RMD_438,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-09
+064476415543,,Zashil Pandya,2002-05-20,M,RMD_439,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,ST,INDIAN,2026-09-15
+,Z0930682,Wazir Wali,2005-06-05,M,RMD_440,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,nri,SC,INDIAN,2026-09-04
+957013997843,,Yug Parikh,2002-08-27,M,RMD_441,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-21
+105890122419,,Adweta Sani,2002-10-08,F,RMD_442,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Information Technology,2026-27,60,3,regular,OBC,INDIAN,2026-09-24
+827671273251,,Udyati Sarna,2006-12-23,F,RMD_443,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-09-14
+547539742788,,Ishita Krishnan,2004-04-12,F,RMD_444,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-08-21
+281928060439,,Joshua Nagy,2007-05-30,M,RMD_445,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-19
+,W6586181,Luke Badal,2005-10-28,M,RMD_446,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,nri,ST,INDIAN,2026-08-16
+379909855303,,Samesh Kapadia,2005-02-16,M,RMD_447,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-12
+846262834001,,Alexander Sandal,2005-04-11,M,RMD_448,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-09-19
+078880538266,,Hemang Bains,2006-08-12,M,RMD_449,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,supernumerary,GENERAL,INDIAN,2026-08-03
+932174204889,,Hemang Seth,2004-04-09,M,RMD_450,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-09-13
+670645710864,,Inaya Rastogi,2004-06-07,F,RMD_451,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-07-11
+668826249715,,Tarak Gole,2009-05-09,M,RMD_452,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-07-27
+990252714198,,Meghana Gandhi,2002-10-03,F,RMD_453,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-07-22
+497326118516,,Nitara Gara,2009-01-19,F,RMD_454,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-07-07
+,F3559198,Frederick Cherian,2002-07-09,M,RMD_455,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,fn,OBC,FOREIGN,2026-08-17
+741365870012,,Thomas Desai,2008-08-29,M,RMD_456,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-08-27
+593454046330,,Azaan Kapadia,2002-11-07,M,RMD_457,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-07-06
+409234506822,,Liam Dutta,2005-03-07,M,RMD_458,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-08-25
+530762644959,,Shravya Yadav,2006-01-03,F,RMD_459,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-03
+526453222257,,Jason Vaidya,2002-01-14,M,RMD_460,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-08-03
+654325994524,,Maya Goda,2006-12-17,F,RMD_461,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-09-20
+279851425599,,Fiyaz Dalal,2008-10-09,M,RMD_462,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-06
+838951250315,,Oscar Dey,2007-07-05,M,RMD_463,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-07-24
+602555606293,,Manthan Sridhar,2002-01-12,M,RMD_464,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-08-25
+129703669662,,Vedika Tandon,2005-05-31,F,RMD_465,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-08-22
+202055522852,,Advaith Dua,2004-02-10,M,RMD_466,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-09-20
+022071305441,,Arin Mammen,2001-12-20,M,RMD_467,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-07-23
+133720821437,,Gauri Ganesan,2006-05-03,F,RMD_468,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-07-23
+059577629773,,Eshana Golla,2005-03-13,F,RMD_469,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-09-16
+235554023497,,Girindra Bala,2003-06-25,M,RMD_470,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-07
+891010500891,,Jeet Goel,2005-09-15,M,RMD_471,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-07-18
+,H3737912,Victor Puri,2008-03-05,M,RMD_472,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,fn,OBC,FOREIGN,2026-08-05
+215966808795,,Abha Singh,2006-02-09,F,RMD_473,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-09-20
+438907169743,,Chandresh Ghose,2007-11-01,M,RMD_474,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-24
+372071188198,,Lopa Singhal,2003-10-30,F,RMD_475,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-09-21
+526506826159,,Praneel Chokshi,2004-12-08,M,RMD_476,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-08-06
+501130380077,,Vanya Som,2004-11-19,F,RMD_477,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-09-10
+,U4464125,Barkha Venkatesh,2009-08-03,F,RMD_478,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,nri,ST,INDIAN,2026-08-22
+487128982888,,Rehaan Srinivas,2003-07-21,M,RMD_479,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-07-15
+960894583298,,Luke Luthra,2008-04-20,M,RMD_480,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-09-08
+831163341367,,Elijah Sandhu,2009-07-01,M,RMD_481,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-07-18
+484047464571,,Radhika Suri,2003-10-26,F,RMD_482,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-09-18
+082005952002,,Abhimanyu Sant,2006-09-14,M,RMD_483,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-11
+049211325510,,Wahab Kata,2006-05-08,M,RMD_484,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-08-25
+954223277154,,Ayush Munshi,2008-08-27,M,RMD_485,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-09-04
+713729654202,,Meera Bhatti,2001-12-18,F,RMD_486,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-17
+560881872331,,Girik Bains,2005-04-26,M,RMD_487,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-07-18
+427856280937,,Janani Srinivas,2003-06-24,F,RMD_488,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-09-27
+613588945367,,Advaith Sekhon,2002-03-07,M,RMD_489,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-09-16
+610499061371,,Naksh Kar,2004-12-16,M,RMD_490,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-08-14
+055127173357,,Shravya Mahal,2009-02-11,F,RMD_491,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-07-15
+277103232857,,Sudiksha Hayer,2004-12-24,F,RMD_492,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-13
+224329101081,,Atharv Thakkar,2009-05-14,M,RMD_493,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-09-10
+546466881266,,Odika Toor,2007-04-17,F,RMD_494,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-07-08
+483302370883,,Nitara Atwal,2003-01-04,F,RMD_495,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-08-15
+453764229676,,Samaksh Ahuja,2008-01-14,M,RMD_496,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-08
+325183696615,,Darpan Keer,2007-03-17,M,RMD_497,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-09-28
+361906771708,,Ekansh Tandon,2007-11-27,M,RMD_498,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,OBC,INDIAN,2026-09-14
+705836693421,,Jairaj Balay,2006-05-22,M,RMD_499,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-07-20
+599295477294,,Harish Srinivas,2004-04-27,M,RMD_500,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,SC,INDIAN,2026-07-06
+583557289056,,Guneet Oommen,2006-03-25,M,RMD_501,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-08-07
+903303485926,,Aarnav Buch,2001-12-16,M,RMD_502,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,ST,INDIAN,2026-07-10
+806082141248,,Chakradev Muni,2001-11-05,M,RMD_503,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-06
+026967840522,,Lakshmi Pall,2005-11-19,F,RMD_504,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,EWS,INDIAN,2026-08-01
+429183911893,,Nisha Chand,2008-10-22,F,RMD_505,RMD Sinhgad Technical Institutes Campus,"Warje, Pune",6769,B.Tech (Engineering),Electronics & Telecommunication,2026-27,60,3,regular,GENERAL,INDIAN,2026-08-16
