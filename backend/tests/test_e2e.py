@@ -140,7 +140,7 @@ def test_dashboards_show_seeded_reality(tokens):
     r = client.get("/api/v1/dashboard/overview", headers=_h(tokens["officer"]))
     assert r.status_code == 200
     ov = r.json()
-    assert ov["institutions"] == 8
+    assert ov["institutions"] == 11  # 10 real Pune colleges + ABC fixture
     assert ov["students"] >= 600
     assert ov["cross_institution_duplicates"] >= 1
     assert any(s["state"] == "Maharashtra" for s in ov["by_state"])
@@ -184,6 +184,7 @@ def test_verification_flow(tokens):
     try:
         apaar = db.execute(
             select(Student.apaar_id).where(Student.status.in_([STATUS_VALID, STATUS_FLAGGED]))
+            .where(Student.apaar_id.is_not(None))  # nri/oci/fn students carry passports
         ).scalars().first()
     finally:
         db.close()

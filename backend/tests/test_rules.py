@@ -64,20 +64,32 @@ def test_category_invalid():
 
 
 def test_oci_with_indian_nationality_warns():
-    row = {**GOOD_ROW, "quota_type": "oci", "nationality": "INDIAN"}
+    row = {**GOOD_ROW, "quota_type": "oci", "nationality": "INDIAN",
+           "apaar_id": "", "passport_no": "A1234567"}
     flags = row_flags(row, AY_START, AY_END)
     assert "QUOTA_NATIONALITY_MISMATCH" in codes(flags)
     assert all(sev == "warning" for _, sev, _ in flags)
 
 
 def test_nri_with_indian_nationality_is_ok():
-    row = {**GOOD_ROW, "quota_type": "nri", "nationality": "INDIAN"}
+    row = {**GOOD_ROW, "quota_type": "nri", "nationality": "INDIAN",
+           "apaar_id": "", "passport_no": "A1234567"}
     assert "QUOTA_NATIONALITY_MISMATCH" not in codes(row_flags(row, AY_START, AY_END))
 
 
 def test_fn_with_foreign_nationality_is_ok():
-    row = {**GOOD_ROW, "quota_type": "fn", "nationality": "FRENCH"}
+    row = {**GOOD_ROW, "quota_type": "fn", "nationality": "FRENCH",
+           "apaar_id": "", "passport_no": "A1234567"}
     assert row_flags(row, AY_START, AY_END) == []
+
+
+def test_foreign_quota_needs_passport_not_apaar():
+    # foreign candidate without APAAR but with a passport: no APAAR flags
+    row = {**GOOD_ROW, "quota_type": "nri", "apaar_id": "", "passport_no": "B0000001"}
+    assert "APAAR_MISSING" not in codes(row_flags(row, AY_START, AY_END))
+    # ...and a broken passport is an error
+    row["passport_no"] = "12345"
+    assert "PASSPORT_FORMAT" in codes(row_flags(row, AY_START, AY_END))
 
 
 def test_academic_year_window():

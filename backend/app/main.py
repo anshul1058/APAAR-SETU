@@ -1,9 +1,8 @@
 """APAAR-SETU backend — FastAPI application entrypoint (Phase 0 scaffold)."""
-import os
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.config import settings
 from app.routers import assistant as assistant_router
 from app.routers import auth as auth_router
 from app.routers import dashboard as dashboard_router
@@ -32,7 +31,7 @@ app.include_router(reports_router.router, prefix=API_PREFIX)
 # CORS: origins come from CORS_ORIGINS (comma separated), default = Vite dev server.
 _cors_origins = [
     o.strip()
-    for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+    for o in settings.cors_origins.split(",")
     if o.strip()
 ]
 

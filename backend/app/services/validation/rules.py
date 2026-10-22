@@ -10,17 +10,27 @@ from datetime import date
 from app.config import settings
 
 APAAR_RE = re.compile(settings.apaar_regex)
+# simplified demo passport: one letter + 7 digits (generate_enrollments.py)
+PASSPORT_RE = re.compile(r"^[A-Z][0-9]{7}$")
 CATEGORIES = {"GENERAL", "OBC", "SC", "ST", "EWS", "OTHER"}
 QUOTAS = {"regular", "supernumerary", "nri", "oci", "fn"}
+FOREIGN_QUOTAS = {"nri", "oci", "fn"}
 
 
 def row_flags(row: dict, academic_year_start: date, academic_year_end: date):
     """Validate a single normalised row. Returns list of (code, severity, message)."""
     flags = []
 
-    # --- APAAR ID ------------------------------------------------------
+    # --- primary identity: APAAR for Indian quotas, passport for foreign -----
+    quota = (row.get("quota_type") or "").lower()
     apaar = (row.get("apaar_id") or "").strip()
-    if not apaar:
+    passport = (row.get("passport_no") or "").strip().upper()
+    if quota in FOREIGN_QUOTAS:
+        # nri/oci/fn candidates have NO APAAR ID — passport is their primary id
+        if not PASSPORT_RE.match(passport):
+            flags.append(("PASSPORT_FORMAT", "error",
+                          "Passport number is missing or invalid"))
+    elif not apaar:
         flags.append(("APAAR_MISSING", "error", "APAAR ID is missing"))
     elif not APAAR_RE.match(apaar):
         flags.append(("APAAR_FORMAT", "error", "APAAR ID format is invalid"))

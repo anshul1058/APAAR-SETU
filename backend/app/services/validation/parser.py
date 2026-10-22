@@ -92,6 +92,10 @@ def parse_file(file: UploadFile) -> list[dict]:
             rename[col] = COLUMN_ALIASES[col]
     df = df.rename(columns=rename)
 
+    # per-college dataset files (generate_enrollments.py) label the course as `branch`
+    if "course" not in df.columns and "branch" in df.columns:
+        df["course"] = df["branch"]
+
     missing = [c for c in REQUIRED_COLUMNS if c not in df.columns]
     if missing:
         raise HTTPException(
@@ -117,5 +121,6 @@ def parse_file(file: UploadFile) -> list[dict]:
         if row.get("quota_type"):
             row["quota_type"] = str(row["quota_type"]).lower().strip()
         row["apaar_id"] = str(row.get("apaar_id") or "").strip()
+        row["passport_no"] = str(row.get("passport_no") or "").strip().upper()
         rows.append(row)
     return rows

@@ -16,6 +16,7 @@ from app.config import settings
 from app.models import (
     AnomalyScore,
     Course,
+    EnrolmentHistory,
     Institution,
     STATUS_FLAGGED,
     STATUS_VALID,
@@ -34,7 +35,7 @@ except ImportError:  # pragma: no cover - depends on host policy
     HAS_SKLEARN = False
 
 FEATURE_COLS = [
-    "fill_ratio", "nri_share", "oci_share", "fn_share",
+    "fill_ratio", "yoy_growth", "nri_share", "oci_share", "fn_share",
     "supernumerary_share", "late_admission_share", "flag_rate", "dup_rate",
 ]
 
@@ -47,6 +48,14 @@ def _course_frame(db: Session, academic_year: str) -> pd.DataFrame:
         .where(Course.academic_year == academic_year)
     ).all()
 
+    # prior year's enrolment for yoy_growth (synthetic history from seed)
+    start = int(academic_year.split("-")[0])
+    prev_ay = f"{start - 1}-{str(start)[2:]}"  # "2026-27" -> "2025-26"
+    prev_enrolled = dict(db.execute(
+        select(EnrolmentHistory.course_id, EnrolmentHistory.enrolled)
+        .where(EnrolmentHistory.academic_year == prev_ay)
+    ).all())
+
     records = []
     for course, inst_name in courses:
         students = db.execute(
@@ -54,6 +63,8 @@ def _course_frame(db: Session, academic_year: str) -> pd.DataFrame:
             .where(Student.status.in_([STATUS_VALID, STATUS_FLAGGED]))
         ).scalars().all()
         n = len(students)
+        if n == 0:
+            continue  # no enrolment (e.g. the ABC upload fixture) — nothing to score
         ay_start, ay_end = int(academic_year.split("-")[0]), None
 
         approved = max(course.approved_intake + course.approved_supernumerary, 1)
@@ -76,6 +87,10 @@ def _course_frame(db: Session, academic_year: str) -> pd.DataFrame:
             "academic_year": academic_year,
             "enrolled": n,
             "fill_ratio": n / approved,
+            "yoy_growth": (
+                (n - prev_enrolled[course.id]) / max(prev_enrolled[course.id], 1)
+                if course.id in prev_enrolled else 0.0
+            ),
             "nri_share": sum(1 for s in students if s.quota_type == "nri") / max(n, 1),
             "oci_share": sum(1 for s in students if s.quota_type == "oci") / max(n, 1),
             "fn_share": sum(1 for s in students if s.quota_type == "fn") / max(n, 1),

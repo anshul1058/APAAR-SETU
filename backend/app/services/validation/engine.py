@@ -204,16 +204,22 @@ def run_validation(
         student_id = None
         if not has_error and course is not None:
             status = STATUS_FLAGGED if has_warning else STATUS_VALID
+            # Indian rows key on apaar_id; foreign rows on passport_no (their
+            # primary id — a NULL-apaar match would hit any student in the course)
+            apaar = row["apaar_id"] or None
+            passport = (row.get("passport_no") or "").strip().upper() or None
+            match = [
+                Student.institution_id == institution_id,
+                Student.course_id == course.id,
+                Student.apaar_id == apaar if apaar else Student.passport_no == passport,
+            ]
             student = db.execute(
-                select(Student).where(
-                    Student.apaar_id == row["apaar_id"],
-                    Student.institution_id == institution_id,
-                    Student.course_id == course.id,
-                )
+                select(Student).where(*match)
             ).scalar_one_or_none()
             if student is None:
                 student = Student(
-                    apaar_id=row["apaar_id"],
+                    apaar_id=apaar,
+                    passport_no=passport,
                     institution_id=institution_id,
                     course_id=course.id,
                     status=status,

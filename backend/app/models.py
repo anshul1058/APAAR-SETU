@@ -94,7 +94,9 @@ class Student(Base):
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    apaar_id: Mapped[str] = mapped_column(String(12), nullable=False)
+    # NULL for nri/oci/fn students — their primary id is passport_no (system.md §2)
+    apaar_id: Mapped[str | None] = mapped_column(String(12), nullable=True)
+    passport_no: Mapped[str | None] = mapped_column(String(16), nullable=True)
     institution_id: Mapped[int] = mapped_column(
         ForeignKey("institutions.id", ondelete="CASCADE"), nullable=False
     )
@@ -175,6 +177,22 @@ class AnomalyScore(Base):
     academic_year: Mapped[str] = mapped_column(String(9), nullable=False)
     score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     reasons_json: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+
+
+class EnrolmentHistory(Base):
+    """Prior-year enrolment per course — feeds the yoy_growth anomaly feature
+    (aiml_guide.md §3). Two synthetic years are seeded per course."""
+
+    __tablename__ = "enrolment_history"
+    __table_args__ = (Index("uq_history", "course_id", "academic_year", unique=True),)
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    course_id: Mapped[int] = mapped_column(
+        ForeignKey("courses.id", ondelete="CASCADE"), nullable=False
+    )
+    academic_year: Mapped[str] = mapped_column(String(9), nullable=False)  # e.g. "2025-26"
+    enrolled: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
 

@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     fuzzy_threshold: int = 90
     anomaly_threshold: float = 0.65
     cors_origins: str = "http://localhost:5173"
+    # optional: Supabase project info (used by docs/tooling, not the app itself)
+    supabase_url: str = ""
+    supabase_anon_key: str = ""
+    llm_reader_password: str = ""
 
 
 settings = Settings()

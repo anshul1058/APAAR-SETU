@@ -40,10 +40,11 @@ def apply(db: Session, rows: list[dict], per_row_flags: list, upload, academic_y
                 continue  # same person, same id — handled by DUP_* rules
             score = fuzz.token_set_ratio(name.lower(), (ex_name or "").lower())
             if score >= settings.fuzzy_threshold:
+                ref = f"APAAR ...{ex_apaar[-4:]}" if ex_apaar else "no APAAR ID"
                 per_row_flags[i].append((
                     "FUZZY_DUPLICATE", "warning",
                     f"Name is {score:.0f}% similar to an active student in {inst_name} "
-                    f"(APAAR ...{ex_apaar[-4:]})",
+                    f"({ref})",
                 ))
                 matches += 1
                 break  # one warning per row is enough

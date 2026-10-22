@@ -30,7 +30,9 @@ class StudentBulkIn(BaseModel):
     students: list[StudentIn]
 
 
-def _mask_apaar(apaar: str) -> str:
+def _mask_apaar(apaar: str | None) -> str:
+    if not apaar:  # passport-only student (nri/oci/fn) — nothing to mask
+        return "XXXXXXXX"
     return "XXXXXXXX" + apaar[-4:] if len(apaar) >= 4 else "XXXXXXXX"
 
 

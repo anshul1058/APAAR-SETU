@@ -44,7 +44,8 @@ class CourseOut(BaseModel):
 class StudentOut(BaseModel):
     """Full student record — only for institution_admin of the owning institution."""
     id: int
-    apaar_id: str
+    apaar_id: str | None = None  # NULL for nri/oci/fn students (passport instead)
+    passport_no: str | None = None
     institution_id: int
     course_id: int
     student_code: str

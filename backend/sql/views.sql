@@ -21,6 +21,7 @@ CREATE OR REPLACE VIEW v_duplicate_enrolments AS
 SELECT 'XXXXXXXX' || RIGHT(apaar_id, 4) AS apaar_id_masked,
        COUNT(DISTINCT institution_id) AS institutions
 FROM students WHERE status IN ('valid','flagged')
+  AND apaar_id IS NOT NULL AND apaar_id <> ''
 GROUP BY apaar_id HAVING COUNT(DISTINCT institution_id) > 1;
 
 CREATE OR REPLACE VIEW v_flag_summary AS
