@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: apaar-backend
+    runtime: docker
+    plan: free
+    rootDir: backend
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: LLM_URL
+        value: https://api.groq.com/openai/v1
+      - key: LLM_MODEL
+        value: llama-3.1-8b-instant
+      - key: LLM_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
