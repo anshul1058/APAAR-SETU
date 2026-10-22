@@ -15,76 +15,45 @@ Rule codes referenced here are defined in `system.md`.
 
 ## 1. Synthetic data generator
 
-Goal: about 5,000 students across 10 to 15 institutions with known, seeded errors, so every detector can be checked.
+Goal: a master student registry plus per-college enrolment files with known, seeded errors, so every detector in section 6 can be checked against `ground_truth.csv`.
 
-```python
-# scripts/generate_synthetic.py
-import random, csv
-from datetime import date, timedelta
-from faker import Faker
+Two scripts (both seeded with `SEED = 42`, byte-identical output on every run):
 
-fake = Faker("en_IN")
-random.seed(42)
+| Script | Output |
+|---|---|
+| `scripts/generate_synthetic.py` | `data/apaar_registry.csv` — 15,000 students (`apaar_id`, `full_name`, `dob`, `gender`), unique IDs *and* unique full names, Faker `en_IN`, ages 17–24. Serves two roles: the enrolment generator's source pool, and the known-IDs table for the mock APAAR service. |
+| `scripts/generate_enrollments.py` | `data/enrollments/clean/<college>.csv`, `data/enrollments/dirty/<college>.csv`, `data/ground_truth.csv` |
 
-INSTITUTIONS = [f"INST{i:03d}" for i in range(1, 13)]
-COURSES = ["B.Tech Computer Engineering", "B.Tech Mechanical", "B.Tech Civil",
-           "B.Pharm", "Diploma Electronics"]
-QUOTAS = ["regular"] * 90 + ["supernumerary"] * 4 + ["nri"] * 3 + ["oci"] * 2 + ["fn"] * 1
+The enrolment generator reads the real `Pune_College_Seat_Intake.xlsx` (10 colleges, 80 courses, 11,556 seats — CAP + TFWS split per course):
 
-def apaar():
-    return "".join(random.choices("0123456789", k=12))
+- **clean**: every course filled to exactly 100% of `approved_intake + approved_supernumerary`; one registry student per seat; verified zero rule flags, zero fuzzy pairs (≥ 90 + same DOB), no cross-college dups, supernumerary count within approved TFWS.
+- **dirty**: same rows with errors seeded **in place** (row counts stay at 100%; only the one deliberately over-intake course grows, +5).
+- `nri`/`oci`/`fn` quota rows carry `passport_no` (letter + 7 digits) instead of an APAAR ID.
 
-def make_student(inst, course):
-    nat = "INDIAN"
-    quota = random.choice(QUOTAS)
-    if quota in ("oci", "fn"):
-        nat = "FOREIGN" if quota == "fn" else "OCI"
-    return {
-        "apaar_id": apaar(), "student_code": fake.bothify("S####??"),
-        "full_name": fake.name(),
-        "dob": fake.date_of_birth(minimum_age=17, maximum_age=24).isoformat(),
-        "gender": random.choice(["M", "F"]),
-        "institution": inst, "course": course,
-        "category": random.choice(["GENERAL", "OBC", "SC", "ST", "EWS"]),
-        "quota_type": quota, "nationality": nat,
-        "admission_date": date(2026, random.randint(7, 9), random.randint(1, 28)).isoformat(),
-    }
+Seeded errors — 14 of the 16 rule codes in `system.md` (`DUP_IN_INSTITUTION` surfaces on re-upload, `ANOMALY_HIGH` comes from section 3):
 
-def inject_errors(rows):
-    # Each injection is logged to ground_truth.csv with the expected rule code
-    truth = []
-    # 1. Invalid / missing APAAR IDs
-    for r in random.sample(rows, 20):
-        r["apaar_id"] = random.choice(["", "123", "ABCDEFGHIJKL"])
-        truth.append((r["student_code"], "APAAR_MISSING_OR_FORMAT"))
-    # 2. Duplicate rows inside one institution
-    for r in random.sample(rows, 15):
-        dup = dict(r); dup["student_code"] += "D"; rows.append(dup)
-        truth.append((dup["student_code"], "DUP_IN_INSTITUTION"))
-    # 3. Cross-institution duplicate
-    for r in random.sample(rows, 12):
-        dup = dict(r); dup["institution"] = random.choice(INSTITUTIONS)
-        dup["student_code"] += "X"; rows.append(dup)
-        truth.append((dup["student_code"], "DUP_CROSS_INSTITUTION"))
-    # 4. Fuzzy duplicate: same person, no APAAR, small name change
-    for r in random.sample(rows, 10):
-        dup = dict(r); dup["apaar_id"] = ""
-        dup["full_name"] = r["full_name"].replace("a", "aa", 1)
-        dup["student_code"] += "F"; rows.append(dup)
-        truth.append((dup["student_code"], "FUZZY_DUPLICATE"))
-    # 5. Bad dates
-    for r in random.sample(rows, 8):
-        r["dob"] = (date.today() + timedelta(days=400)).isoformat()
-        truth.append((r["student_code"], "DOB_INVALID"))
-    return rows, truth
-```
+| Injection | Rule code | Count |
+|---|---|---|
+| identity overwritten into another college | DUP_CROSS_INSTITUTION | 5 pairs |
+| one APAAR shared by two people in a file | DUP_IN_UPLOAD | 3 pairs |
+| random 12-digit ID not in registry | APAAR_NOT_FOUND | 4 |
+| malformed IDs | APAAR_FORMAT | 2 |
+| APAAR left blank (Indian rows) | APAAR_MISSING | 4 |
+| blank full_name | FIELD_MISSING | 2 |
+| typo'd name + same DOB, other college | FUZZY_DUPLICATE | 4 pairs |
+| course filled past intake + TFWS | INTAKE_EXCEEDED | 1 (M.Sc. CS, 65/60) |
+| supernumerary admits over approved TFWS | SUPERNUMERARY_EXCEEDED | 1 (COEP AI&ML, 6/4) |
+| DOB in the future | DOB_INVALID | 4 |
+| admission date outside 2026-27 | ADMISSION_DATE_INVALID | 4 |
+| unknown category value | CATEGORY_INVALID | 3 |
+| oci/fn quota declared INDIAN | QUOTA_NATIONALITY_MISMATCH | 3 |
+| malformed passport on a passport row | PASSPORT_FORMAT | 2 |
 
-Also create:
-- An intake table where one course gets `approved_intake` lower than the number of students (to trigger `INTAKE_EXCEEDED`).
-- One institution with an abnormal admission spike and unusual NRI share (for anomaly detection).
-- A `known_apaar_ids` table for the mock APAAR service.
+Every injection is logged in `ground_truth.csv` (`file, student_code, apaar_id, rule_code, detail`). `self_check()` in the generator asserts the invariants above on every run.
 
-Output: `students.csv`, `institutions.csv`, `courses.csv`, `ground_truth.csv`.
+Institution/course metadata (college, location, CET code, branch, intake) is denormalised into each enrolment row — no separate `institutions.csv`/`courses.csv` files. The `institutions` and `courses` tables are built from these rows (or the intake Excel) at DB-seed time.
+
+Seeded for section 3 (feeds the `yoy_growth` feature): `enrolment_history` holds two prior years (2024-25, 2025-26) of enrolment per course. RMD Sinhgad's history is planted at roughly one third of its current intake — an abnormal +200% year-on-year admission spike — and its naturally highest NRI share (9.1% vs 5–7% elsewhere) makes it the deliberate anomaly institution the detector must find.
 
 Always label the dataset as synthetic in the UI and the pitch.
 
@@ -306,7 +275,9 @@ Compute everything in SQL or pandas first, then pass the numbers. After generati
 
 ## 6. Evaluation (to show in the pitch)
 
-Use `ground_truth.csv` from the generator.
+Use `ground_truth.csv` from the generator. `scripts/evaluate.py` replays every
+detector in memory over the dirty files and prints the table below, including the
+anomaly top-k from the seeded database.
 
 | Detector | Metric | Target |
 |---|---|---|
@@ -316,7 +287,13 @@ Use `ground_truth.csv` from the generator.
 | Anomaly detection | Seeded anomalous institutions found in top-k | All found |
 | Text-to-SQL | Accuracy on 15-20 test questions | Above 80%, with 0 unsafe queries executed |
 
-Keep a small `tests/test_llm_sql.py` with sample questions and expected SQL fragments, and tests that destructive or off-schema SQL is rejected by the guard.
+Measured on the seeded dataset: rule recall 100% (54/54), fuzzy precision and
+recall 100%, 0 extra detections.
+
+`tests/test_llm_sql.py` holds sample questions with expected SQL fragments (the
+live model checks skip when the LLM provider is unreachable), and
+`tests/test_sql_guard.py` asserts that destructive or off-schema SQL is rejected
+by the guard.
 
 ## 7. Pitch line
 

@@ -193,7 +193,11 @@ QUOTAS = {"regular", "supernumerary", "nri", "oci", "fn"}
 def row_flags(row: dict, academic_year_start: date, academic_year_end: date):
     flags = []
     apaar = (row.get("apaar_id") or "").strip()
-    if not apaar:
+    foreign = row.get("quota_type") in {"nri", "oci", "fn"}  # passport holders
+    if foreign:
+        if not re.fullmatch(r"[A-Z]\d{7}", (row.get("passport_no") or "").strip()):
+            flags.append(("PASSPORT_FORMAT", "error", "Valid passport number is required"))
+    elif not apaar:
         flags.append(("APAAR_MISSING", "error", "APAAR ID is missing"))
     elif not APAAR_RE.match(apaar):
         flags.append(("APAAR_FORMAT", "error", "APAAR ID format is invalid"))

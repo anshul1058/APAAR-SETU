@@ -24,7 +24,7 @@ Every endpoint declares its allowed roles. Institution users are scoped by `inst
 institutions(id, name, state, aicte_code, created_at)
 courses(id, institution_id, name, branch, academic_year,
         approved_intake, approved_supernumerary)
-students(id, apaar_id, institution_id, course_id, student_code,
+students(id, apaar_id, passport_no, institution_id, course_id, student_code,
          full_name, dob, gender, category, quota_type, nationality,
          admission_date, email_hash, status, source_upload_id,
          created_at, updated_at)
@@ -34,6 +34,7 @@ validation_flags(id, upload_id, student_id, row_number, rule_code,
                  severity, message, details_json, resolved, created_at)
 anomaly_scores(id, institution_id, course_id, academic_year,
                score, reasons_json, created_at)
+enrolment_history(id, course_id, academic_year, enrolled, created_at)
 consents(id, student_id, verifier_id, purpose, otp_hash,
          granted_at, expires_at, revoked)
 verifications(id, student_id, verifier_id, consent_id, result,
@@ -45,6 +46,7 @@ users(id, email, password_hash, role, institution_id, created_at)
 
 Notes:
 - `quota_type` is one of `regular`, `supernumerary`, `nri`, `oci`, `fn`.
+- `apaar_id` is empty for `nri`, `oci` and `fn` rows: APAAR is an Indian-citizen ID, so their primary identifier is `passport_no` (pattern `[A-Z]\d{7}`, configurable). APAAR rules do not apply to them.
 - `status` is one of `pending`, `valid`, `flagged`, `rejected`.
 - Unique key candidates: `(apaar_id, academic_year)` for active enrolment.
 
@@ -58,9 +60,10 @@ v_institution_summary, v_course_intake_status, v_flag_summary, v_duplicate_enrol
 
 | Code | Severity | Rule | Scope |
 |---|---|---|---|
-| `APAAR_MISSING` | error | APAAR ID is empty | row |
+| `APAAR_MISSING` | error | APAAR ID is empty (not applicable to `nri`/`oci`/`fn` quota - they use `passport_no`) | row |
 | `APAAR_FORMAT` | error | APAAR ID does not match the configured pattern (default 12 digits) | row |
 | `APAAR_NOT_FOUND` | error | Mock/real APAAR service says ID does not exist | row |
+| `PASSPORT_FORMAT` | error | `nri`/`oci`/`fn` row without a valid passport number (primary ID for them) | row |
 | `DUP_IN_UPLOAD` | error | Same APAAR ID appears twice in one file | file |
 | `DUP_IN_INSTITUTION` | error | APAAR ID already enrolled in this institution for the same year | db |
 | `DUP_CROSS_INSTITUTION` | error | APAAR ID active in another institution for the same year | db |
