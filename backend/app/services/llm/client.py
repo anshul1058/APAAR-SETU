@@ -5,8 +5,9 @@ Includes a tiny prompt-hash cache and a friendly busy fallback.
 """
 import hashlib
 import logging
+import time
 
-from openai import OpenAI, OpenAIError
+from openai import OpenAI, OpenAIError, RateLimitError
 
 from app.config import settings
 from app.services.llm.prompts import (
@@ -32,19 +33,25 @@ def chat(system: str, user: str, temperature: float = 0.1, max_tokens: int = 500
     key = hashlib.sha256(f"{system}|{user}".encode()).hexdigest()
     if key in _cache:
         return _cache[key]
-    try:
-        r = _get_client().chat.completions.create(
-            model=settings.llm_model,
-            messages=[{"role": "system", "content": system},
-                      {"role": "user", "content": user}],
-            temperature=temperature,
-            max_tokens=max_tokens,
-            timeout=30,
-        )
-        text = r.choices[0].message.content.strip()
-    except OpenAIError as exc:
-        log.warning("LLM call failed: %s", exc)
-        raise
+    for attempt in (1, 2):
+        try:
+            r = _get_client().chat.completions.create(
+                model=settings.llm_model,
+                messages=[{"role": "system", "content": system},
+                          {"role": "user", "content": user}],
+                temperature=temperature,
+                max_tokens=max_tokens,
+                timeout=30,
+            )
+            text = r.choices[0].message.content.strip()
+            break
+        except RateLimitError:
+            if attempt == 2:  # aiml_guide §4.1: one short retry on HTTP 429
+                raise
+            time.sleep(1.5)
+        except OpenAIError as exc:
+            log.warning("LLM call failed: %s", exc)
+            raise
     _cache[key] = text
     return text
 

@@ -33,6 +33,12 @@ A: SELECT institution, course, approved_intake, enrolled, excess FROM v_course_i
 
 Q: How many students are flagged in Maharashtra?
 A: SELECT SUM(flagged_students) AS flagged FROM v_institution_summary WHERE state = 'Maharashtra'
+
+Q: Which APAAR ids appear in more than one college?
+A: SELECT apaar_id_masked, institutions FROM v_duplicate_enrolments ORDER BY institutions DESC LIMIT 100
+
+Q: Which validation rules fire most often?
+A: SELECT rule_code, severity, SUM(flag_count) AS count FROM v_flag_summary GROUP BY rule_code, severity ORDER BY count DESC LIMIT 100
 """
 
 SUMMARY_SYSTEM = """You write a short factual summary for AICTE officers from computed statistics (JSON).
