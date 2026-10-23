@@ -25,9 +25,6 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=25s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
-# On container startup:
-#   1. scripts/wait_for_db.py — wait until PostgreSQL is ready to accept connections
-#   2. scripts/init_db.py     — create tables + views idempotently
-#   3. scripts/seed.py        — seed demo data (idempotent, skips if already present)
-#   4. exec uvicorn           — start FastAPI server on $PORT (defaults to 8000)
-CMD ["sh", "-c", "python scripts/wait_for_db.py && python scripts/init_db.py && python scripts/seed.py && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Start the web process before the remote database setup so Render health
+# checks do not time out while migrations and demo seeding are running.
+CMD ["sh", "scripts/start_render.sh"]

@@ -13,6 +13,8 @@ services:
     runtime: docker
     plan: free
     rootDir: backend
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
     healthCheckPath: /health
     envVars:
       # Set this in Render to the Supabase session-pooler URI (port 6543).

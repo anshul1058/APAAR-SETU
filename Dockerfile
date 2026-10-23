@@ -50,7 +50,7 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=25s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
-CMD ["sh", "-c", "python scripts/wait_for_db.py && python scripts/init_db.py && python scripts/seed.py && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "scripts/start_render.sh"]
 
 # ------------------------------------------------------------------------------
 # Stage 4: Frontend-Only Target (Nginx)
