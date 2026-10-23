@@ -12,8 +12,13 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { ROLE_PRESETS, authService } from '../../services/authService';
 import { UserRole } from '../../types';
+import aicteLogo from '../../assets/aicte-logo-transparent.webp';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  showSearch?: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ showSearch = true }) => {
   const { user, logout, login, openAiWithContext } = useAuth();
   const navigate = useNavigate();
 
@@ -46,14 +51,13 @@ export const Header: React.FC = () => {
           onClick={() => navigate(authService.getDefaultPathForRole(user?.role || 'institution_admin'))}
           className="flex items-center gap-2.5 cursor-pointer"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-xs">
-            <ShieldCheck className="w-5 h-5" />
-          </div>
+          <img 
+            src={aicteLogo} 
+            alt="AICTE Logo" 
+            className="w-9 h-9 object-contain" 
+          />
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-slate-900 tracking-tight text-base">APAAR-AICTE</span>
-              <span className="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.2 rounded font-mono">PS 26263</span>
-            </div>
+            <span className="font-extrabold text-slate-900 tracking-tight text-base block">APAAR SETU</span>
             <p className="text-[10px] text-slate-500 font-medium">One Nation, One Student ID Platform</p>
           </div>
         </div>
@@ -67,8 +71,7 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Global Quick Search */}
-      <div className="hidden md:flex items-center max-w-xs w-full mx-4">
+      {showSearch && <div className="hidden md:flex items-center max-w-xs w-full mx-4">
         <div className="relative w-full">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
@@ -84,7 +87,7 @@ export const Header: React.FC = () => {
             className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 hover:bg-stone-100 focus:bg-white border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-mono"
           />
         </div>
-      </div>
+      </div>}
 
       {/* Right Actions: Role Switcher & Profile */}
       <div className="flex items-center gap-3">

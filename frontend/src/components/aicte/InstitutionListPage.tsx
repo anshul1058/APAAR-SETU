@@ -103,9 +103,7 @@ export const InstitutionListPage: React.FC = () => {
               className="w-full px-3 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none text-slate-700"
             >
               <option value="ALL">All Categories</option>
-              <option value="Central University">Central University</option>
-              <option value="State Govt">State Govt</option>
-              <option value="Private Deemed">Private Deemed</option>
+              <option value="Dataset Registry">Dataset Registry</option>
             </select>
           </div>
 

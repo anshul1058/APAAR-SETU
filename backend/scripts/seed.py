@@ -142,7 +142,28 @@ def seed() -> None:
     db = SessionLocal()
     try:
         if db.execute(select(Institution.id)).first():
-            print("[seed] institutions already present — use --reset to reseed")
+            # Keep institution-admin accounts in sync when the database was
+            # seeded previously. This is intentionally additive and does not
+            # reset or overwrite existing data.
+            institution_ids = dict(db.execute(select(Institution.name, Institution.id)).all())
+            existing_emails = set(db.execute(select(User.email)).scalars().all())
+            password_hash = hash_password(DEMO_PASSWORD)
+            missing_admins = []
+            for slug, name, _ in colleges:
+                email = f"admin@{slug}.in"
+                if email not in existing_emails and name in institution_ids:
+                    missing_admins.append({
+                        "email": email,
+                        "role": "institution_admin",
+                        "institution_id": institution_ids[name],
+                        "password_hash": password_hash,
+                    })
+            if missing_admins:
+                _bulk(db, User, missing_admins)
+                db.commit()
+                print(f"[seed] added {len(missing_admins)} missing institution-admin accounts")
+            else:
+                print("[seed] institution-admin accounts already present")
             return
 
         # --- institutions ---------------------------------------------------

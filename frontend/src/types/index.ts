@@ -113,7 +113,7 @@ export interface Institution {
   region: string;
   state: string;
   city: string;
-  category: 'Central University' | 'State Govt' | 'Private Deemed' | 'Autonomous';
+  category: string;
   totalSanctionedIntake: number;
   totalEnrolled: number;
   apaarVerifiedCount: number;

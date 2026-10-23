@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { 
   Mail, 
   Eye, 
@@ -15,11 +15,11 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { ROLE_PRESETS, authService } from '../../services/authService';
 import { UserRole } from '../../types';
+import aicteLogo from '../../assets/aicte-logo-transparent.webp';
 
 export const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [email, setEmail] = useState('admin@dtu.ac.in');
   const [password, setPassword] = useState('password123');
@@ -31,8 +31,6 @@ export const LoginPage: React.FC = () => {
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotSuccess, setForgotSuccess] = useState(false);
-
-  const from = (location.state as any)?.from?.pathname || null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,7 +48,9 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
     try {
       const user = await login(email, selectedRole);
-      const destination = from || authService.getDefaultPathForRole(user.role);
+      // Demo role selection should always open that role's dashboard instead
+      // of reusing a previously requested route from another role.
+      const destination = authService.getDefaultPathForRole(user.role);
       navigate(destination, { replace: true });
     } catch {
       setErrorMessage('Login authentication failed. Please verify credentials.');
@@ -73,23 +73,15 @@ export const LoginPage: React.FC = () => {
       {/* Top AICTE / APAAR Institutional Branding Header */}
       <header className="w-full max-w-6xl px-6 py-6 flex items-center justify-between z-10">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
+          <img 
+            src={aicteLogo} 
+            alt="AICTE Logo" 
+            className="w-11 h-11 object-contain drop-shadow-xs" 
+          />
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-slate-900 tracking-tight text-lg">APAAR AICTE</span>
-              <span className="text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">
-                SIH 2026 • PS 26263
-              </span>
-            </div>
+            <h1 className="font-extrabold text-slate-900 tracking-tight text-lg">APAAR SETU</h1>
             <p className="text-xs text-slate-500 font-medium">One Nation, One Student ID Verification Platform</p>
           </div>
-        </div>
-
-        <div className="hidden sm:flex items-center gap-3 text-xs text-slate-600 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-stone-200/80 shadow-2xs">
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>Central MoE Gateway: <strong>ONLINE (Demo Mode)</strong></span>
         </div>
       </header>
 

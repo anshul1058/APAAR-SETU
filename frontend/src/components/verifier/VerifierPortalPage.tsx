@@ -184,7 +184,7 @@ export const VerifierPortalPage: React.FC = () => {
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(formatApaarId(e.target.value))}
-              placeholder="e.g. 9042-3819-5502"
+              placeholder="Enter the APAAR ID"
               maxLength={14}
               className="w-full px-4 py-3 pl-11 text-base font-mono tracking-widest bg-stone-50 border border-stone-300 rounded-2xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-600 transition-all text-slate-800"
             />
@@ -194,7 +194,7 @@ export const VerifierPortalPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setShowQrCamera(true)}
-            className="px-4 py-3 rounded-2xl bg-stone-100 hover:bg-stone-200 text-slate-700 text-xs font-semibold flex items-center gap-2 border border-stone-200 transition-colors w-full sm:w-auto justify-center"
+            className="px-4 py-3 rounded-none bg-stone-100 hover:bg-stone-200 text-slate-700 text-xs font-semibold flex items-center gap-2 border border-stone-200 transition-colors w-full sm:w-auto justify-center"
           >
             <Camera className="w-4 h-4 text-slate-600" />
             Scan QR Code
@@ -204,7 +204,7 @@ export const VerifierPortalPage: React.FC = () => {
             type="button"
             onClick={() => handleStartVerification()}
             disabled={isVerifying}
-            className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 w-full sm:w-auto justify-center"
+            className="px-6 py-3 rounded-none bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 w-full sm:w-auto justify-center"
           >
             {isVerifying ? (
               <>
@@ -219,6 +219,10 @@ export const VerifierPortalPage: React.FC = () => {
             )}
           </button>
         </div>
+
+        <p className="text-[11px] text-slate-400">
+          Example APAAR ID: <code className="font-mono font-semibold text-slate-600">9042-3819-5502</code>
+        </p>
 
         {errorMessage && (
           <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2 animate-fade-in">

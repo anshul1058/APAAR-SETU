@@ -1,14 +1,71 @@
 import { Institution, DuplicateCase } from '../types';
-import { AICTE_INSTITUTIONS, INITIAL_DUPLICATES } from '../data/mockData';
-import { simulateLatency } from './apiClient';
+import { INITIAL_DUPLICATES } from '../data/mockData';
+import { apiClient, simulateLatency } from './apiClient';
 
-let localInstitutions: Institution[] = [...AICTE_INSTITUTIONS];
 let localDuplicates: DuplicateCase[] = [...INITIAL_DUPLICATES];
+
+interface InstitutionApiRecord {
+  id: string;
+  name: string;
+  code: string;
+  aicte_permanent_id: string;
+  region: string;
+  state: string;
+  city: string | null;
+  category: string;
+  total_sanctioned_intake: number;
+  total_enrolled: number;
+  apaar_verified_count: number;
+  verification_rate: number;
+  anomaly_score: number;
+  anomaly_summary: string;
+  compliance_status: Institution['complianceStatus'];
+  faculty_student_ratio: string;
+  programs: Array<{
+    program_code: string;
+    program_name: string;
+    sanctioned_intake: number;
+    actual_enrolled: number;
+    apaar_verified: number;
+    pending_verification: number;
+    discrepancies_count: number;
+  }>;
+}
+
+const toInstitution = (record: InstitutionApiRecord): Institution => ({
+  id: record.id,
+  name: record.name,
+  code: record.code,
+  aictePermanentId: record.aicte_permanent_id,
+  region: record.region,
+  state: record.state,
+  city: record.city || record.state,
+  category: record.category,
+  totalSanctionedIntake: record.total_sanctioned_intake,
+  totalEnrolled: record.total_enrolled,
+  apaarVerifiedCount: record.apaar_verified_count,
+  verificationRate: record.verification_rate,
+  anomalyScore: record.anomaly_score,
+  anomalySummary: record.anomaly_summary,
+  complianceStatus: record.compliance_status,
+  facultyStudentRatio: record.faculty_student_ratio,
+  programs: record.programs.map((program) => ({
+    programCode: program.program_code,
+    programName: program.program_name,
+    sanctionedIntake: program.sanctioned_intake,
+    actualEnrolled: program.actual_enrolled,
+    apaarVerified: program.apaar_verified,
+    pendingVerification: program.pending_verification,
+    discrepanciesCount: program.discrepancies_count,
+  })),
+});
 
 export const institutionService = {
   async getInstitutions(search = '', region = 'ALL', category = 'ALL'): Promise<Institution[]> {
-    await simulateLatency(250);
-    return localInstitutions.filter((inst) => {
+    const response = await apiClient.get<InstitutionApiRecord[]>('/dashboard/institutions');
+    const institutions = response.data.map(toInstitution);
+
+    return institutions.filter((inst) => {
       const q = search.toLowerCase();
       const matchesSearch =
         inst.name.toLowerCase().includes(q) ||
@@ -24,8 +81,8 @@ export const institutionService = {
   },
 
   async getInstitutionById(id: string): Promise<Institution | null> {
-    await simulateLatency(200);
-    return localInstitutions.find((i) => i.id === id || i.code === id) || null;
+    const institutions = await this.getInstitutions();
+    return institutions.find((i) => i.id === id || i.code === id) || null;
   },
 
   async getDuplicates(): Promise<DuplicateCase[]> {

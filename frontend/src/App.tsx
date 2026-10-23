@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { LoginPage } from './components/login/LoginPage';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { ForbiddenPage } from './components/common/ForbiddenPage';
 import { NotFoundPage } from './components/common/NotFoundPage';
-import { DemoBanner } from './components/common/DemoBanner';
 import { Header } from './components/common/Header';
 import { Sidebar } from './components/common/Sidebar';
 import { AiAssistantDrawer } from './components/ai/AiAssistantDrawer';
@@ -28,12 +27,14 @@ import { AicteAdminPage } from './components/aicte/AicteAdminPage';
 import { VerifierPortalPage } from './components/verifier/VerifierPortalPage';
 
 const AppLayout: React.FC = () => {
+  const location = useLocation();
+  const isVerificationDesk = location.pathname.startsWith('/verifier');
+
   return (
-    <div className="min-h-screen bg-[#FDFBF7] flex flex-col font-sans text-slate-800">
-      <DemoBanner />
-      <Header />
+    <div className="min-h-screen bg-warm-grid flex flex-col font-sans text-slate-800">
+      <Header showSearch={!isVerificationDesk} />
       <div className="flex-1 flex overflow-hidden">
-        <Sidebar />
+        {!isVerificationDesk && <Sidebar />}
         <main className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
           <Outlet />
         </main>

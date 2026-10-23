@@ -58,6 +58,114 @@ def overview(
     }
 
 
+@router.get("/institutions")
+def institutions(db: Session = Depends(get_db)):
+    """Return the institution registry assembled from the seeded database.
+
+    Institution metadata is non-sensitive. The response includes aggregate
+    course and student counts so the frontend does not need to use fixture
+    institution data for its registry view.
+    """
+    institution_rows = _rows(db, """
+        SELECT id, name, state, aicte_code
+        FROM institutions
+        ORDER BY name
+    """)
+    course_rows = _rows(db, """
+        SELECT c.id, c.institution_id, c.name, c.branch, c.academic_year,
+               c.approved_intake, c.approved_supernumerary,
+               COUNT(s.id) FILTER (WHERE s.status IN ('valid', 'flagged')) AS enrolled,
+               COUNT(s.id) FILTER (
+                   WHERE s.status = 'valid' AND s.apaar_id IS NOT NULL
+               ) AS apaar_verified
+        FROM courses c
+        LEFT JOIN students s ON s.course_id = c.id
+        GROUP BY c.id, c.institution_id, c.name, c.branch, c.academic_year,
+                 c.approved_intake, c.approved_supernumerary
+        ORDER BY c.name
+    """)
+    student_rows = _rows(db, """
+        SELECT institution_id,
+               COUNT(*) FILTER (WHERE status IN ('valid', 'flagged')) AS enrolled,
+               COUNT(*) FILTER (
+                   WHERE status = 'valid' AND apaar_id IS NOT NULL
+               ) AS apaar_verified
+        FROM students
+        GROUP BY institution_id
+    """)
+    anomaly_rows = _rows(db, """
+        SELECT institution_id, COALESCE(MAX(score), 0) AS anomaly_score
+        FROM anomaly_scores
+        GROUP BY institution_id
+    """)
+
+    courses_by_institution: dict[int, list[dict]] = {}
+    for course in course_rows:
+        courses_by_institution.setdefault(course["institution_id"], []).append(course)
+
+    students_by_institution = {row["institution_id"]: row for row in student_rows}
+    anomaly_by_institution = {row["institution_id"]: row["anomaly_score"] for row in anomaly_rows}
+
+    output = []
+    for institution in institution_rows:
+        institution_id = institution["id"]
+        courses = courses_by_institution.get(institution_id, [])
+        student_counts = students_by_institution.get(
+            institution_id, {"enrolled": 0, "apaar_verified": 0}
+        )
+        sanctioned_intake = sum(
+            (course["approved_intake"] or 0) + (course["approved_supernumerary"] or 0)
+            for course in courses
+        )
+        total_enrolled = student_counts["enrolled"] or 0
+        verified_count = student_counts["apaar_verified"] or 0
+        anomaly_score = float(anomaly_by_institution.get(institution_id, 0) or 0)
+
+        if anomaly_score >= 50:
+            compliance_status = "CRITICAL_REVIEW"
+        elif anomaly_score >= 20:
+            compliance_status = "NEEDS_INSPECTION"
+        else:
+            compliance_status = "COMPLIANT"
+
+        output.append({
+            "id": str(institution_id),
+            "name": institution["name"],
+            "code": institution["aicte_code"],
+            "aicte_permanent_id": institution["aicte_code"],
+            "region": "Western" if institution["state"] == "Maharashtra" else "Other",
+            "state": institution["state"],
+            "city": None,
+            "category": "Dataset Registry",
+            "total_sanctioned_intake": sanctioned_intake,
+            "total_enrolled": total_enrolled,
+            "apaar_verified_count": verified_count,
+            "verification_rate": round((verified_count / total_enrolled) * 100, 1)
+            if total_enrolled else 0,
+            "anomaly_score": anomaly_score,
+            "anomaly_summary": "Database-derived anomaly score from seeded analytics.",
+            "compliance_status": compliance_status,
+            "faculty_student_ratio": "N/A",
+            "programs": [
+                {
+                    "program_code": course["branch"],
+                    "program_name": course["name"],
+                    "sanctioned_intake": (course["approved_intake"] or 0)
+                    + (course["approved_supernumerary"] or 0),
+                    "actual_enrolled": course["enrolled"] or 0,
+                    "apaar_verified": course["apaar_verified"] or 0,
+                    "pending_verification": max(
+                        0, (course["enrolled"] or 0) - (course["apaar_verified"] or 0)
+                    ),
+                    "discrepancies_count": 0,
+                }
+                for course in courses
+            ],
+        })
+
+    return output
+
+
 @router.get("/intake")
 def intake(
     user: dict = Depends(require_roles(*AICTE_OR_INST)),
