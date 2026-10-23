@@ -1,4 +1,4 @@
-# Render blueprint — backend (FastAPI on Docker) + managed Postgres.
+# Render blueprint — backend (FastAPI on Docker) using Supabase Postgres.
 # Deploy: Render dashboard -> "Blueprints" -> connect this repo -> "Sync".
 # The frontend deploys separately on Vercel — its URL MUST be listed in
 # CORS_ORIGINS below (update it once the Vercel domain is known).
@@ -6,12 +6,6 @@
 # On boot the container runs scripts/init_db.py (idempotent tables + views)
 # and scripts/seed.py (demo dataset; skipped when already present), then
 # serves uvicorn on $PORT. Health check: GET /health.
-
-databases:
-  - name: apaar-postgres
-    plan: free
-    databaseName: apaar_setu
-    user: apaar_admin
 
 services:
   - type: web
@@ -21,11 +15,10 @@ services:
     rootDir: backend
     healthCheckPath: /health
     envVars:
-      # wired automatically to the apaar-postgres instance above
+      # Set this in Render to the Supabase session-pooler URI (port 6543).
+      # Keep the password URL-encoded and never commit the value.
       - key: DATABASE_URL
-        fromDatabase:
-          name: apaar-postgres
-          property: connectionString
+        sync: false
       # auto-generated once and kept stable across deploys
       - key: JWT_SECRET
         generateValue: true
