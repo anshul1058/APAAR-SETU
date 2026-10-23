@@ -173,9 +173,15 @@ export const authService = {
       // Do not convert rejected backend credentials into a fake JWT. That
       // token cannot be accepted by protected API routes and causes a
       // misleading "session expired" redirect. Keep the local fallback only
-      // for an unavailable backend.
+      // for local development; production must never show an empty dashboard
+      // when the deployed API is unreachable or misconfigured.
       if (error?.response) {
         throw error;
+      }
+      if (!import.meta.env.DEV) {
+        throw new Error(
+          'Backend API is unavailable. Configure VITE_API_BASE_URL for the deployed frontend.'
+        );
       }
     }
 

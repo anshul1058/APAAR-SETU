@@ -13,7 +13,7 @@ import {
   Settings 
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { ROLE_PRESETS, authService } from '../../services/authService';
+import { ROLE_PRESETS, INSTITUTION_ADMIN_PRESETS, authService } from '../../services/authService';
 import { UserRole } from '../../types';
 import aicteLogo from '../../assets/aicte-logo-transparent.webp';
 
@@ -21,7 +21,7 @@ export const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('admin@dtu.ac.in');
+  const [email, setEmail] = useState(INSTITUTION_ADMIN_PRESETS[0].email);
   const [password, setPassword] = useState('password123');
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState<UserRole>('institution_admin');
@@ -60,7 +60,9 @@ export const LoginPage: React.FC = () => {
   };
 
   const handlePresetSelect = (presetRole: UserRole) => {
-    const preset = ROLE_PRESETS.find((p) => p.role === presetRole) || ROLE_PRESETS[0];
+    const preset = presetRole === 'institution_admin'
+      ? INSTITUTION_ADMIN_PRESETS[0]
+      : ROLE_PRESETS.find((p) => p.role === presetRole) || ROLE_PRESETS[0];
     setEmail(preset.email);
     setSelectedRole(presetRole);
     setPassword('password123');
