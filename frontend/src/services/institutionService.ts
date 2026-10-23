@@ -26,6 +26,7 @@ interface InstitutionApiRecord {
     program_code: string;
     program_name: string;
     sanctioned_intake: number;
+    additional_seats?: number;
     actual_enrolled: number;
     apaar_verified: number;
     pending_verification: number;
@@ -55,6 +56,7 @@ const toInstitution = (record: InstitutionApiRecord): Institution => ({
     programCode: program.program_code,
     programName: program.program_name,
     sanctionedIntake: program.sanctioned_intake,
+    additionalSeats: program.additional_seats || 0,
     actualEnrolled: program.actual_enrolled,
     apaarVerified: program.apaar_verified,
     pendingVerification: program.pending_verification,

@@ -170,6 +170,7 @@ def institutions(db: Session = Depends(get_db)):
                     "program_code": course["branch"],
                     "program_name": course["name"],
                     "sanctioned_intake": course["approved_intake"] or 0,
+                    "additional_seats": course["approved_supernumerary"] or 0,
                     "actual_enrolled": course["enrolled"] or 0,
                     "apaar_verified": course["apaar_verified"] or 0,
                     "pending_verification": max(

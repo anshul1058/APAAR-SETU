@@ -40,6 +40,7 @@ from app.models import (
     EnrolmentHistory,
     Institution,
     Student,
+    Upload,
     User,
     STATUS_FLAGGED,
     STATUS_VALID,
@@ -146,10 +147,25 @@ def seed() -> None:
                 select(Institution).where(Institution.name == "ABC College of Engineering")
             ).scalar_one_or_none()
             if legacy:
+                db.execute(delete(Course).where(Course.institution_id == legacy.id))
+                db.execute(
+                    delete(Upload).where(
+                        Upload.uploaded_by.in_(
+                            select(User.id).where(User.email == "admin@abc.in")
+                        )
+                    )
+                )
                 db.execute(delete(User).where(User.email == "admin@abc.in"))
                 db.delete(legacy)
                 db.commit()
                 print("[seed] removed legacy fixture institution: ABC College of Engineering")
+
+            removed_demo = db.execute(
+                delete(Student).where(Student.student_code.in_(["DEMO1", "DEMO2"]))
+            ).rowcount
+            if removed_demo:
+                db.commit()
+                print(f"[seed] removed {removed_demo} legacy verification demo student(s)")
 
             # Keep institution-admin accounts in sync when the database was
             # seeded previously. This is intentionally additive and does not
@@ -173,6 +189,49 @@ def seed() -> None:
                 print(f"[seed] added {len(missing_admins)} missing institution-admin accounts")
             else:
                 print("[seed] institution-admin accounts already present")
+
+            # Keep existing student-directory identity fields synchronized with
+            # the clean enrollment files. This matters when the database was
+            # seeded before a source CSV was corrected (for example, the
+            # women-only Cummins College roster).
+            synced_students = 0
+            synced_registry = 0
+            for f in sorted((DATA / "enrollments" / "clean").glob("*.csv")):
+                rows = _read_csv(f)
+                if not rows:
+                    continue
+                institution_id = institution_ids.get(rows[0]["college"])
+                if not institution_id:
+                    continue
+                by_student_code = {row["student_code"]: row for row in rows}
+                existing = db.execute(
+                    select(Student).where(Student.institution_id == institution_id)
+                ).scalars().all()
+                for student in existing:
+                    source = by_student_code.get(student.student_code)
+                    if not source:
+                        continue
+                    student.full_name = source["full_name"]
+                    student.gender = source["gender"]
+                    student.dob = date.fromisoformat(source["dob"])
+                    synced_students += 1
+
+            source_identity = {
+                row["apaar_id"]: row
+                for f in sorted((DATA / "enrollments" / "clean").glob("*.csv"))
+                for row in _read_csv(f)
+                if row["apaar_id"]
+            }
+            for record in db.execute(select(APAARRecord)).scalars().all():
+                source = source_identity.get(record.apaar_id)
+                if not source:
+                    continue
+                record.full_name = source["full_name"]
+                record.dob = date.fromisoformat(source["dob"])
+                synced_registry += 1
+
+            db.commit()
+            print(f"[seed] synchronized {synced_students} student records and {synced_registry} APAAR registry records")
             return
 
         # --- institutions ---------------------------------------------------
@@ -213,14 +272,6 @@ def seed() -> None:
                     approved_intake=int(r["approved_intake"]),
                     approved_supernumerary=int(r["approved_supernumerary"]),
                 ))
-        course_rows += [
-            dict(institution_id=abc, name="B.Tech Computer Engineering",
-                 branch="B.Tech Computer Engineering", academic_year=ACADEMIC_YEAR,
-                 approved_intake=40, approved_supernumerary=0),
-            dict(institution_id=abc, name="B.Tech Mechanical Engineering",
-                 branch="B.Tech Mechanical Engineering", academic_year=ACADEMIC_YEAR,
-                 approved_intake=60, approved_supernumerary=0),
-        ]
         _bulk(db, Course, course_rows)
         cid = {
             (iid, name): c_id
@@ -257,30 +308,6 @@ def seed() -> None:
         missing = used_apaar - registry_ids
         assert not missing, f"{len(missing)} enrolled APAARs absent from apaar_registry.csv"
 
-        # --- students: ABC upload fixture (tests/test_e2e.py) ----------------
-        for branch, n in (("B.Tech Computer Engineering", 47),
-                          ("B.Tech Mechanical Engineering", 55)):
-            for _ in range(n):
-                quota = random.choices(
-                    ["regular", "supernumerary", "nri", "oci", "fn"],
-                    weights=[80, 12, 4, 2, 2])[0]
-                foreign = quota in {"nri", "oci", "fn"}
-                student_rows.append(dict(
-                    apaar_id=None if foreign else _new_apaar(used_apaar),
-                    passport_no=_passport() if foreign else None,
-                    institution_id=abc,
-                    course_id=cid[(abc, branch)],
-                    student_code=f"ST{random.randint(10000, 99999)}",
-                    full_name=fake.name(),
-                    dob=fake.date_between_dates(date(2001, 1, 1), date(2009, 12, 31)),
-                    gender=random.choice(["M", "F", "O"]),
-                    category=random.choice(["GENERAL", "OBC", "SC", "ST", "EWS"]),
-                    quota_type=quota,
-                    nationality="FRENCH" if quota == "fn" else "INDIAN",
-                    admission_date=fake.date_between_dates(date(2026, 4, 1), date(2027, 3, 31)),
-                    email_hash="",
-                    status=STATUS_VALID,
-                ))
         _bulk(db, Student, student_rows)
         print(f"[seed] students: {len(student_rows)}")
 
@@ -346,25 +373,6 @@ def seed() -> None:
         ])
         print(f"[seed] apaar_registry: {len(registry)}")
 
-        # --- verification-desk demo fixtures (frontend presets; system.md §5) --
-        demo_iid, demo_cid = db.execute(
-            select(Student.institution_id, Student.course_id)
-            .where(Student.status == STATUS_VALID)
-            .where(Student.institution_id.not_in([mit, coep, abc]))
-            .limit(1)
-        ).one()
-        _bulk(db, Student, [
-            dict(apaar_id="904238195502", passport_no=None, institution_id=demo_iid,
-                 course_id=demo_cid, student_code="DEMO1", full_name="Aarav Sharma",
-                 dob=date(2004, 6, 18), gender="M", category="GENERAL",
-                 quota_type="regular", nationality="INDIAN",
-                 admission_date=date(2026, 7, 1), email_hash="", status=STATUS_VALID),
-            dict(apaar_id="999900001111", passport_no=None, institution_id=demo_iid,
-                 course_id=demo_cid, student_code="DEMO2", full_name="Rohan Verma",
-                 dob=date(2004, 2, 10), gender="M", category="GENERAL",
-                 quota_type="regular", nationality="INDIAN",
-                 admission_date=date(2026, 7, 1), email_hash="", status=STATUS_FLAGGED),
-        ])
         print("[seed] verification fixtures: 904238195502 (valid), 999900001111 (flagged)")
 
         # --- self-checks: the planted reality dashboards assert on -----------

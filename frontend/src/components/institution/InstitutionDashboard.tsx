@@ -62,7 +62,9 @@ export const InstitutionDashboard: React.FC = () => {
     }
   };
 
-  const totalSanctioned = intakeData.reduce((acc, curr) => acc + curr.sanctionedIntake, 0);
+  const totalCapIntake = intakeData.reduce((acc, curr) => acc + curr.sanctionedIntake, 0);
+  const totalAdditionalSeats = intakeData.reduce((acc, curr) => acc + (curr.additionalSeats || 0), 0);
+  const totalSanctioned = totalCapIntake + totalAdditionalSeats;
   const totalEnrolled = intakeData.reduce((acc, curr) => acc + curr.actualEnrolled, 0);
   const totalApaarVerified = intakeData.reduce((acc, curr) => acc + curr.apaarVerified, 0);
   const totalPending = intakeData.reduce((acc, curr) => acc + curr.pendingVerification, 0);
@@ -240,7 +242,8 @@ export const InstitutionDashboard: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-3 text-xs">
                       <span className="text-slate-500">
-                        Intake: <strong>{dept.actualEnrolled}</strong> / {dept.sanctionedIntake}
+                        Intake: <strong>{dept.actualEnrolled}</strong> / {dept.sanctionedIntake + (dept.additionalSeats || 0)}
+                        <span className="ml-1 text-[10px] text-slate-400">({dept.sanctionedIntake} CAP + {dept.additionalSeats || 0} TFWS)</span>
                       </span>
                       <span className="font-extrabold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full text-[11px]">
                         {verifiedPct}% Verified

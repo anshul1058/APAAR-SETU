@@ -99,6 +99,7 @@ export interface AicteProgramIntake {
   programCode: string;
   programName: string;
   sanctionedIntake: number;
+  additionalSeats?: number;
   actualEnrolled: number;
   apaarVerified: number;
   pendingVerification: number;
