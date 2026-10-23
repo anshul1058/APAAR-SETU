@@ -114,6 +114,14 @@ def institutions(db: Session = Depends(get_db)):
         WHERE s.status IN ('valid', 'flagged')
         GROUP BY s.institution_id
     """)
+    upload_duplicate_rows = _rows(db, """
+        SELECT u.institution_id, COUNT(*) AS duplicate_alerts
+        FROM validation_flags f
+        JOIN uploads u ON u.id = f.upload_id
+        WHERE f.rule_code IN ('DUP_IN_UPLOAD', 'DUP_IN_INSTITUTION')
+          AND f.resolved = FALSE
+        GROUP BY u.institution_id
+    """)
 
     courses_by_institution: dict[int, list[dict]] = {}
     for course in course_rows:
@@ -122,6 +130,11 @@ def institutions(db: Session = Depends(get_db)):
     students_by_institution = {row["institution_id"]: row for row in student_rows}
     anomaly_by_institution = {row["institution_id"]: row["anomaly_score"] for row in anomaly_rows}
     duplicates_by_institution = {row["institution_id"]: row["duplicate_alerts"] for row in duplicate_rows}
+    for row in upload_duplicate_rows:
+        duplicates_by_institution[row["institution_id"]] = (
+            duplicates_by_institution.get(row["institution_id"], 0)
+            + row["duplicate_alerts"]
+        )
 
     output = []
     for institution in institution_rows:
@@ -214,11 +227,26 @@ def intake(
 
 @router.get("/duplicates")
 def duplicates(
-    user: dict = Depends(require_roles(*AICTE)),
+    user: dict = Depends(require_roles(*AICTE_OR_INST)),
     db: Session = Depends(get_db),
 ):
     """Return active duplicate cases from students and upload validation flags."""
-    return _rows(db, """
+    duplicate_scope_filter = ""
+    upload_institution_filter = ""
+    params = {}
+    if user["role"] == "institution_admin":
+        duplicate_scope_filter = """
+              AND EXISTS (
+                  SELECT 1 FROM students scoped_student
+                  WHERE scoped_student.apaar_id = s.apaar_id
+                    AND scoped_student.institution_id = :institution_id
+                    AND scoped_student.status IN ('valid', 'flagged')
+              )
+        """
+        upload_institution_filter = "AND u.institution_id = :institution_id"
+        params["institution_id"] = user["institution_id"]
+
+    return _rows(db, f"""
         WITH duplicate_ids AS (
             SELECT apaar_id
             FROM students
@@ -248,6 +276,7 @@ def duplicates(
         JOIN institutions i ON i.id = s.institution_id
         JOIN courses c ON c.id = s.course_id
         WHERE s.status IN ('valid', 'flagged')
+          {duplicate_scope_filter}
         GROUP BY d.apaar_id
         UNION ALL
         SELECT
@@ -283,8 +312,9 @@ def duplicates(
         LEFT JOIN students s ON s.id = f.student_id
         WHERE f.rule_code IN ('DUP_IN_UPLOAD', 'DUP_IN_INSTITUTION')
           AND f.resolved = FALSE
+          {upload_institution_filter}
         ORDER BY institution_count DESC, student_name
-    """)
+    """, params)
 
 
 @router.get("/anomalies")
