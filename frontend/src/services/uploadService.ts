@@ -118,6 +118,17 @@ export const uploadService = {
       errors: number;
       warnings: number;
       by_rule: Record<string, number>;
+      row_errors?: Array<{
+        row_number: number;
+        student_name?: string;
+        apaar_id?: string;
+        student_code?: string;
+        department?: string;
+        quota?: string;
+        rule_code: string;
+        severity: string;
+        message: string;
+      }>;
     }>('/uploads', form, {
       headers: { 'Content-Type': 'multipart/form-data' },
       timeout: 120000,
@@ -133,6 +144,22 @@ export const uploadService = {
       violatorCount
     }));
     if (!rulesEvaluated.length) rulesEvaluated.push({ name: 'Row data validation', passed: true, violatorCount: 0 });
+    const errors: UploadRowError[] = (result.row_errors || []).map((error) => {
+      const apaarId = error.apaar_id || '';
+      return {
+        rowNumber: error.row_number,
+        studentName: error.student_name || '—',
+        apaarId,
+        maskedApaarId: maskApaarId(apaarId),
+        rollNumber: error.student_code || '—',
+        department: error.department || '—',
+        quota: error.quota || '—',
+        ruleViolated: error.rule_code,
+        severity: error.severity === 'warning' ? 'WARNING' : 'CRITICAL',
+        description: error.message,
+        status: 'FLAGGED',
+      };
+    });
     onProgress(100, 'Batch processing complete.');
     return {
       fileName: file.name,
@@ -143,7 +170,7 @@ export const uploadService = {
       warningFlags: result.warnings,
       duplicateSuspects: result.by_rule?.DUP_CROSS_INSTITUTION || 0,
       rulesEvaluated,
-      errors: []
+      errors,
     };
   },
   exportErrorsCsv(errors: UploadRowError[]): void {

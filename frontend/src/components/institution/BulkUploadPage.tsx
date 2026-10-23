@@ -295,8 +295,14 @@ export const BulkUploadPage: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-stone-100">
-                  {summary.errors.map((err) => (
-                    <tr key={err.rowNumber} className="hover:bg-rose-50/30 transition-colors">
+                  {summary.errors.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="py-8 px-3 text-center text-slate-500">
+                        No row-level validation flags found in this upload.
+                      </td>
+                    </tr>
+                  ) : summary.errors.map((err, index) => (
+                    <tr key={`${err.rowNumber}-${err.ruleViolated}-${index}`} className="hover:bg-rose-50/30 transition-colors">
                       <td className="py-3.5 px-3 font-mono font-bold text-slate-500">
                         #{err.rowNumber}
                       </td>
@@ -336,7 +342,7 @@ export const BulkUploadPage: React.FC = () => {
             {/* Resubmission Action Bar */}
             <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3">
               <p className="text-xs text-slate-500">
-                {formatNumber(summary.passedRecords)} clean rows can be committed immediately. {formatNumber(summary.errors.length)} flagged rows will be staged in the exception queue.
+                {formatNumber(summary.passedRecords)} clean rows can be committed immediately. {formatNumber(summary.errors.length)} row-level flags will be staged in the exception queue.
               </p>
 
               <button

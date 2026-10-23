@@ -282,6 +282,24 @@ def run_validation(
     upload.status = "completed_with_errors" if errors_rows else "completed"
     db.flush()
 
+    # Return the same row-level detail that was persisted in ValidationFlag.
+    # The UI uses this payload to render the validation table immediately after
+    # upload instead of showing only aggregate error counts.
+    row_errors = []
+    for i, row in enumerate(rows):
+        for code, severity, message in per_row_flags[i]:
+            row_errors.append({
+                "row_number": i + 1,
+                "student_name": row.get("full_name") or "",
+                "apaar_id": row.get("apaar_id") or "",
+                "student_code": row.get("student_code") or "",
+                "department": row.get("branch") or row.get("course") or "",
+                "quota": row.get("quota_type") or "",
+                "rule_code": code,
+                "severity": severity,
+                "message": message,
+            })
+
     return {
         "upload_id": upload.id,
         "total": len(rows),
@@ -289,4 +307,5 @@ def run_validation(
         "errors": errors_rows,
         "warnings": warnings_rows,
         "by_rule": dict(by_rule),
+        "row_errors": row_errors,
     }
