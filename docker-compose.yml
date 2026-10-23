@@ -1,0 +1,72 @@
+services:
+  # ----------------------------------------------------------------------------
+  # PostgreSQL Database
+  # ----------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: apaar_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: apaar_setu
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d apaar_setu"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ----------------------------------------------------------------------------
+  # FastAPI Backend Service
+  # ----------------------------------------------------------------------------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: apaar_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:postgrespassword@postgres:5432/apaar_setu
+      JWT_SECRET: dev-insecure-secret-key-change-in-production-1234567890
+      CORS_ORIGINS: http://localhost:3000,http://localhost:5173,http://localhost:80,http://127.0.0.1:3000
+      PORT: 8000
+      LLM_URL: ${LLM_URL:-https://api.groq.com/openai/v1}
+      LLM_KEY: ${LLM_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-llama-3.1-8b-instant}
+      APAAR_MODE: mock
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ----------------------------------------------------------------------------
+  # React SPA Frontend (Served via Nginx with reverse proxy to backend)
+  # ----------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: /api/v1
+    container_name: apaar_frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "3000:80"
+
+volumes:
+  postgres_data:

@@ -50,3 +50,24 @@ app.add_middleware(
 def health():
     """Liveness probe used by deployment and tests."""
     return {"status": "ok", "version": APP_VERSION}
+
+
+# Optional static frontend serving for unified full-stack container
+import os
+from pathlib import Path
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+_static_dir = Path(__file__).resolve().parent.parent / "static"
+if _static_dir.exists() and (_static_dir / "index.html").exists():
+    _assets_dir = _static_dir / "assets"
+    if _assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(_assets_dir)), name="assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str):
+        target = _static_dir / full_path
+        if target.is_file():
+            return FileResponse(target)
+        return FileResponse(_static_dir / "index.html")
+

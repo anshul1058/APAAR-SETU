@@ -67,6 +67,22 @@ refreshes enrolment history + anomaly scores.
 cd frontend && npm install && npm run dev   # SPA on http://localhost:5173
 ```
 
+### 4. Or run everything with Docker
+
+```bash
+# Start PostgreSQL, FastAPI backend, and React frontend with 1 command:
+docker compose up --build
+```
+- Frontend UI: `http://localhost:3000`
+- Backend API & Docs: `http://localhost:8000/docs` (health probe: `/health`)
+
+Or build a single self-contained fullstack image from root:
+```bash
+docker build -t apaar-setu .
+docker run -p 8000:8000 -e DATABASE_URL="<your_postgres_url>" apaar-setu
+```
+
+
 ### Demo accounts (password for all: `password123`)
 
 | Role | Email |
