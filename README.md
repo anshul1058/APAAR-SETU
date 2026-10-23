@@ -46,8 +46,11 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # Windows: 
 cp .env.example .env        # set DATABASE_URL, JWT_SECRET, LLM_* (optional), SIGNING_*
 ```
 
-`DATABASE_URL` accepts any Postgres. For Supabase use the **session pooler**
-port `6543` (the direct `5432` port refuses external connections).
+`DATABASE_URL` accepts any Postgres. For Supabase on Render, copy the **shared
+Transaction pooler** URI from the Supabase Connect dialog. It uses an IPv4
+host like `aws-<index>-<region>.pooler.supabase.com:6543` and a username like
+`postgres.<project-ref>`. Do not use `db.<project-ref>.supabase.co`, which is
+IPv6-only on plans without the IPv4 add-on.
 
 ### 2. Database and demo data
 

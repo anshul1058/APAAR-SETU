@@ -17,7 +17,9 @@ services:
     dockerContext: backend
     healthCheckPath: /health
     envVars:
-      # Set this in Render to the Supabase session-pooler URI (port 6543).
+      # Set this in Render to the Supabase shared Transaction pooler URI.
+      # It must use aws-*.pooler.supabase.com:6543 and the project-qualified
+      # username postgres.<project-ref>; db.<project-ref>.supabase.co is IPv6.
       # Keep the password URL-encoded and never commit the value.
       - key: DATABASE_URL
         sync: false
