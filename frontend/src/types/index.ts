@@ -206,3 +206,46 @@ export interface AiChatMessage {
   category?: 'validation_flag' | 'dashboard_query' | 'report_summary';
   relatedEntityId?: string;
 }
+
+// ------------------------------------------------------- ERP integration
+export interface ErpCrossCheckMismatch {
+  apaar_id_masked: string;
+  full_name: string;
+  field: string;
+  local: string;
+  erp: string;
+}
+
+export interface ErpCrossCheckMissing {
+  apaar_id_masked: string;
+  full_name: string;
+  student_code: string;
+  course?: string;
+}
+
+export interface ErpCrossCheckReport {
+  checked_at: string;
+  erp_records: number;
+  local_records: number;
+  matched: number;
+  verified_apaar: number;
+  missing_in_erp_count: number;
+  missing_in_local_count: number;
+  field_mismatches_count: number;
+  missing_in_erp: ErpCrossCheckMissing[];
+  missing_in_local: ErpCrossCheckMissing[];
+  field_mismatches: ErpCrossCheckMismatch[];
+  summary: string;
+}
+
+export interface ErpConfig {
+  institution_id: number;
+  institution_name: string;
+  erp_base_url: string | null;
+  api_key_configured: boolean;
+  api_key_masked: string | null;
+  status: 'not_configured' | 'connected' | 'error';
+  connected_at: string | null;
+  last_sync_at: string | null;
+  last_result: ErpCrossCheckReport | null;
+}

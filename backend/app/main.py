@@ -6,6 +6,7 @@ from app.config import settings
 from app.routers import assistant as assistant_router
 from app.routers import auth as auth_router
 from app.routers import dashboard as dashboard_router
+from app.routers import institutions as institutions_router
 from app.routers import reports as reports_router
 from app.routers import students as students_router
 from app.routers import uploads as uploads_router
@@ -24,6 +25,7 @@ app.include_router(auth_router.router, prefix=API_PREFIX)
 app.include_router(uploads_router.router, prefix=API_PREFIX)
 app.include_router(students_router.router, prefix=API_PREFIX)
 app.include_router(dashboard_router.router, prefix=API_PREFIX)
+app.include_router(institutions_router.router, prefix=API_PREFIX)
 app.include_router(verify_router.router, prefix=API_PREFIX)
 app.include_router(assistant_router.router, prefix=API_PREFIX)
 app.include_router(reports_router.router, prefix=API_PREFIX)

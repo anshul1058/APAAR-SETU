@@ -62,7 +62,7 @@ def tokens() -> dict:
     _attempts.clear()  # login rate limiter is shared module state
     out = {}
     for key, (email, pw) in {
-        "admin": ("admin@abc.in", "password123"),
+        "admin": ("admin@coep_technological_university.in", "password123"),
         "officer": ("aicte.officer@gov.in", "password123"),
         "verifier": ("verifier@verify.in", "password123"),
     }.items():
@@ -140,7 +140,7 @@ def test_dashboards_show_seeded_reality(tokens):
     r = client.get("/api/v1/dashboard/overview", headers=_h(tokens["officer"]))
     assert r.status_code == 200
     ov = r.json()
-    assert ov["institutions"] == 11  # 10 real Pune colleges + ABC fixture
+    assert ov["institutions"] == 10  # 10 real Pune colleges (ABC fixture retired)
     assert ov["students"] >= 600
     assert ov["cross_institution_duplicates"] >= 1
     assert any(s["state"] == "Maharashtra" for s in ov["by_state"])

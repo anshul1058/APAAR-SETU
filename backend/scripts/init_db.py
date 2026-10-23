@@ -20,6 +20,24 @@ def init_db() -> None:
     tables = sorted(inspect(engine).get_table_names())
     print(f"[init_db] tables ({len(tables)}): {', '.join(tables)}")
 
+    # Additive migration: create_all() does NOT alter existing tables, so
+    # databases created before the ERP integration feature need these columns.
+    # IF NOT EXISTS keeps the script idempotent.
+    erp_columns = [
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_base_url VARCHAR(500)",
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_api_key_enc TEXT",
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_last4 VARCHAR(4) DEFAULT '' NOT NULL",
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_status VARCHAR(20) "
+        "DEFAULT 'not_configured' NOT NULL",
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_connected_at TIMESTAMP",
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_last_sync_at TIMESTAMP",
+        "ALTER TABLE institutions ADD COLUMN IF NOT EXISTS erp_last_result TEXT",
+    ]
+    with engine.begin() as conn:
+        for stmt in erp_columns:
+            conn.execute(text(stmt))
+    print("[init_db] institutions ERP columns ensured (7)")
+
     views_sql = (Path(__file__).resolve().parents[1] / "sql" / "views.sql").read_text()
     # strip --comments so the splitter doesn't send comment-only chunks
     cleaned = "\n".join(

@@ -1,4 +1,4 @@
-import { Institution, DuplicateCase } from '../types';
+import { Institution, DuplicateCase, ErpConfig, ErpCrossCheckReport } from '../types';
 import { INITIAL_DUPLICATES } from '../data/mockData';
 import { apiClient, simulateLatency } from './apiClient';
 
@@ -33,6 +33,12 @@ interface InstitutionApiRecord {
     discrepancies_count: number;
   }>;
 }
+
+/** Extract a human-readable message from an axios/FastAPI error. */
+const errDetail = (err: unknown): string => {
+  const anyErr = err as { response?: { data?: { detail?: string } }; message?: string };
+  return anyErr?.response?.data?.detail || anyErr?.message || 'Request failed';
+};
 
 const toInstitution = (record: InstitutionApiRecord): Institution => ({
   id: record.id,
@@ -112,6 +118,45 @@ export const institutionService = {
       ]
     };
     return localDuplicates[index];
+  },
+
+  // ---------------------------------------------------- ERP integration (PRD F7)
+  // The API key is entered once, stored encrypted on the server, and is never
+  // returned — only a masked hint (********XXXX) comes back.
+
+  async getErpConfig(): Promise<ErpConfig> {
+    const response = await apiClient.get<ErpConfig>('/institutions/me/erp');
+    return response.data;
+  },
+
+  async saveErpConfig(erpBaseUrl: string, erpApiKey: string): Promise<ErpConfig> {
+    try {
+      const response = await apiClient.put<ErpConfig>('/institutions/me/erp', {
+        erp_base_url: erpBaseUrl,
+        erp_api_key: erpApiKey,
+      });
+      return response.data;
+    } catch (err) {
+      throw new Error(errDetail(err));
+    }
+  },
+
+  async disconnectErp(): Promise<ErpConfig> {
+    try {
+      const response = await apiClient.delete<ErpConfig>('/institutions/me/erp');
+      return response.data;
+    } catch (err) {
+      throw new Error(errDetail(err));
+    }
+  },
+
+  async runErpCrossCheck(): Promise<ErpCrossCheckReport> {
+    try {
+      const response = await apiClient.post<ErpCrossCheckReport>('/institutions/me/erp/cross-check');
+      return response.data;
+    } catch (err) {
+      throw new Error(errDetail(err));
+    }
   },
 
   exportInstitutionsCsv(data: Institution[]): void {
