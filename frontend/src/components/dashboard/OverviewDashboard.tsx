@@ -29,7 +29,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
   onNavigateTab,
   onSelectStudent
 }) => {
-  const totalSanctioned = intakeData.reduce((acc, curr) => acc + curr.sanctionedIntake, 0);
+  const totalSanctioned = intakeData.reduce((acc, curr) => acc + curr.sanctionedIntake + (curr.additionalSeats || 0), 0);
   const totalEnrolled = intakeData.reduce((acc, curr) => acc + curr.actualEnrolled, 0);
   const totalApaarVerified = intakeData.reduce((acc, curr) => acc + curr.apaarVerified, 0);
   const totalPending = intakeData.reduce((acc, curr) => acc + curr.pendingVerification, 0);
@@ -225,7 +225,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                     </div>
                     <div className="flex items-center gap-3 text-xs">
                       <span className="text-slate-500">
-                        Intake: <strong>{dept.actualEnrolled}</strong> / {dept.sanctionedIntake}
+                        Intake: <strong>{dept.actualEnrolled}</strong> / {dept.sanctionedIntake + (dept.additionalSeats || 0)}
                       </span>
                       <span className="font-extrabold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full text-[11px]">
                         {verifiedPct}% Verified

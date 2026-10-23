@@ -227,6 +227,27 @@ def inject_errors(dirty, counts, intake_map, reserve):
                       "DUP_IN_UPLOAD", "shared APAAR ID with another person in this file"))
         made += 1
 
+    # 2b. Ensure every college's dirty upload has a duplicate case.  The
+    # random injections above are useful for variety, but each institution
+    # should also have a deterministic duplicate to exercise its dashboard.
+    for src_key in sorted(dirty):
+        candidates = [(i, row) for i, row in enumerate(dirty[src_key])
+                      if free(src_key, row["student_code"]) and has_apaar(row)]
+        if len(candidates) < 2:
+            continue
+        donor_idx, donor = candidates[0]
+        target_idx, target = candidates[1]
+        target["apaar_id"] = donor["apaar_id"]
+        target["passport_no"] = ""
+        target["quota_type"] = "regular" if donor["quota_type"] == "supernumerary" else donor["quota_type"]
+        target["nationality"] = donor["nationality"]
+        used.add((src_key, donor["student_code"]))
+        used.add((src_key, target["student_code"]))
+        truth.append((src_key + ".csv", donor["student_code"], donor["apaar_id"],
+                      "DUP_IN_UPLOAD", "shared APAAR ID with another person in this file"))
+        truth.append((src_key + ".csv", target["student_code"], target["apaar_id"],
+                      "DUP_IN_UPLOAD", "shared APAAR ID with another person in this file"))
+
     # 3. Fake APAAR IDs -> APAAR_NOT_FOUND / APAAR_FORMAT
     made = 0
     for src_key, idx in random.sample(all_rows, len(all_rows)):
@@ -263,6 +284,23 @@ def inject_errors(dirty, counts, intake_map, reserve):
                       "APAAR_MISSING", "APAAR ID left blank"))
         used.add((src_key, row["student_code"]))
         made += 1
+
+    # 4b. Ensure every college has at least one explicit missing APAAR case.
+    # Convert a selected domestic row to regular quota so the row validator
+    # emits APAAR_MISSING rather than treating it as a passport-only record.
+    for src_key in sorted(dirty):
+        candidates = [(i, row) for i, row in enumerate(dirty[src_key])
+                      if free(src_key, row["student_code"]) and has_apaar(row)]
+        if not candidates:
+            continue
+        _idx, row = candidates[0]
+        row["apaar_id"] = ""
+        row["passport_no"] = ""
+        row["quota_type"] = "regular"
+        row["nationality"] = "INDIAN"
+        used.add((src_key, row["student_code"]))
+        truth.append((src_key + ".csv", row["student_code"], "",
+                      "APAAR_MISSING", "APAAR ID left blank"))
 
     # 5a. Missing name -> FIELD_MISSING
     made = 0

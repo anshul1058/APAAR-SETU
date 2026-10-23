@@ -62,7 +62,11 @@ export const BulkUploadPage: React.FC = () => {
       });
       setSummary(res);
     } catch (err: any) {
-      setUploadError(err.message || 'File upload failed');
+      const detail = err.response?.data?.detail;
+      const detailMessage = Array.isArray(detail)
+        ? detail.map((item: { msg?: string }) => item.msg || 'Invalid upload data').join('; ')
+        : detail;
+      setUploadError(detailMessage || err.message || 'File upload failed');
       setUploadProgress(null);
     }
   };

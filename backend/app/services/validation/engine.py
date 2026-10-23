@@ -202,8 +202,18 @@ def run_validation(
         course = course_for_row[i]
 
         student_id = None
-        if not has_error and course is not None:
+        has_cross_institution_duplicate = any(
+            code == "DUP_CROSS_INSTITUTION" and severity == "error"
+            for code, severity, _ in per_row_flags[i]
+        )
+        only_cross_institution_duplicate = has_cross_institution_duplicate and all(
+            severity != "error" or code == "DUP_CROSS_INSTITUTION"
+            for code, severity, _ in per_row_flags[i]
+        )
+        if (not has_error or only_cross_institution_duplicate) and course is not None:
             status = STATUS_FLAGGED if has_warning else STATUS_VALID
+            if only_cross_institution_duplicate:
+                status = STATUS_FLAGGED
             # Indian rows key on apaar_id; foreign rows on passport_no (their
             # primary id — a NULL-apaar match would hit any student in the course)
             apaar = row["apaar_id"] or None
@@ -246,9 +256,16 @@ def run_validation(
 
         for code, severity, message in per_row_flags[i]:
             by_rule[code] += 1
+            flag_details = None
+            if code in {"DUP_IN_UPLOAD", "DUP_IN_INSTITUTION", "DUP_CROSS_INSTITUTION"}:
+                flag_details = json.dumps({
+                    "apaar_id": row.get("apaar_id") or "",
+                    "student_code": row.get("student_code") or "",
+                })
             db.add(ValidationFlag(
                 upload_id=upload.id, student_id=student_id, row_number=row_number,
                 rule_code=code, severity=severity, message=message,
+                details_json=flag_details,
             ))
 
     # aggregate flags attach to no row (row_number NULL)

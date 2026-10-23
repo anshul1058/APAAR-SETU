@@ -3,6 +3,8 @@ import { INITIAL_DUPLICATES } from '../data/mockData';
 import { apiClient, simulateLatency } from './apiClient';
 
 let localDuplicates: DuplicateCase[] = [...INITIAL_DUPLICATES];
+const liveDuplicates = new Map<string, DuplicateCase>();
+const locallyResolvedDuplicateIds = new Set<string>();
 
 interface InstitutionApiRecord {
   id: string;
@@ -32,6 +34,21 @@ interface InstitutionApiRecord {
     pending_verification: number;
     discrepancies_count: number;
   }>;
+}
+
+interface DuplicateApiRecord {
+  case_id: string;
+  student_name: string;
+  apaar_id_masked: string;
+  institution_records: Array<{
+    id: string;
+    name: string;
+    course: string;
+    admissionYear: number;
+    state: string;
+    aicteId: string;
+  }>;
+  institution_count: number;
 }
 
 const toInstitution = (record: InstitutionApiRecord): Institution => ({
@@ -89,13 +106,61 @@ export const institutionService = {
     return institutions.find((i) => i.id === id || i.code === id) || null;
   },
 
+  async getMissingRegistryFlagCount(): Promise<number> {
+    const response = await apiClient.get<{
+      flags_by_rule: Array<{ rule_code: string; count: number }>;
+    }>('/dashboard/overview');
+    const missingRules = new Set(['APAAR_NOT_FOUND', 'APAAR_MISSING']);
+    return response.data.flags_by_rule
+      .filter((flag) => missingRules.has(flag.rule_code))
+      .reduce((total, flag) => total + Number(flag.count || 0), 0);
+  },
+
   async getDuplicates(): Promise<DuplicateCase[]> {
-    await simulateLatency(250);
-    return [...localDuplicates];
+    const response = await apiClient.get<DuplicateApiRecord[]>('/dashboard/duplicates');
+    const liveCases = response.data.flatMap((record) => {
+      const [primary, conflicting] = record.institution_records;
+      if (!primary || !conflicting) return [];
+
+      return [{
+        id: record.case_id,
+        studentName: record.student_name,
+        apaarId: record.apaar_id_masked,
+        maskedApaarId: record.apaar_id_masked,
+        primaryInstitution: primary,
+        conflictingInstitution: conflicting,
+        flagType: 'SIMULTANEOUS_FULLTIME_ENROLLMENT' as const,
+        anomalyScore: 100,
+        detectionDate: new Date().toISOString().slice(0, 10),
+        severity: 'CRITICAL' as const,
+        status: 'UNDER_REVIEW' as const,
+        actionHistory: []
+      }];
+    });
+    liveDuplicates.clear();
+    liveCases.forEach((duplicate) => liveDuplicates.set(duplicate.id, duplicate));
+    return liveCases.filter((duplicate) => !locallyResolvedDuplicateIds.has(duplicate.id));
   },
 
   async resolveDuplicate(caseId: string, action: string, notes: string): Promise<DuplicateCase> {
     await simulateLatency(300);
+    const liveCase = liveDuplicates.get(caseId);
+    if (liveCase) {
+      const resolved = {
+        ...liveCase,
+        status: 'RESOLVED_VERIFIED' as const,
+        actionHistory: [{
+          date: new Date().toLocaleString(),
+          action,
+          performedBy: 'Authorized Officer',
+          notes
+        }]
+      };
+      locallyResolvedDuplicateIds.add(caseId);
+      liveDuplicates.set(caseId, resolved);
+      return resolved;
+    }
+
     const index = localDuplicates.findIndex((d) => d.id === caseId);
     if (index === -1) throw new Error('Duplicate case not found');
     localDuplicates[index] = {

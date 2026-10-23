@@ -19,6 +19,9 @@ MIT_Arts_Commerce_Science_College_MIT_ACSC.csv,MIT_1175,389149015444,APAAR_NOT_F
 Dr_D_Y_Patil_Institute_of_Technology_DYPIT.csv,DR_D006,734987388311,APAAR_NOT_FOUND,valid format but not in APAAR registry
 Zeal_College_of_Engineering_and_Research_ZCOER.csv,ZEAL836,AB1234567890,APAAR_FORMAT,malformed APAAR ID
 Zeal_College_of_Engineering_and_Research_ZCOER.csv,ZEAL905,454054640416,APAAR_NOT_FOUND,valid format but not in APAAR registry
+MKSSS_s_Cummins_College_of_Engineering_for_Women.csv,MKSS001,307900454170,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+MKSSS_s_Cummins_College_of_Engineering_for_Women.csv,MKSS002,307900454170,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+MKSSS_s_Cummins_College_of_Engineering_for_Women.csv,MKSS003,,APAAR_MISSING,APAAR ID left blank
 COEP_Technological_University.csv,COEP420,891567133223,APAAR_NOT_FOUND,valid format but not in APAAR registry
 Zeal_College_of_Engineering_and_Research_ZCOER.csv,ZEAL682,9876543,APAAR_FORMAT,malformed APAAR ID
 Pune_Institute_of_Computer_Technology_PICT.csv,PUNE530,,APAAR_MISSING,APAAR ID left blank
@@ -53,3 +56,24 @@ Zeal_College_of_Engineering_and_Research_ZCOER.csv,ZEAL649,,QUOTA_NATIONALITY_MI
 COEP_Technological_University.csv,*,*,SUPERNUMERARY_EXCEEDED,COEP_Technological_University/AI and Machine Learning (AI&ML): 6 supernumerary vs 4 approved
 Dr_D_Y_Patil_College_of_Engineering_DYPCOE.csv,DR_D1084,,PASSPORT_FORMAT,passport not letter+7 digits
 MKSSS_s_Cummins_College_of_Engineering_for_Women.csv,MKSS341,,PASSPORT_FORMAT,passport not letter+7 digits
+COEP_Technological_University.csv,COEP001,008504339035,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+COEP_Technological_University.csv,COEP002,008504339035,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+COEP_Technological_University.csv,COEP001,,APAAR_MISSING,APAAR ID left blank
+Dr_D_Y_Patil_College_of_Engineering_DYPCOE.csv,DR_D001,334043760859,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+Dr_D_Y_Patil_College_of_Engineering_DYPCOE.csv,DR_D002,334043760859,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+Dr_D_Y_Patil_College_of_Engineering_DYPCOE.csv,DR_D001,,APAAR_MISSING,APAAR ID left blank
+Dr_D_Y_Patil_Institute_of_Technology_DYPIT.csv,DR_D001,802091904493,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+Dr_D_Y_Patil_Institute_of_Technology_DYPIT.csv,DR_D002,802091904493,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+MIT_Arts_Commerce_Science_College_MIT_ACSC.csv,MIT_001,303676070287,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+MIT_Arts_Commerce_Science_College_MIT_ACSC.csv,MIT_002,303676070287,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+MIT_Arts_Commerce_Science_College_MIT_ACSC.csv,MIT_001,,APAAR_MISSING,APAAR ID left blank
+MMCOE.csv,MMCO001,,APAAR_MISSING,APAAR ID left blank
+RMD_Sinhgad_Technical_Institutes_Campus.csv,RMD_001,600315383816,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+RMD_Sinhgad_Technical_Institutes_Campus.csv,RMD_002,600315383816,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+RMD_Sinhgad_Technical_Institutes_Campus.csv,RMD_001,,APAAR_MISSING,APAAR ID left blank
+Zeal_College_of_Engineering_and_Research_ZCOER.csv,ZEAL001,535725785744,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+Zeal_College_of_Engineering_and_Research_ZCOER.csv,ZEAL002,535725785744,DUP_IN_UPLOAD,shared APAAR ID with another person in this file
+COEP_Technological_University.csv,COEP003,,APAAR_MISSING,APAAR ID left blank
+Dr_D_Y_Patil_College_of_Engineering_DYPCOE.csv,DR_D003,,APAAR_MISSING,APAAR ID left blank
+MIT_Arts_Commerce_Science_College_MIT_ACSC.csv,MIT_003,,APAAR_MISSING,APAAR ID left blank
+RMD_Sinhgad_Technical_Institutes_Campus.csv,RMD_003,,APAAR_MISSING,APAAR ID left blank

@@ -1,7 +1,7 @@
 apaar_id,passport_no,full_name,dob,gender,student_code,college,location,mht_cet_code,program_level,branch,academic_year,approved_intake,approved_supernumerary,quota_type,category,nationality,admission_date
 008504339035,,Chaman Dar,2009-05-03,F,COEP001,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,regular,OBC,INDIAN,2026-09-26
-892980969670,,Wahab Narula,2005-03-05,M,COEP002,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,regular,EWS,INDIAN,2026-08-11
-907587255626,,Brinda Munshi,2006-05-31,F,COEP003,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,regular,OBC,INDIAN,2026-08-15
+008504339035,,Wahab Narula,2005-03-05,M,COEP002,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,regular,EWS,INDIAN,2026-08-11
+,,Brinda Munshi,2006-05-31,F,COEP003,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,regular,OBC,INDIAN,2026-08-15
 458758222503,,Lohit Agrawal,2004-04-03,M,COEP004,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,supernumerary,ST,INDIAN,2026-09-18
 ,C1762343,Logan Manda,2007-07-23,M,COEP005,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,nri,ST,INDIAN,2026-09-03
 709870195759,,Riya Bal,2005-05-11,F,COEP006,COEP Technological University,Pune,16006,B.Tech (Engineering),Computer Science and Engineering,2026-27,300,15,regular,OBC,INDIAN,2026-07-06

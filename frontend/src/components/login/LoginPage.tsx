@@ -63,7 +63,7 @@ export const LoginPage: React.FC = () => {
     const preset = ROLE_PRESETS.find((p) => p.role === presetRole) || ROLE_PRESETS[0];
     setEmail(preset.email);
     setSelectedRole(presetRole);
-    setPassword('aicte@2026#secure');
+    setPassword('password123');
     setErrorMessage('');
   };
 

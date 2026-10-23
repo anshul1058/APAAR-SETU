@@ -165,7 +165,7 @@ export const InstitutionListPage: React.FC = () => {
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
                       inst.anomalyScore >= 50 ? 'bg-rose-100 text-rose-800' : 'bg-stone-100 text-slate-700'
                     }`}>
-                      {inst.anomalyScore} / 100
+                      {Number(inst.anomalyScore).toFixed(1)} / 100
                     </span>
                   </td>
 
@@ -223,7 +223,7 @@ export const InstitutionListPage: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-2xl bg-rose-50/50 border border-rose-200 text-xs text-rose-900 space-y-1">
-              <p className="font-bold">Anomaly Assessment ({selectedInst.anomalyScore}/100):</p>
+              <p className="font-bold">Anomaly Assessment ({Number(selectedInst.anomalyScore).toFixed(1)} / 100):</p>
               <p className="text-[11px] leading-relaxed">{selectedInst.anomalySummary}</p>
             </div>
 
@@ -233,7 +233,9 @@ export const InstitutionListPage: React.FC = () => {
                 {selectedInst.programs.map((prog) => (
                   <div key={prog.programCode} className="p-2 rounded-xl bg-stone-50 border border-stone-200 flex justify-between text-xs">
                     <span>{prog.programName}</span>
-                    <span className="font-bold text-slate-700">{prog.actualEnrolled} / {prog.sanctionedIntake}</span>
+                    <span className="font-bold text-slate-700">
+                      {prog.actualEnrolled} / {prog.sanctionedIntake + (prog.additionalSeats || 0)}
+                    </span>
                   </div>
                 ))}
               </div>

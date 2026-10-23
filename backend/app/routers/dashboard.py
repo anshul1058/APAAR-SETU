@@ -130,14 +130,19 @@ def institutions(db: Session = Depends(get_db)):
         student_counts = students_by_institution.get(
             institution_id, {"enrolled": 0, "apaar_verified": 0}
         )
-        # The workbook's "CAP Seats (Sanctioned Intake)" is the published
-        # intake figure. TFWS is an additional category and must not inflate
-        # the headline sanctioned-intake number (e.g. 300 must remain 300,
-        # not 315).
-        sanctioned_intake = sum((course["approved_intake"] or 0) for course in courses)
+        # Dashboard capacity includes both CAP seats and approved
+        # supernumerary seats such as TFWS. For example, 300 CAP + 15 TFWS
+        # must be reported as 315 total capacity across every dashboard.
+        sanctioned_intake = sum(
+            (course["approved_intake"] or 0) + (course["approved_supernumerary"] or 0)
+            for course in courses
+        )
         total_enrolled = student_counts["enrolled"] or 0
         verified_count = student_counts["apaar_verified"] or 0
-        anomaly_score = float(anomaly_by_institution.get(institution_id, 0) or 0)
+        raw_anomaly_score = float(anomaly_by_institution.get(institution_id, 0) or 0)
+        # The analytics model stores normalized scores between 0 and 1;
+        # dashboards and policy thresholds use the displayed 0-100 scale.
+        anomaly_score = round(raw_anomaly_score * 100, 1) if raw_anomaly_score <= 1 else round(raw_anomaly_score, 1)
 
         if anomaly_score >= 50:
             compliance_status = "CRITICAL_REVIEW"
@@ -212,10 +217,73 @@ def duplicates(
     user: dict = Depends(require_roles(*AICTE)),
     db: Session = Depends(get_db),
 ):
-    """Cross-institution duplicate enrolments (masked APAAR ids)."""
+    """Return active duplicate cases from students and upload validation flags."""
     return _rows(db, """
-        SELECT apaar_id_masked, institutions
-        FROM v_duplicate_enrolments ORDER BY institutions DESC
+        WITH duplicate_ids AS (
+            SELECT apaar_id
+            FROM students
+            WHERE status IN ('valid', 'flagged')
+              AND apaar_id IS NOT NULL
+              AND apaar_id <> ''
+            GROUP BY apaar_id
+            HAVING COUNT(DISTINCT institution_id) > 1
+        )
+        SELECT
+            'DB-DUP-' || RIGHT(MD5(d.apaar_id), 10) AS case_id,
+            MAX(s.full_name) AS student_name,
+            'XXXXXXXX' || RIGHT(d.apaar_id, 4) AS apaar_id_masked,
+            json_agg(
+                json_build_object(
+                    'id', i.id::text,
+                    'name', i.name,
+                    'course', c.name,
+                    'admissionYear', split_part(c.academic_year, '-', 1)::integer,
+                    'state', i.state,
+                    'aicteId', i.aicte_code
+                ) ORDER BY i.name
+            ) AS institution_records,
+            COUNT(DISTINCT s.institution_id) AS institution_count
+        FROM duplicate_ids d
+        JOIN students s ON s.apaar_id = d.apaar_id
+        JOIN institutions i ON i.id = s.institution_id
+        JOIN courses c ON c.id = s.course_id
+        WHERE s.status IN ('valid', 'flagged')
+        GROUP BY d.apaar_id
+        UNION ALL
+        SELECT
+            'UPLOAD-DUP-' || f.id::text AS case_id,
+            COALESCE(s.full_name, 'Duplicate APAAR upload record') AS student_name,
+            CASE
+                WHEN NULLIF(f.details_json::json ->> 'apaar_id', '') IS NOT NULL
+                THEN 'XXXXXXXX' || RIGHT(f.details_json::json ->> 'apaar_id', 4)
+                ELSE 'Upload row ' || COALESCE(f.row_number::text, '?')
+            END AS apaar_id_masked,
+            json_build_array(
+                json_build_object(
+                    'id', i.id::text,
+                    'name', i.name,
+                    'course', 'Uploaded enrollment file',
+                    'admissionYear', EXTRACT(YEAR FROM u.created_at)::integer,
+                    'state', i.state,
+                    'aicteId', i.aicte_code
+                ),
+                json_build_object(
+                    'id', i.id::text,
+                    'name', i.name,
+                    'course', 'Same upload duplicate',
+                    'admissionYear', EXTRACT(YEAR FROM u.created_at)::integer,
+                    'state', i.state,
+                    'aicteId', i.aicte_code
+                )
+            ) AS institution_records,
+            1 AS institution_count
+        FROM validation_flags f
+        JOIN uploads u ON u.id = f.upload_id
+        JOIN institutions i ON i.id = u.institution_id
+        LEFT JOIN students s ON s.id = f.student_id
+        WHERE f.rule_code IN ('DUP_IN_UPLOAD', 'DUP_IN_INSTITUTION')
+          AND f.resolved = FALSE
+        ORDER BY institution_count DESC, student_name
     """)
 
 

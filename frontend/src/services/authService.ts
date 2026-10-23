@@ -169,8 +169,14 @@ export const authService = {
       localStorage.setItem(TOKEN_KEY, response.data.access_token);
       localStorage.setItem(USER_KEY, JSON.stringify(user));
       return { user, token: response.data.access_token };
-    } catch {
-      // Preserve the existing demo login for profiles not seeded in the DB.
+    } catch (error: any) {
+      // Do not convert rejected backend credentials into a fake JWT. That
+      // token cannot be accepted by protected API routes and causes a
+      // misleading "session expired" redirect. Keep the local fallback only
+      // for an unavailable backend.
+      if (error?.response) {
+        throw error;
+      }
     }
 
     const actualRole: UserRole = role || preset.role;

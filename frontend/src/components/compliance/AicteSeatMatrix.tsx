@@ -19,7 +19,7 @@ interface AicteSeatMatrixProps {
 export const AicteSeatMatrix: React.FC<AicteSeatMatrixProps> = ({ intakeData }) => {
   const [selectedProgram, setSelectedProgram] = useState<AicteProgramIntake>(intakeData[0]);
 
-  const totalSanctioned = intakeData.reduce((a, b) => a + b.sanctionedIntake, 0);
+  const totalSanctioned = intakeData.reduce((a, b) => a + b.sanctionedIntake + (b.additionalSeats || 0), 0);
   const totalEnrolled = intakeData.reduce((a, b) => a + b.actualEnrolled, 0);
   const totalVerified = intakeData.reduce((a, b) => a + b.apaarVerified, 0);
   const totalDiscrepancies = intakeData.reduce((a, b) => a + b.discrepanciesCount, 0);
@@ -99,8 +99,9 @@ export const AicteSeatMatrix: React.FC<AicteSeatMatrixProps> = ({ intakeData }) 
             </thead>
             <tbody className="divide-y divide-stone-100">
               {intakeData.map((item) => {
-                const verifiedPct = ((item.apaarVerified / item.sanctionedIntake) * 100).toFixed(1);
-                const isCompliant = item.actualEnrolled <= item.sanctionedIntake;
+                const totalCapacity = item.sanctionedIntake + (item.additionalSeats || 0);
+                const verifiedPct = ((item.apaarVerified / totalCapacity) * 100).toFixed(1);
+                const isCompliant = item.actualEnrolled <= totalCapacity;
 
                 return (
                   <tr 
@@ -115,7 +116,7 @@ export const AicteSeatMatrix: React.FC<AicteSeatMatrixProps> = ({ intakeData }) 
                       <p className="text-[10px] font-mono text-slate-400">Code: {item.programCode}</p>
                     </td>
                     <td className="py-3.5 px-3 font-semibold text-slate-900">
-                      {item.sanctionedIntake}
+                      {totalCapacity}
                     </td>
                     <td className="py-3.5 px-3 text-slate-700">
                       {item.actualEnrolled}

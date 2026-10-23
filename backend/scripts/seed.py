@@ -9,9 +9,8 @@ generate_enrollments.py, seed=42):
 
 Seeds institutions, users (all roles), courses, students, apaar_registry,
 two prior years of enrolment_history (feeds yoy_growth) and anomaly scores,
-plus deliberate demo cases:
-  * 3 cross-institution duplicate enrolments (v_duplicate_enrolments)
-  * MIT ACSC M.Sc Computer Science: 65 enrolled vs 60 approved (INTAKE_EXCEEDED)
+plus deliberate intake demo cases:
+  * MIT ACSC M.Sc Computer Science: 64 enrolled vs 60 approved (INTAKE_EXCEEDED)
   * COEP AI&ML: 6 supernumerary vs 4 approved (SUPERNUMERARY_EXCEEDED)
 
 The 10 colleges in the clean enrollment files are the actual dataset.
@@ -166,6 +165,15 @@ def seed() -> None:
             if removed_demo:
                 db.commit()
                 print(f"[seed] removed {removed_demo} legacy verification demo student(s)")
+
+            removed_seed_duplicates = db.execute(
+                delete(Student).where(
+                    Student.student_code.in_(["ST99001", "ST99002", "ST99003"])
+                )
+            ).rowcount
+            if removed_seed_duplicates:
+                db.commit()
+                print(f"[seed] removed {removed_seed_duplicates} seeded duplicate demo student(s)")
 
             # Keep institution-admin accounts in sync when the database was
             # seeded previously. This is intentionally additive and does not
@@ -333,37 +341,16 @@ def seed() -> None:
                 status=STATUS_FLAGGED,
             )
 
-        # MIT ACSC M.Sc CS: 60 (clean) + 4 fresh + 1 dup = 65 > 60 approved
+        # MIT ACSC M.Sc CS: 60 (clean) + 4 fresh = 64 > 60 approved
         planted = [fresh(reserve[i], mit, mit_msc, "regular", f"ST9000{i}")
                    for i in range(4)]
         # COEP AI&ML: supernumerary 2 (clean) + 4 fresh = 6 > 4 approved
         planted += [fresh(reserve[4 + i], coep, coep_ai, "supernumerary", f"ST9004{i}")
                     for i in range(4)]
 
-        def dup(donor, iid: int, course: int, code: str) -> dict:
-            return dict(
-                apaar_id=donor.apaar_id, passport_no=None,
-                institution_id=iid, course_id=course, student_code=code,
-                full_name=donor.full_name, dob=donor.dob, gender=donor.gender,
-                category=donor.category, quota_type="regular",
-                nationality=donor.nationality, admission_date=date(2026, 7, 15),
-                email_hash=donor.email_hash, status=STATUS_FLAGGED,
-            )
-
-        def donor_except(iid: int, skip: int = 0):
-            return db.execute(
-                select(Student).where(
-                    Student.apaar_id.is_not(None),
-                    Student.institution_id != iid,
-                ).order_by(Student.id).offset(skip).limit(1)
-            ).scalars().first()
-
-        planted.append(dup(donor_except(mit), mit, mit_msc, "ST99001"))
-        planted.append(dup(donor_except(coep), coep, coep_ai, "ST99002"))
-        planted.append(dup(donor_except(coep, skip=1), coep, coep_ai, "ST99003"))
         _bulk(db, Student, planted)
-        print("[seed] demo cases: 3 cross-institution duplicates, "
-              "M.Sc CS 65/60, COEP AI&ML supernumerary 6/4")
+        print("[seed] intake demo cases: M.Sc CS 64/60, "
+              "COEP AI&ML supernumerary 6/4")
 
         # --- APAAR registry (mock national service) --------------------------
         _bulk(db, APAARRecord, [
@@ -389,9 +376,8 @@ def seed() -> None:
             .group_by(Student.apaar_id)
             .having(func.count(func.distinct(Student.institution_id)) > 1)
         ).all())
-        assert msc == 65, f"MIT ACSC M.Sc CS should be 65 enrolled, got {msc}"
+        assert msc == 64, f"MIT ACSC M.Sc CS should be 64 enrolled, got {msc}"
         assert supn == 6, f"COEP AI&ML supernumerary should be 6, got {supn}"
-        assert n_dupes >= 3, f"expected >=3 cross-institution duplicates, got {n_dupes}"
 
         # --- anomaly scores (aiml_guide §3) so dashboards are live ------------
         n_hist = seed_history(db)

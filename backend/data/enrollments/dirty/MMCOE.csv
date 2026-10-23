@@ -1,5 +1,5 @@
 apaar_id,passport_no,full_name,dob,gender,student_code,college,location,mht_cet_code,program_level,branch,academic_year,approved_intake,approved_supernumerary,quota_type,category,nationality,admission_date
-327341623080,,Nidra Prashad,2008-06-18,F,MMCO001,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Computer Engineering,2026-27,240,12,regular,OBC,INDIAN,2026-07-03
+,,Nidra Prashad,2008-06-18,F,MMCO001,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Computer Engineering,2026-27,240,12,regular,OBC,INDIAN,2026-07-03
 213435357251,,Ranveer Chander,2001-12-11,M,MMCO002,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Computer Engineering,2026-27,240,12,regular,ST,INDIAN,2026-09-19
 595367147268,,Faraj Mohan,2003-01-18,M,MMCO003,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Computer Engineering,2026-27,240,12,regular,EWS,INDIAN,2026-07-17
 329789790290,,Meghana Boase,2002-03-26,F,MMCO004,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Computer Engineering,2026-27,240,12,regular,GENERAL,INDIAN,2026-07-26
@@ -711,7 +711,7 @@ apaar_id,passport_no,full_name,dob,gender,student_code,college,location,mht_cet_
 634806546249,,Utkarsh Bera,2005-01-21,M,MMCO710,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,EWS,INDIAN,2026-08-07
 776878186276,,Gautam Walla,2009-02-02,M,MMCO711,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,SC,INDIAN,2026-07-24
 583695609943,,Aditya Badami,2009-06-18,M,MMCO712,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,supernumerary,GENERAL,INDIAN,2026-07-20
-320795737659,,Odika Soni,2006-11-21,F,MMCO713,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,ST,INDIAN,2026-08-11
+320795737658,,Odika Soni,2006-11-21,F,MMCO713,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,ST,INDIAN,2026-08-11
 480561542271,,Bhavna Vora,2006-02-27,F,MMCO714,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,OBC,INDIAN,2026-08-08
 000327519695,,Samaksh Sundaram,2005-11-24,M,MMCO715,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,SC,INDIAN,2026-09-20
 122830399362,,Nicholas Bir,2002-02-03,M,MMCO716,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,SC,INDIAN,2026-09-01
@@ -792,7 +792,7 @@ apaar_id,passport_no,full_name,dob,gender,student_code,college,location,mht_cet_
 885061986354,,Reva Bora,2001-12-15,F,MMCO791,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,GENERAL,INDIAN,2026-08-07
 697352672812,,Gautami Mitra,2005-07-11,F,MMCO792,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,EWS,INDIAN,2026-09-09
 651034882068,,Chanakya Rai,2007-08-20,M,MMCO793,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,GENERAL,INDIAN,2026-09-12
-320795737659,,Yochana Pall,2002-08-03,F,MMCO794,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,SC,INDIAN,2026-09-11
+320795737658,,Yochana Pall,2002-08-03,F,MMCO794,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,SC,INDIAN,2026-09-11
 ,K5362174,Warhi Gala,2002-03-08,F,MMCO795,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,nri,SC,INDIAN,2026-08-25
 159927514046,,Pranav Lanka,2006-11-23,M,MMCO796,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,ST,INDIAN,2026-09-23
 245528943540,,Kabir Jhaveri,2008-05-04,M,MMCO797,MMCOE,"Karvenagar, Pune",6156,B.Tech (Engineering),Artificial Intelligence & Data Science,2026-27,180,9,regular,ST,INDIAN,2026-08-15

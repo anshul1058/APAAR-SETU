@@ -26,13 +26,21 @@ export const DuplicateResolutionPage: React.FC = () => {
 
   useEffect(() => {
     loadDuplicates();
+    const interval = window.setInterval(loadDuplicates, 15000);
+    return () => window.clearInterval(interval);
   }, [refreshTrigger]);
 
   const loadDuplicates = async () => {
-    const data = await institutionService.getDuplicates();
-    setDuplicates(data);
-    if (!selectedCase && data.length > 0) {
-      setSelectedCase(data[0]);
+    try {
+      const data = await institutionService.getDuplicates();
+      setDuplicates(data);
+      setSelectedCase((current) => {
+        if (!data.length) return null;
+        return data.find((item) => item.id === current?.id) || data[0];
+      });
+    } catch {
+      setDuplicates([]);
+      setSelectedCase(null);
     }
   };
 

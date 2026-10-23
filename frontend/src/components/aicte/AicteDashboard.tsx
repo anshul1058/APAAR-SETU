@@ -24,6 +24,7 @@ export const AicteDashboard: React.FC = () => {
 
   const [institutions, setInstitutions] = useState<Institution[]>([]);
   const [duplicates, setDuplicates] = useState<DuplicateCase[]>([]);
+  const [missingRegistryFlags, setMissingRegistryFlags] = useState(0);
   const [selectedInstitution, setSelectedInstitution] = useState<Institution | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,12 +34,14 @@ export const AicteDashboard: React.FC = () => {
 
   const loadData = async () => {
     try {
-      const [insts, dups] = await Promise.all([
+      const [insts, dups, missingFlags] = await Promise.all([
         institutionService.getInstitutions(),
-        institutionService.getDuplicates()
+        institutionService.getDuplicates(),
+        institutionService.getMissingRegistryFlagCount()
       ]);
       setInstitutions(insts);
       setDuplicates(dups);
+      setMissingRegistryFlags(missingFlags);
       if (!selectedInstitution && insts.length > 0) {
         setSelectedInstitution(insts[0]);
       }
@@ -98,7 +101,7 @@ export const AicteDashboard: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-xs">
           <div className="flex items-center justify-between text-slate-500 mb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider">Monitored Institutes</span>
+            <span className="text-xs font-semibold uppercase tracking-wider">Total Institutions</span>
             <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>
@@ -141,6 +144,17 @@ export const AicteDashboard: React.FC = () => {
           </div>
           <p className="text-2xl font-black text-rose-600">{duplicates.length} Cases</p>
           <p className="text-xs text-rose-800 mt-1">Dual-enrollment fraud flags</p>
+        </div>
+
+        <div className="bg-white p-5 rounded-3xl border border-amber-200 shadow-xs">
+          <div className="flex items-center justify-between text-slate-500 mb-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">Missing APAAR IDs</span>
+            <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+              <ShieldAlert className="w-4 h-4" />
+            </div>
+          </div>
+          <p className="text-2xl font-black text-amber-600">{formatNumber(missingRegistryFlags)} Flags</p>
+          <p className="text-xs text-amber-800 mt-1">Blank or unregistered APAAR IDs from uploads</p>
         </div>
       </div>
 
@@ -243,7 +257,9 @@ export const AicteDashboard: React.FC = () => {
                     <AlertTriangle className="w-4 h-4 text-amber-600" />
                     Anomaly Index Score
                   </span>
-                  <span className="text-lg font-black text-amber-900">{selectedInstitution.anomalyScore}/100</span>
+                  <span className="text-lg font-black text-amber-900 whitespace-nowrap">
+                    {Number(selectedInstitution.anomalyScore).toFixed(1)} / 100
+                  </span>
                 </div>
                 <p className="text-[11px] text-amber-900/80 leading-relaxed">
                   {selectedInstitution.anomalySummary}

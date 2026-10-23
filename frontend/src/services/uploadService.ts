@@ -1,7 +1,6 @@
 import { UploadBatchSummary, UploadRowError } from '../types';
 import { maskApaarId } from '../utils/formatters';
-import { simulateLatency } from './apiClient';
-import { studentService, StudentBatchRow } from './studentService';
+import { apiClient } from './apiClient';
 
 const MAX_FILE_SIZE_MB = 10;
 type CsvRow = Record<string, string>;
@@ -108,18 +107,44 @@ export const uploadService = {
   async processUpload(file: File, onProgress: (pct: number, stage: string) => void): Promise<UploadBatchSummary> {
     const fileSizeMb = file.size / (1024 * 1024);
     if (fileSizeMb > MAX_FILE_SIZE_MB) throw new Error(`File size (${fileSizeMb.toFixed(1)} MB) exceeds the maximum allowed 10 MB limit.`);
-    if (!file.name.toLowerCase().endsWith('.csv')) throw new Error('Please upload a CSV file so its rows can be validated.');
-    onProgress(20, 'Reading uploaded CSV rows...');
-    const rows = parseCsv(await file.text());
-    await simulateLatency(100);
-    onProgress(65, 'Validating uploaded student data...');
-    const { errors, rulesEvaluated } = validateRows(rows);
-    await simulateLatency(100);
+    if (!/\.(csv|xlsx)$/i.test(file.name)) throw new Error('Please upload a CSV or Excel file so its rows can be validated.');
+    onProgress(20, 'Uploading rows to the institutional validation service...');
+    const form = new FormData();
+    form.append('file', file);
+    const response = await apiClient.post<{
+      upload_id: number;
+      total: number;
+      valid: number;
+      errors: number;
+      warnings: number;
+      by_rule: Record<string, number>;
+    }>('/uploads', form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 120000,
+      onUploadProgress: (event) => {
+        if (event.total) onProgress(Math.min(55, Math.round((event.loaded / event.total) * 55)), 'Uploading rows to the institutional validation service...');
+      }
+    });
+    onProgress(75, 'Checking APAAR registry and cross-institution duplicates...');
+    const result = response.data;
+    const rulesEvaluated = Object.entries(result.by_rule || {}).map(([name, violatorCount]) => ({
+      name,
+      passed: false,
+      violatorCount
+    }));
+    if (!rulesEvaluated.length) rulesEvaluated.push({ name: 'Row data validation', passed: true, violatorCount: 0 });
     onProgress(100, 'Batch processing complete.');
-    const flaggedRows = new Set(errors.map((error) => error.rowNumber));
-    const criticalRows = new Set(errors.filter((error) => error.severity === 'CRITICAL').map((error) => error.rowNumber));
-    studentService.ingestBatch(rows.filter((_, index) => !criticalRows.has(index + 1)) as unknown as StudentBatchRow[]);
-    return { fileName: file.name, fileSizeMb: parseFloat(fileSizeMb.toFixed(2)), totalRecords: rows.length, passedRecords: rows.length - flaggedRows.size, criticalErrors: errors.filter((error) => error.severity === 'CRITICAL').length, warningFlags: errors.filter((error) => error.severity === 'WARNING').length, duplicateSuspects: errors.filter((error) => error.ruleViolated === 'Duplicate APAAR in Upload').length, rulesEvaluated, errors };
+    return {
+      fileName: file.name,
+      fileSizeMb: parseFloat(fileSizeMb.toFixed(2)),
+      totalRecords: result.total,
+      passedRecords: result.valid,
+      criticalErrors: result.errors,
+      warningFlags: result.warnings,
+      duplicateSuspects: result.by_rule?.DUP_CROSS_INSTITUTION || 0,
+      rulesEvaluated,
+      errors: []
+    };
   },
   exportErrorsCsv(errors: UploadRowError[]): void {
     const headers = ['Row Number', 'Student Name', 'Masked APAAR ID', 'Roll Number', 'Department', 'Rule Violated', 'Severity', 'Description'];

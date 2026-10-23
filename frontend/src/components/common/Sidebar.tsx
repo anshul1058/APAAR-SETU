@@ -31,8 +31,8 @@ export const Sidebar: React.FC = () => {
       case 'aicte_officer':
         return [
           { to: '/aicte/dashboard', label: 'AICTE Regional Overview', icon: LayoutDashboard },
-          { to: '/aicte/institutions', label: 'Institutions Directory', icon: Building2, badge: '5 Monitored' },
-          { to: '/aicte/duplicates', label: 'Duplicate Detection Hub', icon: AlertTriangle, badge: '3 Alerts', badgeColor: 'bg-rose-100 text-rose-800 font-bold animate-pulse' },
+          { to: '/aicte/institutions', label: 'Institutions Directory', icon: Building2 },
+          { to: '/aicte/duplicates', label: 'Duplicate Detection Hub', icon: AlertTriangle },
           { to: '/verifier/portal', label: 'Spot Inspection Verifier', icon: QrCode }
         ];
 
@@ -41,7 +41,7 @@ export const Sidebar: React.FC = () => {
           { to: '/aicte/admin', label: 'Apex Governance Cell', icon: Settings },
           { to: '/aicte/dashboard', label: 'National KPI Metrics', icon: LayoutDashboard },
           { to: '/aicte/institutions', label: 'All AICTE Institutes', icon: Building2 },
-          { to: '/aicte/duplicates', label: 'National Duplicate Engine', icon: AlertTriangle, badge: '3 Active' },
+          { to: '/aicte/duplicates', label: 'National Duplicate Engine', icon: AlertTriangle },
           { to: '/institution/reports', label: 'Tamper Audit Ledger', icon: FileText }
         ];
 
@@ -107,7 +107,7 @@ export const Sidebar: React.FC = () => {
                         className={`text-[10px] px-2 py-0.5 rounded-full ${
                           isActive
                             ? 'bg-blue-700 text-blue-100'
-                            : item.badgeColor || 'bg-stone-200 text-slate-600'
+                          : ('badgeColor' in item && item.badgeColor) || 'bg-stone-200 text-slate-600'
                         }`}
                       >
                         {item.badge}
