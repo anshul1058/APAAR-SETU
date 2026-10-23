@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Warm Ivory Square Grid Pattern from Image 2 */
+.bg-warm-grid {
+  background-color: #FAF6EE;
+  background-size: 56px 56px;
+  background-image: 
+    linear-gradient(to right, rgba(214, 197, 172, 0.32) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, rgba(214, 197, 172, 0.32) 1.2px, transparent 1.2px);
+  background-position: center center;
+}
+
+/* Finer subtle grid for dashboard sections */
+.bg-subtle-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(220, 208, 188, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(220, 208, 188, 0.18) 1px, transparent 1px);
+}
+
+/* Neumorphic Card from Image 1 */
+.login-card-reference {
+  background: #FFFFFF;
+  border-radius: 38px;
+  box-shadow: 0 25px 60px -15px rgba(35, 45, 60, 0.08), 
+              0 10px 25px -5px rgba(35, 45, 60, 0.04),
+              0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+}
+
+/* Blue to Violet Gradient Pill Button from Image 1 */
+.btn-gradient-pill {
+  background: linear-gradient(90deg, #2563EB 0%, #3B82F6 35%, #4F46E5 70%, #6D28D9 100%);
+  box-shadow: 0 12px 26px -6px rgba(37, 99, 235, 0.42), 0 4px 10px -2px rgba(109, 40, 217, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-gradient-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -6px rgba(37, 99, 235, 0.52), 0 6px 14px -2px rgba(109, 40, 217, 0.38);
+}
+
+.btn-gradient-pill:active {
+  transform: translateY(0);
+}
+
+/* Minimal Underline Inputs from Image 1 */
+.underline-input {
+  border-bottom: 1.5px solid #E2E8F0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.underline-input:focus {
+  border-bottom: 2px solid #3B82F6;
+  outline: none;
+}
+
+/* Custom Scrollbar for crisp data tables */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1EFEA;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
