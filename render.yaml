@@ -1,3 +1,18 @@
+# Render blueprint — backend (FastAPI on Docker) + managed Postgres.
+# Deploy: Render dashboard -> "Blueprints" -> connect this repo -> "Sync".
+# The frontend deploys separately on Vercel — its URL MUST be listed in
+# CORS_ORIGINS below (update it once the Vercel domain is known).
+#
+# On boot the container runs scripts/init_db.py (idempotent tables + views)
+# and scripts/seed.py (demo dataset; skipped when already present), then
+# serves uvicorn on $PORT. Health check: GET /health.
+
+databases:
+  - name: apaar-postgres
+    plan: free
+    databaseName: apaar_setu
+    user: apaar_admin
+
 services:
   - type: web
     name: apaar-backend
@@ -6,10 +21,18 @@ services:
     rootDir: backend
     healthCheckPath: /health
     envVars:
+      # wired automatically to the apaar-postgres instance above
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: apaar-postgres
+          property: connectionString
+      # auto-generated once and kept stable across deploys
       - key: JWT_SECRET
         generateValue: true
+      # MUST include the Vercel domain of the deployed frontend, e.g.
+      # https://apaar-setu.vercel.app — otherwise the browser blocks API calls
+      - key: CORS_ORIGINS
+        value: https://apaar-setu.vercel.app,http://localhost:5173
       - key: LLM_URL
         value: https://api.groq.com/openai/v1
       - key: LLM_MODEL
@@ -17,6 +40,4 @@ services:
       - key: LLM_KEY
         sync: false
       - key: SIGNING_PRIVATE_KEY
-        sync: false
-      - key: CORS_ORIGINS
         sync: false
