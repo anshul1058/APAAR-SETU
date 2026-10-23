@@ -308,7 +308,7 @@ Record payload example:
 QR: encode `{"payload": ..., "sig": ...}` with the `qrcode` library and return a PNG or data URL.
 
 Consent flow:
-- `/verify/request`: create a `consents` row with `otp_hash`, `expires_at` (15 minutes), and return `consent_id`. In the demo, print or return the OTP (mock).
+- `/verify/request`: create a `consents` row with `otp_hash`, `expires_at` (15 minutes), and return `consent_id` plus the OTP (demo delivery).
 - `/verify/confirm`: check OTP, mark consent granted, build and sign the payload, store the `verifications` row.
 - Rate limit OTP attempts (for example, 5 per consent).
 

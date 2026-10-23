@@ -5,7 +5,7 @@ import { authService } from '../services/authService';
 interface AuthContextType {
   user: UserProfile | null;
   token: string | null;
-  login: (email: string, role?: UserRole) => Promise<UserProfile>;
+  login: (email: string, role?: UserRole, password?: string) => Promise<UserProfile>;
   logout: () => void;
   isDemoMode: boolean;
   autoRefreshCountdown: number;
@@ -47,8 +47,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => clearInterval(interval);
   }, [isAutoRefreshPaused, user]);
 
-  const login = async (email: string, role?: UserRole): Promise<UserProfile> => {
-    const res = await authService.login(email, role);
+  const login = async (email: string, role?: UserRole, password?: string): Promise<UserProfile> => {
+    const res = await authService.login(email, role, password);
     setUser(res.user);
     setToken(res.token);
     setAutoRefreshCountdown(15);

@@ -97,7 +97,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
         {/* KPI 1: Total Sanctioned vs Enrolled */}
         <div className="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-center justify-between text-slate-500 mb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider">Sanctioned Seats</span>
+            <span className="text-xs font-semibold uppercase tracking-wider">CAP Sanctioned Seats</span>
             <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>

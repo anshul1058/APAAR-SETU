@@ -1,19 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Layers, 
   CheckCircle2, 
   AlertTriangle, 
   ShieldCheck, 
   Download,
-  Info
+  Info,
+  RefreshCw
 } from 'lucide-react';
-import { PROGRAM_INTAKE_DATA } from '../../data/mockData';
 import { AicteProgramIntake } from '../../types';
 import { formatNumber } from '../../utils/formatters';
+import { useAuth } from '../../context/AuthContext';
+import { institutionService } from '../../services/institutionService';
 
 export const SeatMatrixPage: React.FC = () => {
-  const [intakeData] = useState<AicteProgramIntake[]>(PROGRAM_INTAKE_DATA);
-  const [selectedProgram, setSelectedProgram] = useState<AicteProgramIntake>(intakeData[0]);
+  const { user } = useAuth();
+  const [intakeData, setIntakeData] = useState<AicteProgramIntake[]>([]);
+  const [selectedProgram, setSelectedProgram] = useState<AicteProgramIntake | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    const loadMatrix = async () => {
+      setIsLoading(true);
+      setLoadError('');
+      try {
+        const institutions = await institutionService.getInstitutions();
+        const current = institutions.find((institution) =>
+          institution.name === user?.institutionName || institution.aictePermanentId === user?.aicteId
+        );
+        const programs = current?.programs || [];
+        if (active) {
+          setIntakeData(programs);
+          setSelectedProgram(programs[0] || null);
+        }
+      } catch {
+        if (active) setLoadError('Live seat data is unavailable. Start the backend service to load the Excel-backed intake records.');
+      } finally {
+        if (active) setIsLoading(false);
+      }
+    };
+    loadMatrix();
+    return () => { active = false; };
+  }, [user?.institutionName, user?.aicteId]);
 
   const totalSanctioned = intakeData.reduce((a, b) => a + b.sanctionedIntake, 0);
   const totalEnrolled = intakeData.reduce((a, b) => a + b.actualEnrolled, 0);
@@ -57,7 +87,7 @@ export const SeatMatrixPage: React.FC = () => {
         <div className="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-xs">
           <p className="text-slate-400 uppercase font-bold text-[10px]">Total Sanctioned Capacity</p>
           <p className="text-3xl font-black text-slate-900 mt-2">{formatNumber(totalSanctioned)} Seats</p>
-          <p className="text-slate-500 mt-1">Across 6 AICTE Approved Programs</p>
+          <p className="text-slate-500 mt-1">Across {intakeData.length} Excel-backed programs</p>
         </div>
 
         <div className="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-xs">
@@ -77,7 +107,13 @@ export const SeatMatrixPage: React.FC = () => {
       <div className="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs space-y-4">
         <h2 className="text-base font-bold text-slate-900">Program Quota Breakdown & Cap Monitoring</h2>
 
-        <div className="overflow-x-auto">
+        {isLoading ? (
+          <div className="py-12 text-center text-xs text-slate-400"><RefreshCw className="mx-auto mb-2 h-5 w-5 animate-spin text-blue-600" />Loading actual seat data...</div>
+        ) : loadError ? (
+          <div className="py-12 text-center text-xs text-amber-700">{loadError}</div>
+        ) : intakeData.length === 0 ? (
+          <div className="py-12 text-center text-xs text-slate-500">No seat records are available for this institution.</div>
+        ) : <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="border-b border-stone-200 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
@@ -91,13 +127,16 @@ export const SeatMatrixPage: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-stone-100">
               {intakeData.map((item) => {
-                const verifiedPct = ((item.apaarVerified / item.sanctionedIntake) * 100).toFixed(1);
+                const verifiedPct = item.actualEnrolled > 0
+                  ? ((item.apaarVerified / item.actualEnrolled) * 100).toFixed(1)
+                  : '0.0';
+                const isCompliant = item.actualEnrolled <= item.sanctionedIntake;
                 return (
                   <tr
                     key={item.programCode}
                     onClick={() => setSelectedProgram(item)}
                     className={`hover:bg-blue-50/50 transition-colors cursor-pointer ${
-                      selectedProgram.programCode === item.programCode ? 'bg-blue-50/70 font-medium' : ''
+                      selectedProgram?.programCode === item.programCode ? 'bg-blue-50/70 font-medium' : ''
                     }`}
                   >
                     <td className="py-3.5 px-3">
@@ -123,7 +162,7 @@ export const SeatMatrixPage: React.FC = () => {
                     </td>
                     <td className="py-3.5 px-3">
                       <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 inline-flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3" /> Compliant
+                        {isCompliant ? <CheckCircle2 className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />} {isCompliant ? 'Compliant' : 'Over capacity'}
                       </span>
                     </td>
                   </tr>
@@ -131,7 +170,7 @@ export const SeatMatrixPage: React.FC = () => {
               })}
             </tbody>
           </table>
-        </div>
+        </div>}
       </div>
 
       {/* Program Quota Drilldown */}
@@ -142,43 +181,16 @@ export const SeatMatrixPage: React.FC = () => {
               <span className="text-[10px] uppercase font-bold text-slate-400">Selected Program Quota Distribution</span>
               <h3 className="text-base font-extrabold text-slate-900">{selectedProgram.programName}</h3>
             </div>
-            <span className="font-mono text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-xl">
-              Capacity: {selectedProgram.sanctionedIntake} Seats
+              <span className="font-mono text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-xl">
+              CAP capacity: {selectedProgram.sanctionedIntake} Seats
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
-            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200">
-              <span className="text-[10px] text-slate-400 font-bold uppercase">General Merit (85%)</span>
-              <p className="text-lg font-black text-slate-800 mt-1">
-                {Math.round(selectedProgram.sanctionedIntake * 0.85)} Seats
-              </p>
-              <p className="text-[11px] text-slate-500 mt-0.5">Centralized Counseling</p>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200">
-              <span className="text-[10px] text-slate-400 font-bold uppercase">Management Quota (15% Cap)</span>
-              <p className="text-lg font-black text-slate-800 mt-1">
-                {Math.round(selectedProgram.sanctionedIntake * 0.15)} Seats
-              </p>
-              <p className="text-[11px] text-slate-500 mt-0.5">Merit Based Only</p>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200">
-              <span className="text-[10px] text-slate-400 font-bold uppercase">Lateral Entry (+10%)</span>
-              <p className="text-lg font-black text-indigo-700 mt-1">
-                +{Math.round(selectedProgram.sanctionedIntake * 0.10)} Supernumerary
-              </p>
-              <p className="text-[11px] text-slate-500 mt-0.5">Direct 2nd Year Diploma</p>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200">
-              <span className="text-[10px] text-slate-400 font-bold uppercase">PMSSS (J&K Special)</span>
-              <p className="text-lg font-black text-blue-700 mt-1">
-                +2 Supernumerary
-              </p>
-              <p className="text-[11px] text-slate-500 mt-0.5">AICTE Special Scheme</p>
-            </div>
+            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200"><span className="text-[10px] text-slate-400 font-bold uppercase">CAP sanctioned intake</span><p className="text-lg font-black text-slate-800 mt-1">{selectedProgram.sanctionedIntake} Seats</p><p className="text-[11px] text-slate-500 mt-0.5">Source: Pune seat-intake workbook</p></div>
+            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200"><span className="text-[10px] text-slate-400 font-bold uppercase">Actual enrolled</span><p className="text-lg font-black text-slate-800 mt-1">{selectedProgram.actualEnrolled} Students</p><p className="text-[11px] text-slate-500 mt-0.5">From institutional registry</p></div>
+            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200"><span className="text-[10px] text-slate-400 font-bold uppercase">APAAR verified</span><p className="text-lg font-black text-emerald-700 mt-1">{selectedProgram.apaarVerified} Students</p><p className="text-[11px] text-slate-500 mt-0.5">{selectedProgram.actualEnrolled ? ((selectedProgram.apaarVerified / selectedProgram.actualEnrolled) * 100).toFixed(1) : '0.0'}% of enrolled</p></div>
+            <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200"><span className="text-[10px] text-slate-400 font-bold uppercase">Pending verification</span><p className="text-lg font-black text-amber-700 mt-1">{selectedProgram.pendingVerification} Students</p><p className="text-[11px] text-slate-500 mt-0.5">Registry status</p></div>
           </div>
         </div>
       )}

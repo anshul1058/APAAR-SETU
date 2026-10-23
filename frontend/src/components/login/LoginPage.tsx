@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const user = await login(email, selectedRole);
+      const user = await login(email, selectedRole, password);
       // Demo role selection should always open that role's dashboard instead
       // of reusing a previously requested route from another role.
       const destination = authService.getDefaultPathForRole(user.role);

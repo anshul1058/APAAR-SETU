@@ -10,21 +10,24 @@ import {
   Key, 
   Camera, 
   Printer, 
-  Sparkles,
-  Lock,
-  ArrowRight
+  Sparkles
 } from 'lucide-react';
-import { formatApaarId, validateVerhoeffChecksum } from '../../utils/apaarValidator';
-import { maskApaarId, maskPhone, formatDate, formatNumber } from '../../utils/formatters';
+import { formatApaarId } from '../../utils/apaarValidator';
 import { verificationService } from '../../services/verificationService';
 import { VerificationSession } from '../../types';
 import { useAuth } from '../../context/AuthContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const VerifierPortalPage: React.FC = () => {
   const { openAiWithContext } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [inputVal, setInputVal] = useState('9042-3819-5502');
-  const [session, setSession] = useState<VerificationSession | null>(null);
+  // handed over by the DigiLocker consent page once the OTP has been requested
+  const [session, setSession] = useState<VerificationSession | null>(
+    () => (location.state as { session?: VerificationSession } | null)?.session ?? null
+  );
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
   const [isVerifying, setIsVerifying] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -50,8 +53,8 @@ export const VerifierPortalPage: React.FC = () => {
 
     try {
       const newSession = await verificationService.startVerification(val);
-      setSession(newSession);
-      setOtpDigits(['4', '8', '2', '9', '1', '0']); // prefill demo OTP
+      navigate('/verifier/digilocker', { state: { session: newSession } });
+      setOtpDigits(['', '', '', '', '', '']);
     } catch (err: any) {
       setErrorMessage(err.message || 'Verification initiation failed.');
     } finally {
@@ -95,8 +98,8 @@ export const VerifierPortalPage: React.FC = () => {
       setSession(updated);
     } catch (err: any) {
       setErrorMessage(err.message || 'OTP verification failed.');
-      // Refresh session attempt count
-      setSession((prev) => (prev ? { ...prev, attemptsLeft: Math.max(0, prev.attemptsLeft - 1) } : null));
+      // attemptsLeft is tracked server-side by the service; re-render from the mutated session
+      setSession((prev) => (prev ? { ...prev } : null));
     } finally {
       setIsVerifying(false);
     }
@@ -137,7 +140,7 @@ export const VerifierPortalPage: React.FC = () => {
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
-                Spot-verify candidate APAAR IDs using Verhoeff checksums, DigiLocker QR codes, and 6-digit OTP authentication.
+                Spot-verify candidate APAAR IDs through DigiLocker consent, mobile OTP, and registry lookup.
               </p>
             </div>
           </div>
@@ -166,8 +169,8 @@ export const VerifierPortalPage: React.FC = () => {
           </button>
           <button
             onClick={() => {
-              setInputVal('9124-5820-1928');
-              handleStartVerification('9124-5820-1928');
+              setInputVal('0227-6804-0250');
+              handleStartVerification('0227-6804-0250');
             }}
             className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-200 transition-colors"
           >
@@ -238,7 +241,9 @@ export const VerifierPortalPage: React.FC = () => {
           
           {/* Step 1: 6-Digit OTP Desk */}
           {session.step === 'OTP_WAIT' && (
-            <div className="lg:col-span-2 bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs space-y-6">
+            <div className="lg:col-span-2 overflow-hidden rounded-3xl border border-[#dfc9ef] bg-white shadow-xs space-y-6">
+              <div className="bg-[#5b2a86] px-6 py-4 text-white flex items-center gap-3"><div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-[#5b2a86] font-black">D</div><div><p className="font-bold">DigiLocker</p><p className="text-[10px] text-purple-100">One-time password verification</p></div></div>
+              <div className="px-6 pb-6 space-y-6">
               <div className="flex items-center justify-between border-b border-stone-100 pb-3">
                 <div>
                   <h3 className="font-extrabold text-base text-slate-900">Step 2: Candidate Consent OTP</h3>
@@ -254,6 +259,12 @@ export const VerifierPortalPage: React.FC = () => {
                   </span>
                 </div>
               </div>
+
+              {session.demoOtp && (
+                <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+                  SMS provider not configured — demo OTP: <strong className="font-mono">{session.demoOtp}</strong>
+                </div>
+              )}
 
               {/* 6-Digit OTP Boxes */}
               <div className="flex items-center justify-center gap-2 sm:gap-3 py-4">
@@ -295,11 +306,12 @@ export const VerifierPortalPage: React.FC = () => {
                   Verify & Authenticate Record
                 </button>
               </div>
+              </div>
             </div>
           )}
 
           {/* Step 2: Verification Result (Authentic vs Tampered) */}
-          {(session.step === 'SUCCESS' || session.step === 'TAMPERED') && (
+          {(session.step === 'SUCCESS' || session.step === 'TAMPERED' || session.step === 'NOT_FOUND') && (
             <div className="lg:col-span-2 space-y-4">
               
               {/* Result Status Stamp Card */}
@@ -319,7 +331,7 @@ export const VerifierPortalPage: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <h3 className="font-extrabold text-sm uppercase tracking-wide">
-                      {session.step === 'SUCCESS' ? 'VERIFIED & AUTHENTIC RECORD' : 'FLAGGED / TAMPERED RECORD ALERT!'}
+                      {session.step === 'SUCCESS' ? 'VERIFIED & AUTHENTIC RECORD' : session.step === 'NOT_FOUND' ? 'FLAGGED / APAAR ID NOT FOUND' : 'FLAGGED / TAMPERED RECORD ALERT!'}
                     </h3>
                     <span className="text-[10px] text-slate-500 font-mono">{session.result?.timestamp}</span>
                   </div>
@@ -331,8 +343,8 @@ export const VerifierPortalPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Digital Verified Dossier Card */}
-              {session.result?.student && (
+              {/* Signed verifiable record (backend /verify/confirm response) */}
+              {session.result?.payload && (
                 <div className="bg-white rounded-3xl border-2 border-stone-200 p-6 shadow-sm relative space-y-4">
                   <div className="flex items-center justify-between border-b border-stone-100 pb-3">
                     <div className="flex items-center gap-3">
@@ -340,48 +352,61 @@ export const VerifierPortalPage: React.FC = () => {
                         AICTE
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase font-bold text-slate-400">Automated Permanent Academic Account Registry</p>
-                        <h4 className="text-sm font-extrabold text-slate-900">DIGITAL APAAR CREDENTIAL CARD</h4>
+                        <p className="text-[10px] uppercase font-bold text-slate-400">APAAR Setu Signed Verification</p>
+                        <h4 className="text-sm font-extrabold text-slate-900">SIGNED ACADEMIC RECORD</h4>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full uppercase">
-                      ✓ Aadhaar eKYC Verified
+                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase border ${
+                      session.result.verified
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                        : 'bg-rose-50 text-rose-800 border-rose-200'
+                    }`}>
+                      {session.result.payload.status}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center text-xs">
-                    <div className="p-3 bg-stone-50 rounded-2xl text-center border border-stone-200/80">
-                      <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-700 text-white font-black text-2xl flex items-center justify-center mx-auto mb-2 shadow-xs">
-                        {session.result.student.name.charAt(0)}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                    <div className="flex items-center justify-center">
+                      <div className="w-28 h-28 rounded-2xl border-2 border-stone-200 p-1 bg-white">
+                        {session.result.qrDataUrl && <img src={session.result.qrDataUrl} alt="Re-verification QR" className="w-full h-full rounded-xl" />}
                       </div>
-                      <p className="font-bold text-slate-900">{session.result.student.name}</p>
-                      <p className="text-[10px] text-slate-400 font-mono">DOB: {formatDate(session.result.student.dob)}</p>
                     </div>
 
                     <div className="sm:col-span-2 space-y-2">
                       <div className="grid grid-cols-2 gap-2">
                         <div>
                           <span className="text-[10px] uppercase font-bold text-slate-400">Masked APAAR ID</span>
-                          <p className="font-mono font-bold text-blue-700">{session.result.student.maskedApaarId}</p>
+                          <p className="font-mono font-bold text-blue-700">{session.result.payload.apaar_id}</p>
                         </div>
                         <div>
-                          <span className="text-[10px] uppercase font-bold text-slate-400">ABC Account ID</span>
-                          <p className="font-mono font-bold text-indigo-700">{session.result.student.abcAccountId}</p>
+                          <span className="text-[10px] uppercase font-bold text-slate-400">Academic year</span>
+                          <p className="font-mono font-bold text-indigo-700">{session.result.payload.academic_year}</p>
                         </div>
                       </div>
 
                       <div>
                         <span className="text-[10px] uppercase font-bold text-slate-400">Institutional Affiliation</span>
-                        <p className="font-semibold text-slate-800">{session.result.student.institutionName}</p>
-                        <p className="text-[10px] text-slate-500 font-mono">AICTE Permanent ID: {session.result.student.aictePermanentId}</p>
+                        <p className="font-semibold text-slate-800">{session.result.payload.institution}</p>
                       </div>
 
-                      <div className="pt-2 flex justify-between border-t border-stone-100 text-[11px]">
-                        <span>Credits Synced: <strong>{session.result.student.abcCreditsEarned} pts</strong></span>
-                        <span className="text-emerald-700 font-bold">W3C Credential Valid</span>
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-slate-400">Course</span>
+                        <p className="font-semibold text-slate-800">{session.result.payload.course}</p>
+                      </div>
+
+                      <div className="pt-2 border-t border-stone-100 text-[11px] space-y-1">
+                        <p>Issued: <strong>{new Date(session.result.payload.issued_at).toLocaleString()}</strong></p>
+                        <p className="font-mono text-slate-500 break-all">Ed25519: {session.result.signature?.slice(0, 44)}…</p>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="flex justify-end border-t border-stone-100 pt-3">
+                    <button onClick={() => window.print()} className="px-4 py-2 rounded-xl border border-stone-200 text-slate-700 hover:bg-stone-50 font-semibold text-xs flex items-center gap-2 transition-colors">
+                      <Printer className="w-3.5 h-3.5" />
+                      Print / Save
+                    </button>
                   </div>
                 </div>
               )}
@@ -389,34 +414,28 @@ export const VerifierPortalPage: React.FC = () => {
             </div>
           )}
 
-          {/* Right 1 Col: Verhoeff Mathematical Anatomy */}
+          {/* Right 1 Col: Registry verification details */}
           <div className="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs space-y-4">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              Verhoeff Algorithm Inspection
+              APAAR Registry Inspection
             </h3>
             <p className="text-xs text-slate-500 leading-relaxed">
-              APAAR IDs utilize the Verhoeff error detection algorithm based on the dihedral group D5 of order 10.
+              The registry lookup confirms whether the authenticated APAAR ID exists in the institutional database.
             </p>
 
             <div className="p-3.5 rounded-2xl bg-stone-50 border border-stone-200/80 space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-slate-500">11 Data Digits:</span>
-                <span className="font-mono font-bold text-slate-800">{inputVal.replace(/\D/g, '').slice(0, 11) || '—'}</span>
+                <span className="text-slate-500">APAAR digits:</span>
+                <span className="font-mono font-bold text-slate-800">{inputVal.replace(/\D/g, '') || '—'}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-500">12th Check Digit:</span>
-                <span className="font-mono font-extrabold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
-                  {inputVal.replace(/\D/g, '').slice(11, 12) || '—'}
-                </span>
+                <span className="text-slate-500">Format:</span>
+                <span className="font-bold text-blue-700">12 numeric digits</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-500">Single-digit error check:</span>
-                <span className="font-bold text-slate-800">100% Detected</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-slate-500">Adjacent transposition:</span>
-                <span className="font-bold text-slate-800">100% Detected</span>
+                <span className="text-slate-500">Final authority:</span>
+                <span className="font-bold text-slate-800">Registry match</span>
               </div>
             </div>
 

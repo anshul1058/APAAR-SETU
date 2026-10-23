@@ -18,7 +18,6 @@ import { useAuth } from '../../context/AuthContext';
 import { studentService } from '../../services/studentService';
 import { institutionService } from '../../services/institutionService';
 import { Student, DuplicateCase, AicteProgramIntake } from '../../types';
-import { PROGRAM_INTAKE_DATA } from '../../data/mockData';
 import { formatNumber, formatDate, maskApaarId } from '../../utils/formatters';
 
 export const InstitutionDashboard: React.FC = () => {
@@ -27,17 +26,35 @@ export const InstitutionDashboard: React.FC = () => {
 
   const [students, setStudents] = useState<Student[]>([]);
   const [duplicates, setDuplicates] = useState<DuplicateCase[]>([]);
-  const [intakeData] = useState<AicteProgramIntake[]>(PROGRAM_INTAKE_DATA);
+  const [intakeData, setIntakeData] = useState<AicteProgramIntake[]>([]);
+  const [duplicateAlerts, setDuplicateAlerts] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadData();
-  }, [refreshTrigger]);
+    const handleStudentDataUpdated = () => loadData();
+    window.addEventListener('student-data-updated', handleStudentDataUpdated);
+    return () => window.removeEventListener('student-data-updated', handleStudentDataUpdated);
+  }, [refreshTrigger, user?.institutionName]);
 
   const loadData = async () => {
     try {
-      const resStudents = await studentService.getStudents({ pageSize: 5 });
-      const resDups = await institutionService.getDuplicates();
+      const [institutions, resStudents, resDups] = await Promise.all([
+        institutionService.getInstitutions().catch(() => []),
+        studentService.getStudents({
+          institutionName: user?.institutionName,
+          pageSize: 5
+        }),
+        institutionService.getDuplicates().catch(() => [])
+      ]);
+      const currentInstitution = institutions.find(
+        (item) => item.name === user?.institutionName || item.aictePermanentId === user?.aicteId
+      ) || null;
+      const uploadedPrograms = user?.institutionName
+        ? studentService.getLocalInstitutionPrograms(user.institutionName)
+        : [];
+      setIntakeData(uploadedPrograms.length ? uploadedPrograms : (currentInstitution?.programs || []));
+      setDuplicateAlerts(currentInstitution?.duplicateAlerts || 0);
       setStudents(resStudents.data);
       setDuplicates(resDups);
     } finally {
@@ -50,7 +67,12 @@ export const InstitutionDashboard: React.FC = () => {
   const totalApaarVerified = intakeData.reduce((acc, curr) => acc + curr.apaarVerified, 0);
   const totalPending = intakeData.reduce((acc, curr) => acc + curr.pendingVerification, 0);
 
-  const verificationPercentage = ((totalApaarVerified / totalEnrolled) * 100).toFixed(1);
+  const occupancyPercentage = totalSanctioned > 0
+    ? ((totalEnrolled / totalSanctioned) * 100).toFixed(1)
+    : '0.0';
+  const verificationPercentage = totalEnrolled > 0
+    ? ((totalApaarVerified / totalEnrolled) * 100).toFixed(1)
+    : '0.0';
 
   return (
     <div className="space-y-6">
@@ -103,7 +125,7 @@ export const InstitutionDashboard: React.FC = () => {
         {/* KPI 1 */}
         <div className="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-xs hover:shadow-md transition-all">
           <div className="flex items-center justify-between text-slate-500 mb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider">Sanctioned Seats</span>
+            <span className="text-xs font-semibold uppercase tracking-wider">CAP Sanctioned Seats</span>
             <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>
@@ -113,11 +135,11 @@ export const InstitutionDashboard: React.FC = () => {
             <span className="text-xs font-medium text-slate-400">/ {formatNumber(totalSanctioned)} Sanctioned</span>
           </div>
           <div className="mt-3 w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-            <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: `${(totalEnrolled / totalSanctioned) * 100}%` }}></div>
+            <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: `${occupancyPercentage}%` }}></div>
           </div>
           <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500">
             <span>Occupancy Rate</span>
-            <span className="font-bold text-slate-700">{((totalEnrolled / totalSanctioned) * 100).toFixed(1)}%</span>
+            <span className="font-bold text-slate-700">{occupancyPercentage}%</span>
           </div>
         </div>
 
@@ -153,7 +175,7 @@ export const InstitutionDashboard: React.FC = () => {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-black text-rose-600">{duplicates.length}</span>
+            <span className="text-2xl font-black text-rose-600">{duplicateAlerts}</span>
             <span className="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full">
               Active Flags
             </span>
@@ -172,8 +194,8 @@ export const InstitutionDashboard: React.FC = () => {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-black text-indigo-600">{formatNumber(62480)}</span>
-            <span className="text-xs font-medium text-slate-400">Credits Synced</span>
+            <span className="text-2xl font-black text-indigo-600">—</span>
+            <span className="text-xs font-medium text-slate-400">Not in uploaded CSV</span>
           </div>
           <div className="mt-3 flex items-center gap-1.5 text-xs text-slate-600">
             <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
@@ -203,7 +225,11 @@ export const InstitutionDashboard: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            {intakeData.map((dept) => {
+            {intakeData.length === 0 ? (
+              <p className="py-8 text-center text-xs text-slate-500">
+                No course intake data is available for this institution.
+              </p>
+            ) : intakeData.map((dept) => {
               const verifiedPct = Math.round((dept.apaarVerified / dept.actualEnrolled) * 100);
               return (
                 <div key={dept.programCode} className="p-3.5 rounded-2xl bg-stone-50/70 border border-stone-200/60 hover:bg-stone-50 transition-colors">

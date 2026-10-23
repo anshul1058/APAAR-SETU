@@ -190,7 +190,8 @@ def test_verification_flow(tokens):
         db.close()
 
     r = client.post("/api/v1/verify/request",
-                    json={"apaar_id": apaar}, headers=_h(tokens["verifier"]))
+                    json={"apaar_id": apaar, "phone": "9876543210"},
+                    headers=_h(tokens["verifier"]))
     assert r.status_code == 200, r.text
     consent_id, otp = r.json()["consent_id"], r.json()["otp_demo"]
     assert len(otp) == 6

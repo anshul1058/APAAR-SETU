@@ -9,7 +9,6 @@ import {
   Building2, 
   AlertTriangle, 
   QrCode, 
-  ShieldCheck, 
   Settings,
   GraduationCap
 } from 'lucide-react';
@@ -60,7 +59,7 @@ export const Sidebar: React.FC = () => {
   const navLinks = getNavLinks();
 
   return (
-    <aside className="w-64 bg-white border-r border-stone-200/80 flex flex-col justify-between shrink-0 h-[calc(100vh-4rem)] sticky top-16 shadow-xs select-none">
+    <aside className="w-64 bg-white border-r border-stone-200/80 flex flex-col justify-between shrink-0 min-h-[calc(100vh-4rem)] sticky top-16 shadow-xs select-none">
       <div className="p-4 space-y-6">
         
         {/* User Role Card */}
@@ -120,19 +119,6 @@ export const Sidebar: React.FC = () => {
             );
           })}
         </nav>
-      </div>
-
-      {/* Footer Info Box */}
-      <div className="p-4 border-t border-stone-200/70">
-        <div className="p-3 bg-gradient-to-br from-blue-50 to-indigo-50/50 rounded-2xl border border-blue-100/80">
-          <div className="flex items-center gap-2 mb-1">
-            <ShieldCheck className="w-4 h-4 text-blue-700" />
-            <span className="text-xs font-bold text-blue-900">SIH 2026 Ready</span>
-          </div>
-          <p className="text-[11px] text-blue-800/80 leading-relaxed">
-            Eliminating duplicate & ghost enrollments via Verhoeff & DigiLocker APAAR.
-          </p>
-        </div>
       </div>
     </aside>
   );

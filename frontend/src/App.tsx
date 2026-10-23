@@ -25,6 +25,7 @@ import { AicteAdminPage } from './components/aicte/AicteAdminPage';
 
 // Verifier page
 import { VerifierPortalPage } from './components/verifier/VerifierPortalPage';
+import { DigiLockerPage } from './components/verifier/DigiLockerPage';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
@@ -32,10 +33,12 @@ const AppLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-warm-grid flex flex-col font-sans text-slate-800">
-      <Header showSearch={!isVerificationDesk} />
-      <div className="flex-1 flex overflow-hidden">
+      <div className="shrink-0">
+        <Header showSearch={false} />
+      </div>
+      <div className="flex-1 flex gap-0 min-h-0 overflow-hidden">
         {!isVerificationDesk && <Sidebar />}
-        <main className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+        <main className="flex-1 min-w-0 overflow-y-auto p-6 md:p-8 space-y-6">
           <Outlet />
         </main>
       </div>
@@ -113,6 +116,7 @@ export const App: React.FC = () => {
           }
         >
           <Route path="portal" element={<VerifierPortalPage />} />
+          <Route path="digilocker" element={<DigiLockerPage />} />
           <Route index element={<Navigate to="/verifier/portal" replace />} />
         </Route>
 

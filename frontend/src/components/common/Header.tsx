@@ -24,7 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ showSearch = true }) => {
 
   const handleRoleSwitch = async (role: UserRole) => {
     const preset = ROLE_PRESETS.find((p) => p.role === role) || ROLE_PRESETS[0];
-    await login(preset.email, preset.role);
+    await login(preset.email, preset.role, 'password123');
     navigate(authService.getDefaultPathForRole(role));
   };
 

@@ -98,6 +98,22 @@ def institutions(db: Session = Depends(get_db)):
         FROM anomaly_scores
         GROUP BY institution_id
     """)
+    duplicate_rows = _rows(db, """
+        WITH duplicate_ids AS (
+            SELECT apaar_id
+            FROM students
+            WHERE status IN ('valid', 'flagged')
+              AND apaar_id IS NOT NULL
+              AND apaar_id <> ''
+            GROUP BY apaar_id
+            HAVING COUNT(DISTINCT institution_id) > 1
+        )
+        SELECT s.institution_id, COUNT(DISTINCT s.apaar_id) AS duplicate_alerts
+        FROM students s
+        JOIN duplicate_ids d ON d.apaar_id = s.apaar_id
+        WHERE s.status IN ('valid', 'flagged')
+        GROUP BY s.institution_id
+    """)
 
     courses_by_institution: dict[int, list[dict]] = {}
     for course in course_rows:
@@ -105,6 +121,7 @@ def institutions(db: Session = Depends(get_db)):
 
     students_by_institution = {row["institution_id"]: row for row in student_rows}
     anomaly_by_institution = {row["institution_id"]: row["anomaly_score"] for row in anomaly_rows}
+    duplicates_by_institution = {row["institution_id"]: row["duplicate_alerts"] for row in duplicate_rows}
 
     output = []
     for institution in institution_rows:
@@ -113,10 +130,11 @@ def institutions(db: Session = Depends(get_db)):
         student_counts = students_by_institution.get(
             institution_id, {"enrolled": 0, "apaar_verified": 0}
         )
-        sanctioned_intake = sum(
-            (course["approved_intake"] or 0) + (course["approved_supernumerary"] or 0)
-            for course in courses
-        )
+        # The workbook's "CAP Seats (Sanctioned Intake)" is the published
+        # intake figure. TFWS is an additional category and must not inflate
+        # the headline sanctioned-intake number (e.g. 300 must remain 300,
+        # not 315).
+        sanctioned_intake = sum((course["approved_intake"] or 0) for course in courses)
         total_enrolled = student_counts["enrolled"] or 0
         verified_count = student_counts["apaar_verified"] or 0
         anomaly_score = float(anomaly_by_institution.get(institution_id, 0) or 0)
@@ -144,14 +162,14 @@ def institutions(db: Session = Depends(get_db)):
             if total_enrolled else 0,
             "anomaly_score": anomaly_score,
             "anomaly_summary": "Database-derived anomaly score from seeded analytics.",
+            "duplicate_alerts": duplicates_by_institution.get(institution_id, 0),
             "compliance_status": compliance_status,
             "faculty_student_ratio": "N/A",
             "programs": [
                 {
                     "program_code": course["branch"],
                     "program_name": course["name"],
-                    "sanctioned_intake": (course["approved_intake"] or 0)
-                    + (course["approved_supernumerary"] or 0),
+                    "sanctioned_intake": course["approved_intake"] or 0,
                     "actual_enrolled": course["enrolled"] or 0,
                     "apaar_verified": course["apaar_verified"] or 0,
                     "pending_verification": max(

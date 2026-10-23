@@ -17,7 +17,7 @@ export const apiClient: AxiosInstance = axios.create({
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('apaar_auth_token');
-    if (token && config.headers) {
+    if (token && !config.headers.Authorization && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -33,7 +33,9 @@ apiClient.interceptors.response.use(
     return response;
   },
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    const requestUrl = error.config?.url || '';
+    const isVerificationAuthRequest = requestUrl.includes('/auth/login') || requestUrl.includes('/verify/');
+    if (error.response?.status === 401 && !isVerificationAuthRequest) {
       localStorage.removeItem('apaar_auth_token');
       localStorage.removeItem('apaar_auth_user');
       if (window.location.pathname !== '/login') {

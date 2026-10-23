@@ -34,6 +34,7 @@ def _throttle(key: str, limit: int = 20, window: int = 300) -> None:
 
 class VerifyRequestIn(BaseModel):
     apaar_id: str = Field(min_length=4, max_length=12)
+    phone: str = Field(pattern=r"^\d{10}$")
     purpose: str = "verification"
 
 
@@ -69,7 +70,9 @@ def verify_request(
     return {
         "consent_id": consent.id,
         "expires_at": consent.expires_at.isoformat(),
-        "otp_demo": otp,  # real deployment: deliver via SMS/email
+        "sms_sent": False,
+        # demo mode: the OTP is returned and shown on screen (no SMS provider)
+        "otp_demo": otp,
     }
 
 
@@ -86,7 +89,10 @@ def verify_confirm(
         raise HTTPException(404, "Consent request not found")
     if not check_otp(consent, body.otp):
         db.commit()  # persist the attempt counter
-        raise HTTPException(400, "Invalid or expired OTP")
+        left = max(0, MAX_ATTEMPTS - consent.otp_attempts)
+        raise HTTPException(
+            400, f"Invalid or expired OTP. {left} of {MAX_ATTEMPTS} attempts remaining."
+        )
 
     from app.models import Course, Institution
 
@@ -95,18 +101,21 @@ def verify_confirm(
     course = db.get(Course, student.course_id)
     inst = db.get(Institution, student.institution_id)
 
+    flagged = student.status == STATUS_FLAGGED
+
     payload = {
         "apaar_id": "XXXXXXXX" + student.apaar_id[-4:],
         "institution": inst.name,
         "course": course.name,
         "academic_year": course.academic_year,
-        "status": "ENROLLED",
+        "status": "FLAGGED" if flagged else "ENROLLED",
         "issued_at": datetime.now(timezone.utc).isoformat(),
     }
     signature = signing.sign(payload)
     record = Verification(
         student_id=student.id, verifier_id=int(user["sub"]),
-        consent_id=consent.id, result="VERIFIED", signature=signature,
+        consent_id=consent.id, result="FLAGGED" if flagged else "VERIFIED",
+        signature=signature,
     )
     db.add(record)
     audit(db, user, "VERIFY_CONFIRM", "verifications", record.id, request)
@@ -116,6 +125,7 @@ def verify_confirm(
         "payload": payload,
         "signature": signature,
         "qr_data_url": record_qr(payload, signature),
+        "flagged": flagged,
     }
 
 

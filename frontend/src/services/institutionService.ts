@@ -19,6 +19,7 @@ interface InstitutionApiRecord {
   verification_rate: number;
   anomaly_score: number;
   anomaly_summary: string;
+  duplicate_alerts: number;
   compliance_status: Institution['complianceStatus'];
   faculty_student_ratio: string;
   programs: Array<{
@@ -47,6 +48,7 @@ const toInstitution = (record: InstitutionApiRecord): Institution => ({
   verificationRate: record.verification_rate,
   anomalyScore: record.anomaly_score,
   anomalySummary: record.anomaly_summary,
+  duplicateAlerts: record.duplicate_alerts,
   complianceStatus: record.compliance_status,
   facultyStudentRatio: record.faculty_student_ratio,
   programs: record.programs.map((program) => ({

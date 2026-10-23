@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.audit import audit
 from app.auth.rbac import require_roles
 from app.db import get_db
-from app.models import Course, Student
+from app.models import Course, Institution, Student
 from app.schemas import StudentOut
 
 router = APIRouter(prefix="/students", tags=["students"])
@@ -98,7 +98,9 @@ def list_students(
     * institution_admin -> own institution, full records
     * aicte_*           -> ALL institutions, masked (system.md §6 privacy)
     """
-    stmt = select(Student)
+    stmt = select(Student, Course, Institution).join(Course, Course.id == Student.course_id).join(
+        Institution, Institution.id == Student.institution_id
+    )
     if user["role"] == "institution_admin":
         stmt = stmt.where(Student.institution_id == user["institution_id"])
     if course_id:
@@ -106,20 +108,29 @@ def list_students(
     if q:
         like = f"%{q.strip()}%"
         stmt = stmt.where(Student.full_name.ilike(like) | Student.apaar_id.ilike(like))
-    students = db.execute(stmt.order_by(Student.id).limit(200)).scalars().all()
+    rows = db.execute(stmt.order_by(Student.id).limit(200)).all()
 
     if user["role"] == "institution_admin":
-        return [StudentOut.model_validate(s).model_dump() for s in students]
+        return [
+            {
+                **StudentOut.model_validate(student).model_dump(),
+                "course_name": course.name,
+                "branch": course.branch,
+                "institution_name": institution.name,
+                "aicte_code": institution.aicte_code,
+            }
+            for student, course, institution in rows
+        ]
     return [
         {
-            "id": s.id,
-            "apaar_id_masked": _mask_apaar(s.apaar_id),
-            "full_name_masked": _mask_name(s.full_name),
-            "institution_id": s.institution_id,
-            "course_id": s.course_id,
-            "category": s.category,
-            "quota_type": s.quota_type,
-            "status": s.status,
+            "id": student.id,
+            "apaar_id_masked": _mask_apaar(student.apaar_id),
+            "full_name_masked": _mask_name(student.full_name),
+            "institution_id": student.institution_id,
+            "course_id": student.course_id,
+            "category": student.category,
+            "quota_type": student.quota_type,
+            "status": student.status,
         }
-        for s in students
+        for student, _, _ in rows
     ]

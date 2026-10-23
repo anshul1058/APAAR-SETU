@@ -120,6 +120,7 @@ export interface Institution {
   verificationRate: number;
   anomalyScore: number;
   anomalySummary: string;
+  duplicateAlerts?: number;
   complianceStatus: 'COMPLIANT' | 'NEEDS_INSPECTION' | 'CRITICAL_REVIEW';
   facultyStudentRatio: string;
   programs: AicteProgramIntake[];
@@ -159,15 +160,27 @@ export interface VerificationSession {
   apaarId: string;
   maskedApaarId: string;
   studentName?: string;
-  step: 'INPUT' | 'OTP_WAIT' | 'SUCCESS' | 'FAILED' | 'TAMPERED';
+  phone?: string;
+  consentId?: number;
+  smsSent?: boolean;
+  demoOtp?: string;
+  step: 'INPUT' | 'DIGILOCKER' | 'PHONE_WAIT' | 'OTP_WAIT' | 'SUCCESS' | 'FAILED' | 'TAMPERED' | 'NOT_FOUND';
   attemptsLeft: number;
   otpCountdown: number;
   sessionToken: string;
   result?: {
     verified: boolean;
-    student?: Student;
     tamperReason?: string;
-    digiLockerSignature?: string;
+    payload?: {
+      apaar_id: string;
+      institution: string;
+      course: string;
+      academic_year: string;
+      status: string;
+      issued_at: string;
+    };
+    signature?: string;
+    qrDataUrl?: string;
     timestamp: string;
   };
 }

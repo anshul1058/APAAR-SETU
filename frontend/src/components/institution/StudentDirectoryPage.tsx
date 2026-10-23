@@ -21,7 +21,7 @@ import { Pagination } from '../common/Pagination';
 import { formatDate, formatNumber, maskApaarId, maskPhone } from '../../utils/formatters';
 
 export const StudentDirectoryPage: React.FC = () => {
-  const { refreshTrigger, openAiWithContext } = useAuth();
+  const { user, refreshTrigger, openAiWithContext } = useAuth();
 
   const [students, setStudents] = useState<Student[]>([]);
   const [totalStudents, setTotalStudents] = useState(0);
@@ -45,6 +45,7 @@ export const StudentDirectoryPage: React.FC = () => {
     setIsLoading(true);
     try {
       const res = await studentService.getStudents({
+        institutionName: user?.institutionName,
         search: searchQuery,
         status: statusFilter,
         department: deptFilter,

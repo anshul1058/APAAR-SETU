@@ -102,7 +102,7 @@ Re-upload with fixes replaces rows from the same upload scope; resolved flags ar
 ## 5. Verification and consent
 
 1. Verifier submits APAAR ID (or scans a QR).
-2. System creates a consent request and sends an OTP to the student (mock OTP in the demo).
+2. System creates a consent request and sends an OTP to the student (OTP returned in the response for the demo).
 3. Student OTP confirmed -> `consents` row created with expiry (for example, 15 minutes).
 4. System returns a record: name (masked as needed), institution, course, status, academic year.
 5. The record payload is signed with an Ed25519 private key. The QR encodes the payload and signature, and the public key is exposed at `/api/v1/verify/public-key`.

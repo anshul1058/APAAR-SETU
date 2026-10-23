@@ -5,7 +5,7 @@ generate_enrollments.py, seed=42):
 
   data/apaar_registry.csv         15,000 known APAAR IDs (mock national registry)
   data/enrollments/clean/*.csv    10 Pune colleges, 80 courses, 11,556 students
-  data/synthetic/students.csv     203-row upload fixture -> ABC College (e2e tests)
+  data/synthetic/students.csv     203-row upload fixture
 
 Seeds institutions, users (all roles), courses, students, apaar_registry,
 two prior years of enrolment_history (feeds yoy_growth) and anomaly scores,
@@ -14,9 +14,7 @@ plus deliberate demo cases:
   * MIT ACSC M.Sc Computer Science: 65 enrolled vs 60 approved (INTAKE_EXCEEDED)
   * COEP AI&ML: 6 supernumerary vs 4 approved (SUPERNUMERARY_EXCEEDED)
 
-ABC College of Engineering is a small fixture institution so the synthetic
-upload fixture (tests/test_e2e.py) has a home; the 10 real colleges are the
-actual dataset.
+The 10 colleges in the clean enrollment files are the actual dataset.
 
 Usage:
     python scripts/seed.py            # seed (skips if data already present)
@@ -33,7 +31,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from faker import Faker
-from sqlalchemy import func, insert, select, text
+from sqlalchemy import delete, func, insert, select, text
 
 from app.db import Base, SessionLocal, engine
 from app.models import (
@@ -51,7 +49,6 @@ from app.security import hash_password
 DEMO_PASSWORD = "password123"
 ACADEMIC_YEAR = "2026-27"
 DATA = Path(__file__).resolve().parents[1] / "data"
-ABC_NAME = "ABC College of Engineering"
 VIEWS = ("v_course_intake_status", "v_duplicate_enrolments",
          "v_flag_summary", "v_institution_summary")
 
@@ -142,6 +139,18 @@ def seed() -> None:
     db = SessionLocal()
     try:
         if db.execute(select(Institution.id)).first():
+            # Remove the legacy fixture institution from databases seeded by
+            # older versions. The production dataset contains only the ten
+            # colleges in data/enrollments/clean.
+            legacy = db.execute(
+                select(Institution).where(Institution.name == "ABC College of Engineering")
+            ).scalar_one_or_none()
+            if legacy:
+                db.execute(delete(User).where(User.email == "admin@abc.in"))
+                db.delete(legacy)
+                db.commit()
+                print("[seed] removed legacy fixture institution: ABC College of Engineering")
+
             # Keep institution-admin accounts in sync when the database was
             # seeded previously. This is intentionally additive and does not
             # reset or overwrite existing data.
@@ -171,11 +180,9 @@ def seed() -> None:
             dict(name=name, state="Maharashtra", aicte_code=f"IC-{i:04d}")
             for i, (_, name, _) in enumerate(colleges, start=1)
         ]
-        inst_rows.append(dict(name=ABC_NAME, state="Maharashtra", aicte_code="IC-9001"))
         _bulk(db, Institution, inst_rows)
         inst_id = dict(db.execute(select(Institution.name, Institution.id)).all())
-        abc = inst_id[ABC_NAME]
-        print(f"[seed] institutions: {len(colleges)} real + 1 fixture ({ABC_NAME})")
+        print(f"[seed] institutions: {len(colleges)} real")
 
         # --- users (system.md §1 roles) -------------------------------------
         pw = hash_password(DEMO_PASSWORD)
@@ -183,8 +190,6 @@ def seed() -> None:
             dict(email="aicte.admin@gov.in", role="aicte_admin", password_hash=pw),
             dict(email="aicte.officer@gov.in", role="aicte_officer", password_hash=pw),
             dict(email="verifier@verify.in", role="verifier", password_hash=pw),
-            dict(email="admin@abc.in", role="institution_admin",
-                 institution_id=abc, password_hash=pw),
         ]
         user_rows += [
             dict(email=f"admin@{slug}.in", role="institution_admin",
@@ -340,6 +345,27 @@ def seed() -> None:
             for r in registry
         ])
         print(f"[seed] apaar_registry: {len(registry)}")
+
+        # --- verification-desk demo fixtures (frontend presets; system.md §5) --
+        demo_iid, demo_cid = db.execute(
+            select(Student.institution_id, Student.course_id)
+            .where(Student.status == STATUS_VALID)
+            .where(Student.institution_id.not_in([mit, coep, abc]))
+            .limit(1)
+        ).one()
+        _bulk(db, Student, [
+            dict(apaar_id="904238195502", passport_no=None, institution_id=demo_iid,
+                 course_id=demo_cid, student_code="DEMO1", full_name="Aarav Sharma",
+                 dob=date(2004, 6, 18), gender="M", category="GENERAL",
+                 quota_type="regular", nationality="INDIAN",
+                 admission_date=date(2026, 7, 1), email_hash="", status=STATUS_VALID),
+            dict(apaar_id="999900001111", passport_no=None, institution_id=demo_iid,
+                 course_id=demo_cid, student_code="DEMO2", full_name="Rohan Verma",
+                 dob=date(2004, 2, 10), gender="M", category="GENERAL",
+                 quota_type="regular", nationality="INDIAN",
+                 admission_date=date(2026, 7, 1), email_hash="", status=STATUS_FLAGGED),
+        ])
+        print("[seed] verification fixtures: 904238195502 (valid), 999900001111 (flagged)")
 
         # --- self-checks: the planted reality dashboards assert on -----------
         active = Student.status.in_([STATUS_VALID, STATUS_FLAGGED])

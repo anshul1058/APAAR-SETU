@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { uploadService } from '../../services/uploadService';
-import { UploadBatchSummary, UploadRowError } from '../../types';
+import { UploadBatchSummary } from '../../types';
 import { formatNumber } from '../../utils/formatters';
 
 export const BulkUploadPage: React.FC = () => {
@@ -98,7 +98,7 @@ export const BulkUploadPage: React.FC = () => {
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
-                Ingest student batches via CSV / XLSX with automated Verhoeff checks, duplicate resolution, and quota tracking.
+                Ingest student batches via CSV with row-level validation and duplicate detection.
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export const BulkUploadPage: React.FC = () => {
             <div>
               <h3 className="font-bold text-base text-slate-900">Drop your student batch spreadsheet here</h3>
               <p className="text-xs text-slate-500 mt-1">
-                Supports .CSV and .XLSX files up to <strong>10 MB</strong> in size.
+                Supports .CSV files up to <strong>10 MB</strong> in size.
               </p>
             </div>
 
@@ -147,23 +147,12 @@ export const BulkUploadPage: React.FC = () => {
                 Browse Batch File
                 <input
                   type="file"
-                  accept=".csv,.xlsx"
+                  accept=".csv"
                   onChange={handleFileInput}
                   className="hidden"
                 />
               </label>
 
-              <button
-                type="button"
-                onClick={() => {
-                  const sampleBlob = new Blob([uploadService.getTemplateCsv()], { type: 'text/csv' });
-                  const mockFile = new File([sampleBlob], 'dtu_freshman_cohort_2026.csv', { type: 'text/csv' });
-                  handleProcessFile(mockFile);
-                }}
-                className="px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors"
-              >
-                Upload Demo Cohort (150 Students)
-              </button>
             </div>
           </div>
         </div>
@@ -199,7 +188,7 @@ export const BulkUploadPage: React.FC = () => {
               <div>
                 <span className="text-[10px] uppercase font-bold text-slate-400">Batch Inspection Dossier</span>
                 <h3 className="text-base font-extrabold text-slate-900">{summary.fileName}</h3>
-                <p className="text-xs text-slate-500 font-mono">File Size: {summary.fileSizeMb} MB • 150 Rows</p>
+                <p className="text-xs text-slate-500 font-mono">File Size: {summary.fileSizeMb} MB • {formatNumber(summary.totalRecords)} Rows</p>
               </div>
 
               <div className="flex items-center gap-2">
@@ -343,18 +332,18 @@ export const BulkUploadPage: React.FC = () => {
             {/* Resubmission Action Bar */}
             <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3">
               <p className="text-xs text-slate-500">
-                146 clean rows can be committed immediately. 4 flagged rows will be staged in the exception queue.
+                {formatNumber(summary.passedRecords)} clean rows can be committed immediately. {formatNumber(summary.errors.length)} flagged rows will be staged in the exception queue.
               </p>
 
               <button
                 onClick={() => {
-                  alert('Batch successfully ingested into institutional directory with 4 exceptions staged!');
+                  alert(`Batch successfully ingested with ${summary.errors.length} exceptions staged.`);
                   handleReset();
                 }}
                 className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center gap-2 shadow-xs transition-colors"
               >
                 <CheckCircle2 className="w-4 h-4" />
-                Commit Valid Records (146 Students)
+                Commit Valid Records ({formatNumber(summary.passedRecords)} Students)
               </button>
             </div>
           </div>
