@@ -1,5 +1,29 @@
 """Application settings loaded from environment / .env (backend_guide.md §2)."""
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def normalize_database_url(url: str) -> str:
+    """Make cloud Postgres URLs usable by SQLAlchemy (Render / Supabase / Neon).
+
+    * Render hands out ``postgres://...`` — SQLAlchemy 2.x only loads the
+      ``postgresql`` dialect, so the scheme is rewritten automatically.
+      Without this, the app dies at import with
+      ``NoSuchModuleError: Can't load plugin: sqlalchemy.dialects:postgres``.
+    * Managed Postgres requires SSL: append ``sslmode=require`` when the host
+      is not localhost and the URL doesn't already pin an sslmode.
+    Local URLs (localhost / 127.0.0.1 / ::1) are left untouched.
+    """
+    if url.startswith("postgres://"):
+        url = "postgresql://" + url[len("postgres://"):]
+    parsed = urlparse(url)
+    if parsed.hostname and parsed.hostname not in ("localhost", "127.0.0.1", "::1"):
+        query = dict(parse_qsl(parsed.query))
+        query.setdefault("sslmode", "require")
+        url = urlunparse(parsed._replace(query=urlencode(query)))
+    return url
 
 
 class Settings(BaseSettings):
@@ -20,6 +44,11 @@ class Settings(BaseSettings):
     supabase_url: str = ""
     supabase_anon_key: str = ""
     llm_reader_password: str = ""
+
+    @field_validator("database_url")
+    @classmethod
+    def _fix_provider_url(cls, v: str) -> str:
+        return normalize_database_url(v)
 
 
 settings = Settings()

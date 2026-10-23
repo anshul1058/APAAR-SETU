@@ -7,6 +7,7 @@ __pycache__
 *.pem
 server.log
 .DS_Store
-data
+test_phase.db
 tests
-scripts
+# NOTE: scripts/ and data/ are intentionally NOT ignored — the container runs
+# scripts/init_db.py + scripts/seed.py at boot and the seed reads the CSVs.

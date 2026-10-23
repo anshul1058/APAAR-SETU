@@ -56,21 +56,26 @@ def init_db() -> None:
     )
     print(f"[init_db] views ({len(views)}): {', '.join(views)}")
 
-    # Read-only role for the LLM text-to-SQL path (backend_guide.md §3)
-    with engine.begin() as conn:
-        exists = conn.execute(
-            text("SELECT 1 FROM pg_roles WHERE rolname = 'llm_reader'")
-        ).scalar()
-        if not exists:
-            conn.execute(text("CREATE ROLE llm_reader LOGIN PASSWORD 'llm_reader'"))
-            print("[init_db] created role: llm_reader (password: llm_reader)")
-        conn.execute(
-            text(
-                "GRANT SELECT ON v_institution_summary, v_course_intake_status, "
-                "v_flag_summary, v_duplicate_enrolments TO llm_reader"
+    # Read-only role for the LLM text-to-SQL path (backend_guide.md §3).
+    # Best-effort: managed Postgres (Render/Supabase) may forbid CREATE ROLE —
+    # never let that block a deploy.
+    try:
+        with engine.begin() as conn:
+            exists = conn.execute(
+                text("SELECT 1 FROM pg_roles WHERE rolname = 'llm_reader'")
+            ).scalar()
+            if not exists:
+                conn.execute(text("CREATE ROLE llm_reader LOGIN PASSWORD 'llm_reader'"))
+                print("[init_db] created role: llm_reader (password: llm_reader)")
+            conn.execute(
+                text(
+                    "GRANT SELECT ON v_institution_summary, v_course_intake_status, "
+                    "v_flag_summary, v_duplicate_enrolments TO llm_reader"
+                )
             )
-        )
-        print("[init_db] granted SELECT on 4 views to llm_reader")
+            print("[init_db] granted SELECT on 4 views to llm_reader")
+    except Exception as exc:  # noqa: BLE001 — must never block startup
+        print(f"[init_db] llm_reader role skipped: {exc.__class__.__name__}: {exc}")
 
 
 if __name__ == "__main__":

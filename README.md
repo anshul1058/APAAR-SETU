@@ -132,10 +132,17 @@ offline, so `pytest` passes on any machine.
 
 ## Deployment
 
-`render.yaml` defines the backend as a Docker web service (`rootDir: backend`).
-Set `DATABASE_URL`, `JWT_SECRET`, `SIGNING_PRIVATE_KEY`, `LLM_KEY` and
-`CORS_ORIGINS` in the dashboard; the frontend builds with `npm run build` and
-serves `dist/` from any static host.
+* **Backend → Render.** [`render.yaml`](render.yaml) is the blueprint: a free
+  Docker web service (`rootDir: backend`) plus a free managed Postgres
+  (`apaar-postgres`) wired into `DATABASE_URL` automatically. On every boot
+  the container runs `scripts/init_db.py` (idempotent tables + views) and
+  `scripts/seed.py` (demo dataset; skipped when already seeded), then serves
+  uvicorn on `$PORT` — health check `GET /health`. `app/config.py` rewrites
+  Render's `postgres://` scheme and enables SSL automatically. Remaining
+  dashboard secrets: `LLM_KEY`, `SIGNING_PRIVATE_KEY`, and `CORS_ORIGINS`
+  (which must list the Vercel URL of the frontend).
+* **Frontend → Vercel.** `npm run build` in `frontend/`; serve the static
+  `dist/` folder, and add its domain to `CORS_ORIGINS` on Render.
 
 ## Docs
 
