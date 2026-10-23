@@ -12,12 +12,18 @@ import {
   UploadCloud,
   FileSpreadsheet,
   Layers,
-  Sparkles
+  Sparkles,
+  PlugZap,
+  RefreshCw,
+  Unplug,
+  Save,
+  KeyRound,
+  FileSearch
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { studentService } from '../../services/studentService';
 import { institutionService } from '../../services/institutionService';
-import { Student, DuplicateCase, AicteProgramIntake } from '../../types';
+import { Student, DuplicateCase, AicteProgramIntake, ErpConfig, ErpCrossCheckReport } from '../../types';
 import { formatNumber, formatDate, maskApaarId } from '../../utils/formatters';
 
 export const InstitutionDashboard: React.FC = () => {
@@ -29,6 +35,28 @@ export const InstitutionDashboard: React.FC = () => {
   const [intakeData, setIntakeData] = useState<AicteProgramIntake[]>([]);
   const [duplicateAlerts, setDuplicateAlerts] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+
+  // --- ERP integration: institution admin enters their ERP portal API key ---
+  const [erp, setErp] = useState<ErpConfig | null>(null);
+  const [erpUrl, setErpUrl] = useState('');
+  const [erpKey, setErpKey] = useState('');
+  const [erpSaving, setErpSaving] = useState(false);
+  const [erpChecking, setErpChecking] = useState(false);
+  const [erpError, setErpError] = useState<string | null>(null);
+  const [erpNotice, setErpNotice] = useState<string | null>(null);
+  const [erpReport, setErpReport] = useState<ErpCrossCheckReport | null>(null);
+
+  useEffect(() => {
+    // /institutions/me/erp is institution-admin only — hidden for other roles
+    institutionService
+      .getErpConfig()
+      .then((cfg) => {
+        setErp(cfg);
+        setErpUrl(cfg.erp_base_url || '');
+        setErpReport(cfg.last_result);
+      })
+      .catch(() => setErp(null));
+  }, [refreshTrigger]);
 
   useEffect(() => {
     loadData();
@@ -59,6 +87,58 @@ export const InstitutionDashboard: React.FC = () => {
       setDuplicates(resDups);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // ---------------------------------------------------------- ERP handlers
+  const applyErpConfig = (cfg: ErpConfig) => {
+    setErp(cfg);
+    setErpUrl(cfg.erp_base_url || '');
+    setErpReport(cfg.last_result);
+  };
+
+  const saveErpConnection = async () => {
+    setErpSaving(true);
+    setErpError(null);
+    setErpNotice(null);
+    try {
+      const cfg = await institutionService.saveErpConfig(erpUrl, erpKey);
+      applyErpConfig(cfg);
+      setErpKey('');
+      setErpNotice('ERP connection saved. The API key is encrypted at rest and never shown again.');
+    } catch (e) {
+      setErpError((e as Error).message);
+    } finally {
+      setErpSaving(false);
+    }
+  };
+
+  const runErpCrossCheck = async () => {
+    setErpChecking(true);
+    setErpError(null);
+    setErpNotice(null);
+    try {
+      const rep = await institutionService.runErpCrossCheck();
+      setErpReport(rep);
+      setErpNotice(rep.summary);
+      institutionService.getErpConfig().then(setErp).catch(() => {});
+    } catch (e) {
+      setErpError((e as Error).message);
+    } finally {
+      setErpChecking(false);
+    }
+  };
+
+  const disconnectErp = async () => {
+    if (!window.confirm('Remove the stored ERP URL and API key from this platform?')) return;
+    setErpError(null);
+    setErpNotice(null);
+    try {
+      const cfg = await institutionService.disconnectErp();
+      applyErpConfig(cfg);
+      setErpNotice('ERP connection removed.');
+    } catch (e) {
+      setErpError((e as Error).message);
     }
   };
 
@@ -206,6 +286,220 @@ export const InstitutionDashboard: React.FC = () => {
         </div>
 
       </div>
+
+      {/* ERP Integration — institution admin connects their ERP portal (PRD F7) */}
+      {erp && (
+        <div className="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs">
+          {/* header */}
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+                <PlugZap className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-base font-bold text-slate-900">Institution ERP Integration</h2>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Enter your ERP portal's API key to pull its student roster and cross-check every record before APAAR verification.
+                </p>
+              </div>
+            </div>
+            <span
+              className={`shrink-0 px-2.5 py-1 rounded-full text-[11px] font-bold border ${
+                erp.status === 'connected'
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  : erp.status === 'error'
+                  ? 'bg-rose-50 text-rose-700 border-rose-200'
+                  : 'bg-stone-100 text-stone-600 border-stone-200'
+              }`}
+            >
+              {erp.status === 'connected'
+                ? '● Connected'
+                : erp.status === 'error'
+                ? '● Connection error'
+                : '○ Not configured'}
+            </span>
+          </div>
+
+          {/* form: base URL + API key */}
+          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr_auto] gap-3 items-end">
+            <label className="block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">ERP Base URL</span>
+              <input
+                type="url"
+                value={erpUrl}
+                onChange={(e) => setErpUrl(e.target.value)}
+                placeholder="https://erp.yourcollege.edu.in/api (or mock://demo)"
+                className="mt-1 w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-stone-50/60 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-400"
+              />
+            </label>
+            <label className="block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">ERP API Key</span>
+              <input
+                type="password"
+                value={erpKey}
+                onChange={(e) => setErpKey(e.target.value)}
+                autoComplete="off"
+                placeholder={
+                  erp.api_key_masked
+                    ? `Stored: ${erp.api_key_masked} — leave blank to keep`
+                    : 'API key provided by your ERP vendor'
+                }
+                className="mt-1 w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-stone-50/60 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-400"
+              />
+            </label>
+            <button
+              onClick={saveErpConnection}
+              disabled={erpSaving || !erpUrl.trim() || (!erp.api_key_configured && !erpKey.trim())}
+              className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-40 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-xs"
+            >
+              <Save className="w-4 h-4" />
+              {erpSaving ? 'Saving…' : 'Save Key'}
+            </button>
+          </div>
+
+          <p className="mt-2 text-[11px] text-slate-400 flex items-center gap-1.5">
+            <KeyRound className="w-3.5 h-3.5" />
+            The key is encrypted on the server and never displayed again — only the masked hint is returned.
+          </p>
+
+          {/* notices */}
+          {erpError && (
+            <div className="mt-4 px-4 py-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium">
+              {erpError}
+            </div>
+          )}
+          {erpNotice && (
+            <div className="mt-4 px-4 py-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-700 font-medium">
+              {erpNotice}
+            </div>
+          )}
+
+          {/* actions (only once a key is stored) */}
+          {erp.api_key_configured && (
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <button
+                onClick={runErpCrossCheck}
+                disabled={erpChecking || erpSaving}
+                className="px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-violet-500/20"
+              >
+                <RefreshCw className={`w-4 h-4 ${erpChecking ? 'animate-spin' : ''}`} />
+                {erpChecking ? 'Cross-checking…' : 'Run Cross-Check vs ERP'}
+              </button>
+              <button
+                onClick={disconnectErp}
+                disabled={erpChecking}
+                className="px-4 py-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 disabled:opacity-50 text-slate-600 text-xs font-semibold flex items-center gap-2 transition-all"
+              >
+                <Unplug className="w-4 h-4" /> Disconnect
+              </button>
+              <span className="text-[11px] text-slate-500 ml-auto font-mono">
+                key {erp.api_key_masked}
+                {erp.last_sync_at && ` · last sync ${new Date(erp.last_sync_at).toLocaleString()}`}
+              </span>
+            </div>
+          )}
+
+          {/* last cross-check report */}
+          {erpReport && (
+            <div className="mt-5 rounded-2xl border border-violet-100 bg-violet-50/40 p-4 space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
+                  <FileSearch className="w-4 h-4 text-violet-600" />
+                  ERP Cross-Check Report
+                </div>
+                <span className="text-[10px] text-slate-500 font-mono">
+                  {new Date(erpReport.checked_at).toLocaleString()}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-2.5 text-center">
+                  <div className="text-lg font-black text-emerald-700">{formatNumber(erpReport.matched)}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wide text-emerald-700/80">Matched</div>
+                </div>
+                <div className="rounded-xl bg-rose-50 border border-rose-100 p-2.5 text-center">
+                  <div className="text-lg font-black text-rose-700">{formatNumber(erpReport.missing_in_erp_count)}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wide text-rose-700/80">Missing in ERP</div>
+                </div>
+                <div className="rounded-xl bg-amber-50 border border-amber-100 p-2.5 text-center">
+                  <div className="text-lg font-black text-amber-700">{formatNumber(erpReport.missing_in_local_count)}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wide text-amber-700/80">Only in ERP</div>
+                </div>
+                <div className="rounded-xl bg-orange-50 border border-orange-100 p-2.5 text-center">
+                  <div className="text-lg font-black text-orange-700">{formatNumber(erpReport.field_mismatches_count)}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wide text-orange-700/80">Field Mismatches</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+                    In our records but missing in ERP
+                  </p>
+                  {erpReport.missing_in_erp.length === 0 ? (
+                    <p className="text-xs text-emerald-700 font-medium">None — every local record exists in the ERP.</p>
+                  ) : (
+                    <ul className="space-y-1">
+                      {erpReport.missing_in_erp.slice(0, 5).map((m, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center justify-between text-xs bg-white/80 rounded-lg px-2.5 py-1.5 border border-stone-100"
+                        >
+                          <span className="font-semibold text-slate-800 truncate">{m.full_name}</span>
+                          <span className="font-mono text-blue-700 shrink-0 ml-2">{m.apaar_id_masked}</span>
+                        </li>
+                      ))}
+                      {erpReport.missing_in_erp_count > 5 && (
+                        <li className="text-[10px] text-slate-500 pl-1">
+                          + {erpReport.missing_in_erp_count - 5} more…
+                        </li>
+                      )}
+                    </ul>
+                  )}
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+                    Field mismatches (local vs ERP)
+                  </p>
+                  {erpReport.field_mismatches.length === 0 ? (
+                    <p className="text-xs text-emerald-700 font-medium">None — all compared fields agree.</p>
+                  ) : (
+                    <ul className="space-y-1">
+                      {erpReport.field_mismatches.slice(0, 5).map((m, i) => (
+                        <li key={i} className="text-xs bg-white/80 rounded-lg px-2.5 py-1.5 border border-stone-100">
+                          <span className="font-semibold text-slate-800">{m.full_name}</span>
+                          <span className="text-slate-400"> · </span>
+                          <span className="font-bold text-orange-700">{m.field}</span>
+                          <div className="text-[10px] text-slate-500 truncate">
+                            local: <span className="text-slate-700">{m.local}</span> vs erp:{' '}
+                            <span className="text-slate-700">{m.erp}</span>
+                          </div>
+                        </li>
+                      ))}
+                      {erpReport.field_mismatches_count > 5 && (
+                        <li className="text-[10px] text-slate-500 pl-1">
+                          + {erpReport.field_mismatches_count - 5} more…
+                        </li>
+                      )}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* contract hint */}
+          <p className="mt-4 text-[11px] text-slate-400 leading-relaxed">
+            The platform calls{' '}
+            <code className="font-mono bg-stone-100 px-1 py-0.5 rounded text-slate-500">{'{base URL}'}/students</code>{' '}
+            with <code className="font-mono bg-stone-100 px-1 py-0.5 rounded text-slate-500">Authorization: Bearer &lt;key&gt;</code>{' '}
+            and compares identity (APAAR ID / passport / roll number), name, DOB, admission date, course, category,
+            quota and nationality against our records. Use base URL{' '}
+            <code className="font-mono bg-stone-100 px-1 py-0.5 rounded text-slate-500">mock://demo</code> to try
+            the full flow without a real ERP portal.
+          </p>
+        </div>
+      )}
 
       {/* Program-Wise Verification Breakdown & Duplicates Watchlist */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -52,6 +52,19 @@ class Institution(Base):
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     state: Mapped[str] = mapped_column(String(100), nullable=False)
     aicte_code: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
+
+    # --- ERP integration (PRD F7): connect the college's own portal --------
+    # The API key is stored ENCRYPTED (app/services/erp_client.py) and is
+    # never returned by the API — only a masked last-4 hint is exposed.
+    # status: not_configured | connected | error
+    erp_base_url: Mapped[str | None] = mapped_column(String(500))
+    erp_api_key_enc: Mapped[str | None] = mapped_column(Text)
+    erp_last4: Mapped[str] = mapped_column(String(4), nullable=False, default="")
+    erp_status: Mapped[str] = mapped_column(String(20), nullable=False, default="not_configured")
+    erp_connected_at: Mapped[datetime | None] = mapped_column(DateTime)
+    erp_last_sync_at: Mapped[datetime | None] = mapped_column(DateTime)
+    erp_last_result: Mapped[str | None] = mapped_column(Text)  # JSON report of last cross-check
+
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     courses: Mapped[list["Course"]] = relationship(back_populates="institution")

@@ -20,7 +20,9 @@ from faker import Faker
 fake = Faker("en_IN")
 random.seed(42)
 
-COURSES = ["B.Tech Computer Engineering", "B.Tech Mechanical Engineering"]
+# course names must exist in the seeded institution (COEP, AY 2026-27) or the
+# engine flags every row as FIELD_MISSING ("not an approved course")
+COURSES = ["Computer Science and Engineering", "Mechanical Engineering"]
 QUOTAS = ["regular"] * 90 + ["supernumerary"] * 4 + ["nri"] * 3 + ["oci"] * 2 + ["fn"] * 1
 
 HEADER = ["apaar_id", "full_name", "dob", "course", "quota_type", "admission_date",
