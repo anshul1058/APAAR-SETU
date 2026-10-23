@@ -39,6 +39,12 @@ class Settings(BaseSettings):
     jwt_secret: str
     jwt_expire_minutes: int = 60
     apaar_regex: str = r"^\d{12}$"
+
+    @field_validator("apaar_regex")
+    @classmethod
+    def normalize_apaar_regex(cls, value: str) -> str:
+        """Accept APAAR regex values over-escaped by deployment env editors."""
+        return value.replace("\\\\d", "\\d")
     apaar_mode: str = "mock"
     signing_private_key: str = ""
     llm_url: str = "http://localhost:11434/v1"
