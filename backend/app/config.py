@@ -16,8 +16,15 @@ def normalize_database_url(url: str) -> str:
       is not localhost and the URL doesn't already pin an sslmode.
     Local URLs (localhost / 127.0.0.1 / ::1) are left untouched.
     """
+    # The project installs psycopg2-binary, not psycopg (v3). SQLAlchemy 2
+    # defaults a bare postgresql:// URL to psycopg, which crashes at import
+    # time with "ModuleNotFoundError: No module named 'psycopg'". Normalize
+    # both Render's postgres:// URL and ordinary postgresql:// URLs to the
+    # driver that is present in requirements.txt.
     if url.startswith("postgres://"):
-        url = "postgresql://" + url[len("postgres://"):]
+        url = "postgresql+psycopg2://" + url[len("postgres://"):]
+    elif url.startswith("postgresql://"):
+        url = "postgresql+psycopg2://" + url[len("postgresql://"):]
     parsed = urlparse(url)
     if parsed.hostname and parsed.hostname not in ("localhost", "127.0.0.1", "::1"):
         query = dict(parse_qsl(parsed.query))
